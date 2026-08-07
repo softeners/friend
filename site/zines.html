@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Печатные издания — ДРУГ</title>
+  <meta name="description" content="Пилотный зин проекта «Друг» — компиляция материалов шести регионов. Печатный артефакт, который работает и на героя, и на аудиторию.">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Печатные издания — ДРУГ">
+  <meta property="og:description" content="Пилотный зин проекта «Друг» — компиляция материалов шести регионов. Печатный артефакт, который работает и на героя, и на аудиторию.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link">Экспедиции</a>
+        <a href="zines.html" class="nav__link" aria-current="page">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link">Контакты</a>
+    </nav>
+
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Печатные издания</span></span>
+      <h1 class="h1 pagehead__title">Зин</h1>
+      <p class="lead pagehead__lead">
+        Зин — это друг, который приглашает тебя в гости и из первых уст рассказывает о регионе.
+      </p>
+      <p class="lead pagehead__lead">
+        Цифровые материалы масштабируемы, но полный уход в цифру уводит фокус от материального
+        мира и от контакта человека с человеком. Поэтому бумага для нас принципиальна.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <div class="grid grid--2" data-zines></div>
+    </div>
+  </section>
+
+  <section class="section section--deep" id="order">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Заказ</span></span>
+    <span class="section__num">01 / 01</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Оформить заказ</h2>
+    <p class="lead">Заполните форму, и мы покажем реквизиты для оплаты. После поступления оплаты отправляем заказ в течение трёх рабочих дней.</p>
+  </div>
+
+      <div class="grid grid--sidebar">
+        <div>
+          <form class="form" data-form="order" data-subject="Заказ зина с сайта «ДРУГ»" novalidate>
+
+            <div class="form__section form__section--first">
+              <div class="form__grid">
+                <div class="field">
+                  <label class="field__label" for="zine">Что заказываете <span class="field__req" aria-hidden="true">*</span></label>
+                  <select class="select" id="zine" name="zine" required data-label="издание"
+                          data-zine-select aria-describedby="zine-err"></select>
+                  <p class="field__error" id="zine-err" role="alert"></p>
+                </div>
+
+                <div class="form__row">
+                  <div class="field">
+      <label class="field__label" for="qty">Количество экземпляров <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="number" id="qty" name="qty" data-label="это поле" required aria-describedby="qty-err" min="1" max="20" value="1">
+      <p class="field__error" id="qty-err" role="alert"></p>
+    </div>
+                  <div class="field">
+      <label class="field__label" for="name">Имя и фамилия <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="name" name="name" data-label="это поле" required placeholder="Для получения на почте" aria-describedby="name-err">
+      <p class="field__error" id="name-err" role="alert"></p>
+    </div>
+                </div>
+
+                <div class="field">
+      <label class="field__label" for="address">Адрес доставки <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="address" name="address" rows="3" data-label="это поле" required placeholder="Индекс, город, улица, дом, квартира" aria-describedby="address-note address-err"></textarea>
+      <p class="field__note" id="address-note">Отправляем Почтой России и СДЭК. По Сибири доставка обычно занимает от трёх до семи дней, в европейскую часть до двух недель.</p>
+      <p class="field__error" id="address-err" role="alert"></p>
+    </div>
+
+                <div class="form__row">
+                  <div class="field">
+      <label class="field__label" for="email">Почта <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="email" id="email" name="email" data-label="это поле" required placeholder="you@example.ru" aria-describedby="email-err">
+      <p class="field__error" id="email-err" role="alert"></p>
+    </div>
+                  <div class="field">
+      <label class="field__label" for="phone">Телефон <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="tel" id="phone" name="phone" data-label="это поле" required placeholder="+7 900 000-00-00" aria-describedby="phone-note phone-err">
+      <p class="field__note" id="phone-note">Нужен службе доставки.</p>
+      <p class="field__error" id="phone-err" role="alert"></p>
+    </div>
+                </div>
+
+                <div class="field">
+      <label class="field__label" for="comment">Комментарий к заказу <span class="field__opt">по желанию</span></label>
+      <textarea class="textarea" id="comment" name="comment" rows="3" data-label="это поле" placeholder="Например, подписать зин или отправить в пункт выдачи" aria-describedby="comment-err"></textarea>
+      <p class="field__error" id="comment-err" role="alert"></p>
+    </div>
+              </div>
+            </div>
+
+            <div class="form__section">
+              <div class="field">
+                <label class="check">
+                  <input type="checkbox" name="consent" id="consent" required
+                         data-error-required="Без этого согласия мы не сможем принять заявку"
+                         aria-describedby="consent-err">
+                  <span>Согласен на обработку персональных данных. Мы используем их только для связи по вашей заявке, никому не передаём и удаляем по первой просьбе. Подробности в <a href="privacy.html" target="_blank" rel="noopener">политике обработки персональных данных</a>.</span>
+                </label>
+                <p class="field__error" id="consent-err" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="form__foot">
+              <button class="btn btn--primary btn--lg" type="submit" data-submit>Оформить заказ</button>
+              <p class="form__status" data-status role="status" aria-live="polite"></p>
+            </div>
+          </form>
+
+          <div class="sent" data-sent="order">
+            <div class="paper paper--wide">
+              <span class="paper__label">Заказ принят</span>
+              <p class="paper__title">Осталось оплатить</p>
+              <p>Переведите сумму заказа по реквизитам ниже и укажите в комментарии к переводу
+                 свою фамилию, чтобы мы могли сопоставить платёж с заказом.</p>
+              <p><strong>Перевод по номеру телефона</strong><br>
+                 +7 961 879-55-42, Сычева Алина Артемовна</p>
+              <p>
+                 <!-- TODO: заменить на ссылку оплаты, когда будет подключена платёжная система -->
+                 Как только оплата поступит, мы напишем на указанную почту и отправим заказ
+                 в течение трёх рабочих дней. Трек-номер придёт туда же.</p>
+              <p>Если что-то пошло не так, напишите на
+                 <a href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>, и мы разберёмся.</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="aside">
+          <div class="paper paper--right">
+            <span class="paper__label">Почему бумага</span>
+            <p>История требует композиции. Лента даёт только фрагменты, а печатный артефакт
+               становится материальным доказательством важности истории.</p>
+          </div>
+
+          <div class="card">
+            <h2 class="card__title">Оплата и доставка</h2>
+            <ul class="list list--sm">
+              <li>Оплата переводом по номеру телефона, реквизиты показываем после оформления</li>
+              <li>Отправка в течение трёх рабочих дней после поступления оплаты</li>
+              <li>Почта России и СДЭК, трек-номер присылаем на почту</li>
+              <li>Если издание закончилось, мы сообщим об этом и вернём деньги</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

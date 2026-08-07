@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="../">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Путевые заметки. Алтай — ДРУГ</title>
+  <meta name="description" content="Дорога без карты: Чуйский тракт, Курайская степь, ночь у костра и утро на берегу Катуни. Путевые заметки экспедиции проекта «Друг».">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Путевые заметки. Алтай — ДРУГ">
+  <meta property="og:description" content="Дорога без карты: Чуйский тракт, Курайская степь, ночь у костра и утро на берегу Катуни. Путевые заметки экспедиции проекта «Друг».">
+  <meta property="og:image" content="../assets/img/photo/notes-01-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="../assets/img/logo.png" type="image/png">
+  <link rel="preload" href="../assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="../index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="../assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="../about.html" class="nav__link">О проекте</a>
+        <a href="../issues.html" class="nav__link">Выпуски</a>
+        <a href="../archive.html" class="nav__link" aria-current="page">Архив</a>
+        <a href="../expedition.html" class="nav__link">Экспедиции</a>
+        <a href="../zines.html" class="nav__link">Зины</a>
+        <a href="../partners.html" class="nav__link">Сотрудничество</a>
+        <a href="../faq.html" class="nav__link">Вопросы</a>
+        <a href="../contacts.html" class="nav__link">Контакты</a>
+    </nav>
+
+    <a href="../become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Обложка ── -->
+  <section class="hero">
+    <div class="hero__media">
+      <picture>
+        <source type="image/webp"
+                srcset="../assets/img/photo/notes-01-600.webp 600w, ../assets/img/photo/notes-01-1200.webp 1200w"
+                sizes="100vw">
+        <img src="../assets/img/photo/notes-01-1200.jpg" alt="Долина с деревянным срубом в Республике Алтай"
+             loading="eager" fetchpriority="high" decoding="async">
+      </picture>
+    </div>
+
+    <div class="container hero__inner">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Путевые заметки</span></span>
+      <h1 class="hero__title">Алтай</h1>
+      <p class="hero__lead">Дорога без карты: Чуйский тракт, Курайская степь и обратный путь</p>
+
+      <dl class="meta">
+        <div class="meta__item"><dt>Регион</dt><dd>Республика Алтай</dd></div>
+        <div class="meta__item"><dt>Съёмка</dt><dd>июнь 2026</dd></div>
+        <div class="meta__item"><dt>Кадров</dt><dd>24</dd></div>
+        <div class="meta__item"><dt>Маршрут</dt><dd>Чуйский тракт</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <article class="section longread">
+    <div class="container">
+      <span class="longread__part">Дорога</span>
+
+      <p class="longread__lead">
+        Я еду без карты. Только рюкзак, камера и доверие к дороге. Алтай начался не с гор,
+        а с ощущения, что всё лишнее остаётся за плечами. И это лучшее направление,
+        которое я знаю.
+      </p>
+
+      <p>Чуйский тракт входит в десятку самых красивых дорог мира. Он открывает путникам разнообразие пейзажей Алтая, которые поражают своей контрастностью.</p>
+
+      <p>Здесь можно увидеть четыре природные зоны.</p>
+
+      <p>Каменистые пустыни сменяются суровой тайгой и широколиственными лесами, а горные реки сопровождают ваш путь.</p>
+
+      <p>За каждым поворотом открываются скалистые, покрытые лесом и мхом, с водопадами и ущельями горные цепи, дополняющиеся панорамой Алтая.</p>
+
+      <figure class="is-wide longread__row" style="--cols:3">
+      <div class="ph ph--3x4">
+        <picture data-slug="notes-02">
+          <source type="image/webp" srcset="../assets/img/photo/notes-02-600.webp 600w, ../assets/img/photo/notes-02-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-02-1200.jpg" alt="Серпантин Чуйского тракта" width="1198" height="1514" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--3x4">
+        <picture data-slug="notes-03">
+          <source type="image/webp" srcset="../assets/img/photo/notes-03-600.webp 600w, ../assets/img/photo/notes-03-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-03-1200.jpg" alt="Дорога вдоль горной реки" width="946" height="1424" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--3x4">
+        <picture data-slug="notes-04">
+          <source type="image/webp" srcset="../assets/img/photo/notes-04-600.webp 600w, ../assets/img/photo/notes-04-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-04-1200.jpg" alt="Поворот тракта в скалах" width="748" height="1126" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Край богатый суровыми красотами природы, вызывающими резкие контрасты твоих чувств.</p>
+
+      <p>Горные цепи со снегами и ледниками, альпийские луга, скалистые ущелья, бурные реки с порогами и водопадами, большие и маленькие озёра, мрачные елово-пихтовые черни на востоке и светлые леса на западе.</p>
+
+      <p>Алтай соткан из предсказаний, предчувствий и предвестий, историй, легенд и незабываемых встреч. Он словно сон, только это реальность.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-05">
+          <source type="image/webp" srcset="../assets/img/photo/notes-05-600.webp 600w, ../assets/img/photo/notes-05-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-05-1200.jpg" alt="Горная цепь над долиной" width="870" height="1332" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <!-- ── Встреча ── -->
+      <span class="longread__part longread__part--mid">Встреча</span>
+
+      <p>Еду в машине, дорога чёрной лентой стелется по земле, волнами разливаясь посреди безлюдной холмистой равнины. За окном вечереет. Большая часть людей уже колонизировала Марс. Оставшиеся на земле одичали и переехали жить в горы.</p>
+
+      <p>И я решил отправиться в наиболее сохранное место на этой планете, на Алтай. Я в пути уже второй год, со мной верный друг — пёс Харли, мы всё никак не можем найти себе пристанище.</p>
+
+      <p>Проезжаю мимо Кязык-Тялана, вижу странные строения, похожие на космические белые корабли, появилась надежда увидеть наконец-то людей.</p>
+
+      <p>Ко мне навстречу вышли три человека: два обросших, высоких парня и худая девушка.</p>
+
+      <p>Они гостеприимно встретили меня и, напоив чаем, рассказали свою историю.</p>
+
+      <figure class="is-wide longread__row" style="--cols:3">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-06">
+          <source type="image/webp" srcset="../assets/img/photo/notes-06-600.webp 600w, ../assets/img/photo/notes-06-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-06-1200.jpg" alt="Дорога через холмистую равнину" width="1200" height="800" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--4x3">
+        <picture data-slug="notes-07">
+          <source type="image/webp" srcset="../assets/img/photo/notes-07-600.webp 600w, ../assets/img/photo/notes-07-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-07-1200.jpg" alt="Белые строения у дороги" width="1200" height="800" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--4x3">
+        <picture data-slug="notes-08">
+          <source type="image/webp" srcset="../assets/img/photo/notes-08-600.webp 600w, ../assets/img/photo/notes-08-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-08-1200.jpg" alt="Стоянка на маршруте" width="1200" height="1800" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <!-- ── Вечер ── -->
+      <span class="longread__part longread__part--mid">Вечер</span>
+
+      <p>Тихий вечер дождливого Алтая, окутывающий туман, ни света, ни луча зари, лишь мокрые камни с серебристыми пятнами лишайников и шум реки.</p>
+
+      <figure class="is-wide">
+      <div class="ph ph--16x9">
+        <picture data-slug="notes-09">
+          <source type="image/webp" srcset="../assets/img/photo/notes-09-600.webp 600w, ../assets/img/photo/notes-09-1200.webp 1200w" sizes="100vw">
+          <img src="../assets/img/photo/notes-09-1200.jpg" alt="Туман над рекой после дождя" width="1200" height="795" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <blockquote>
+        <p class="verse">Ночь грациозной, чёрной кошкой,
+Шагнув навстречу из «засад»,
+Пойдёт со мной одной дорожкой
+По лентам звёздных эстакад.
+
+В очей прищуре — глубь Вселенной
+И тайны канувших Миров,
+Потоком Истины нетленной
+Души коснутся из Основ.
+
+И как теперь не верить в чудо,
+Когда бок о бок с ним живёшь…
+Что в жизни явь, что — сон-причуда,
+В упор столкнувшись лишь поймёшь…</p>
+        <p class="verse__author">© Элена Солис</p>
+      </blockquote>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-10">
+          <source type="image/webp" srcset="../assets/img/photo/notes-10-600.webp 600w, ../assets/img/photo/notes-10-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-10-1200.jpg" alt="Сумерки в горах" width="1200" height="1214" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <h2>Ночь</h2>
+
+      <p>Ночное небо сияло миллионами осколков света. Острые горные пики вздымились в темноте и на фоне неба похожи на спящие силуэты древних животных.</p>
+
+      <p>Посреди горных вершин в алтайской глуши путники собрались вокруг костра. Они говорили обо всём насущном, рассуждали о будущем.</p>
+
+      <p>Музыка объединила их пением знакомых мотивов.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-11">
+          <source type="image/webp" srcset="../assets/img/photo/notes-11-600.webp 600w, ../assets/img/photo/notes-11-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-11-1200.jpg" alt="Костёр под ночным небом" width="1200" height="886" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Проскользнула история о небе.</p>
+
+      <p>Созвездие Лиры изображает тот музыкальный инструмент, на котором якобы когда-то играл Орфей, заставлял с её помощью шевелиться камни и подпевать ему.</p>
+
+      <p>Волшебными звуками своей лиры Орфей сумел задеть даже грубое сердце Аида, бога царства теней, и тот разрешил Эвридике, жене Орфея, вернуться в мир живых.</p>
+
+      <p>Эту замечательную лиру изготовил вестник олимпийских богов Гермес и отдал её Аполлону в качестве компенсации за украденных у последнего коров, а Аполлон подарил её Орфею.</p>
+
+      <figure class="">
+      <div class="ph ph--16x9">
+        <picture data-slug="notes-12">
+          <source type="image/webp" srcset="../assets/img/photo/notes-12-600.webp 600w, ../assets/img/photo/notes-12-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-12-1200.jpg" alt="Звёздное небо над хребтом" width="640" height="427" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <h2>Утро</h2>
+
+      <p>Безмятежная тишина сменилась пением птиц. После ночного дождя тяжёлые тучи затерялись в горах противоположного берега.</p>
+
+      <p>Катунь шумящими каскадами сбегала с гор, листва на деревьях и трава ещё влажные после вечернего дождя, в каплях воды отражалось солнце и переливалось всеми цветами радуги.</p>
+
+      <p>На рассвете воздух был нежно-сиреневым — в нём сливалась синева холодной ночи и яркий кармин пылающей зари.</p>
+
+      <p>Воздух ещё прохладный, но в тех местах, где его коснулось солнце, уже плыло весеннее тепло.</p>
+
+      <p>Небо с землёй обменялись первыми за день дарами. Зелёные лезвия трав алмазно сверкали росой и потягивались, ещё не до конца проснувшись, к рассветной выси.</p>
+
+      <p>Пока бесцельно прогуливаются по лугу пчёлы, птичьи трели покрывают зелёное поле. Я наливаю чашку ароматного чая и наполняю себя энергией утреннего солнца.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-13">
+          <source type="image/webp" srcset="../assets/img/photo/notes-13-600.webp 600w, ../assets/img/photo/notes-13-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-13-1200.jpg" alt="Утро на берегу Катуни" width="1200" height="1599" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>В неизменности окружающей панорамы начинаешь замечать детали, вечное течение жизни. День за днём природа перетекает в микросезоны, сменяется флора и фауна. В ней можно увидеть бесконечную стремительность, независимую от наблюдателя.</p>
+
+      <p>В необъятности безмолвия Чуйской степи, в глубине неба плавным движением потока мыслей рисуешь мечту, ты как никогда близок к себе. В состоянии безмятежности погружаешься в настоящее.</p>
+
+      <p>Обретая осознанность, выстраиваешь направление.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-14">
+          <source type="image/webp" srcset="../assets/img/photo/notes-14-600.webp 600w, ../assets/img/photo/notes-14-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-14-1200.jpg" alt="Чуйская степь" width="862" height="1304" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Все мы — это части одного большого витража. Яркие стёклышки, преломляющие свет абсолютного гения.</p>
+
+      <p>Каждый уникален и несёт свой неповторимый цвет в этот мир.</p>
+
+      <p>Единственность, уникальность, присущие каждому человеку, определяют и смысл каждой отдельной жизни. Неповторим он сам, неповторимо то, что именно он может и должен сделать — в своём труде, в творчестве, в любви.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-15">
+          <source type="image/webp" srcset="../assets/img/photo/notes-15-600.webp 600w, ../assets/img/photo/notes-15-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-15-1200.jpg" alt="Свет между горными склонами" width="850" height="1180" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <!-- ── Обратный путь ── -->
+      <span class="longread__part longread__part--mid">Обратный путь</span>
+
+      <p>И мы поехали дальше.</p>
+
+      <p>Визуальные зарисовки простого совершенства — природы. Незыблемость её просторов, бесконечности жизни и совершенство форм.</p>
+
+      <p>Наслаждайся каждым её проявлением, будь то обжигающий мороз или знойная жара. Находи вдохновение в окружении и дополняй свою реальность.</p>
+
+      <figure class="is-wide">
+      <div class="ph ph--16x9">
+        <picture data-slug="notes-16">
+          <source type="image/webp" srcset="../assets/img/photo/notes-16-600.webp 600w, ../assets/img/photo/notes-16-1200.webp 1200w" sizes="100vw">
+          <img src="../assets/img/photo/notes-16-1200.jpg" alt="Панорама долины" width="1200" height="595" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Дорога узким руслом реки течёт сквозь величественные массивы, замедляя время.</p>
+
+      <p>Каждый поворот открывает пред тобой новую панораму. Барражируя по серпантину Чуйского тракта, ты всё больше погружаешься в путь кочевников древнего Алтая.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-17">
+          <source type="image/webp" srcset="../assets/img/photo/notes-17-600.webp 600w, ../assets/img/photo/notes-17-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-17-1200.jpg" alt="Серпантин между массивами" width="864" height="1302" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Жаркий день подходит к концу.</p>
+
+      <p>Закатное солнце погрузилось в лагуну ближних гор.</p>
+
+      <p>Но лучи пробиваются сквозь горные долины на горизонте, отчего воздух наполняется золотым свечением.</p>
+
+      <figure class="">
+      <div class="ph ph--16x9">
+        <picture data-slug="notes-18">
+          <source type="image/webp" srcset="../assets/img/photo/notes-18-600.webp 600w, ../assets/img/photo/notes-18-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-18-1200.jpg" alt="Закатное солнце над долиной" width="1200" height="757" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <h2>Следующий день</h2>
+
+      <p>Цветы багульника раскинулись сиреневой тенью на горных склонах. И в свой единственный выходной путники отправились в глубину долин Чуйской степи для созидания и творчества.</p>
+
+      <p>Мы интуитивно добрались к сочному склону, поросшему кустами маральника и изумрудным мхом. Листья тонких берёз переливались зелёным светом. Всё намекало на грозу, но лучи стремительно пробивались сквозь тучи, отчего воздух наполнился золотым свечением.</p>
+
+      <figure class="is-wide longread__row" style="--cols:2">
+      <div class="ph ph--3x4">
+        <picture data-slug="notes-19">
+          <source type="image/webp" srcset="../assets/img/photo/notes-19-600.webp 600w, ../assets/img/photo/notes-19-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-19-1200.jpg" alt="Склон, поросший маральником" width="1200" height="1599" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--3x4">
+        <picture data-slug="notes-20">
+          <source type="image/webp" srcset="../assets/img/photo/notes-20-600.webp 600w, ../assets/img/photo/notes-20-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-20-1200.jpg" alt="Берёзы в зелёном свете" width="1200" height="913" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>До темна мы посвятили себя фотографии.</p>
+
+      <p>Когда склон исчерпал себя, последовали на следующую локацию. На пути к ней мы остановились у родника, чтобы испить воды и наполнить фляги.</p>
+
+      <p>Вдруг из ниоткуда появилась стая чёрных птиц. Оглушительным криком пронеслась над нашими головами.</p>
+
+      <p>Никто не придал этому большого значения.</p>
+
+      <p>После небольшого отдыха мы доехали до заброшенной земли.</p>
+
+      <p>Чернота вечера сменилась на бескрайнюю пустоту ночи. Ветер усилился, вдали послышался гром.</p>
+
+      <p>Пара человек вышли из машины, чтобы оглядеть местность. Повсюду валялись ржавые обломки остовов автомобилей.</p>
+
+      <p>По обе стороны от нас стояли огромные канистры с неизвестной чёрной жидкостью внутри.</p>
+
+      <p>Фары совсем не помогали разглядеть местность, окружающую нас.</p>
+
+      <p>Машина начала подъезжать ближе.</p>
+
+      <p>Послышался металлический скрежет.</p>
+
+      <p>Автомобильное дно зацепилось за оголённый провод, свисающий со старой опоры.</p>
+
+      <p>— Не подходите к машине! — крикнул Дмитрий с водительского сиденья.</p>
+
+      <p>Мы тут же ринулись в темноту искать то, чем можно было бы отцепить провод.</p>
+
+      <p>Не имея ни единого фонарика, мы скрылись в каменистом биоме. Тьма расступилась перед нами, очертания окрестности стали видимыми.</p>
+
+      <p>Всё обошлось. Деревянной палкой получилось освободить машину от провода.</p>
+
+      <figure class="is-wide longread__row" style="--cols:2">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-21">
+          <source type="image/webp" srcset="../assets/img/photo/notes-21-600.webp 600w, ../assets/img/photo/notes-21-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-21-1200.jpg" alt="Заброшенная земля в темноте" width="1200" height="829" loading="lazy" decoding="async">
+        </picture>
+      </div>
+<div class="ph ph--4x3">
+        <picture data-slug="notes-22">
+          <source type="image/webp" srcset="../assets/img/photo/notes-22-600.webp 600w, ../assets/img/photo/notes-22-1200.webp 1200w" sizes="(max-width: 700px) 92vw, 30vw">
+          <img src="../assets/img/photo/notes-22-1200.jpg" alt="Ночная стоянка" width="1200" height="848" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <p>Ночь стёрла границы между реальностью и сном, между дорогой и тем, что ждёт за поворотом. Мы ехали в темноту, не зная, что она приготовила. Иногда путешествие напоминает, что ты не зритель, а участник.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-23">
+          <source type="image/webp" srcset="../assets/img/photo/notes-23-600.webp 600w, ../assets/img/photo/notes-23-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-23-1200.jpg" alt="Дорога в темноте" width="1200" height="1700" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <h2>Конец</h2>
+
+      <p>Путешествия наполняют твой внутренний сосуд воспоминаний проявлениями внешнего мира. Он так многогранен и необъятен. И здесь, вдали от шума, забываешь о своём социальном, вспоминаешь о природном и естественном.</p>
+
+      <p>На пути к истине встречаешь много путников, и через взаимодействие с миром ты знакомишься с самим собой. И это уже новая версия тебя.</p>
+
+      <p>Ныряй в свой внутренний мир через исследование внешнего. Расширяй кругозор и путешествуй.</p>
+
+      <figure class="">
+      <div class="ph ph--4x3">
+        <picture data-slug="notes-24">
+          <source type="image/webp" srcset="../assets/img/photo/notes-24-600.webp 600w, ../assets/img/photo/notes-24-1200.webp 1200w" sizes="(max-width: 900px) 92vw, 66ch">
+          <img src="../assets/img/photo/notes-24-1200.jpg" alt="Последний кадр маршрута" width="1200" height="1800" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </figure>
+
+      <div class="tg reveal">
+  <div class="tg__text">
+    <p class="tg__title">Следить за экспедицией</p>
+    <p class="tg__note">Кадры и заметки с маршрута выходят в Telegram-канале.</p>
+  </div>
+  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+</div>
+    </div>
+  </article>
+
+  <!-- ── Что дальше ── -->
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Дальше</span></span>
+        <span class="section__num">Республика Алтай</span>
+      </div>
+
+      <div class="grid grid--3">
+        <a class="card" href="../archive.html?region=altay">
+          <h2 class="card__title">Материалы региона</h2>
+          <p class="card__text">Всё, что собрано по Республике Алтай в открытой части архива.</p>
+        </a>
+        <a class="card" href="../issues.html">
+          <h2 class="card__title">Выпуск о регионе</h2>
+          <p class="card__text">Выпуск № 01 в разработке. Он выйдет после расшифровки интервью.</p>
+        </a>
+        <a class="card card--accent" href="../become-hero.html">
+          <h2 class="card__title">Знаете такого человека?</h2>
+          <p class="card__text">Расскажите о нём, и мы приедем в следующую экспедицию.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="../index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="../assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="../issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="../archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="../become-hero.html">Стать героем</a>
+        <a class="footer__link" href="../expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="../zines.html">Заказать зин</a>
+        <a class="footer__link" href="../partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="../faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="../js/main.js"></script>
+</body>
+</html>

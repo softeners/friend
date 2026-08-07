@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Рассказать свою историю — ДРУГ</title>
+  <meta name="description" content="Форма заявки для героев проекта «Друг». Расскажите, чем занимаетесь и что делаете для места, где живёте.">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Рассказать свою историю — ДРУГ">
+  <meta property="og:description" content="Форма заявки для героев проекта «Друг». Расскажите, чем занимаетесь и что делаете для места, где живёте.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link">Экспедиции</a>
+        <a href="zines.html" class="nav__link">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link">Контакты</a>
+    </nav>
+
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Стать героем</span></span>
+      <h1 class="h1 pagehead__title">Расскажите свою историю</h1>
+      <p class="lead pagehead__lead">
+        Публичность не нужна, соцсети не обязательны, опыт интервью не важен.
+        Важно то, что вы делаете для места, где живёте. Заполнение занимает около десяти минут.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <div class="grid grid--sidebar">
+        <div>
+          <form class="form" data-form="hero" data-subject="Заявка героя с сайта «ДРУГ»" novalidate>
+
+            <div class="form__section form__section--first">
+              <p class="form__legend">Кто вы и откуда</p>
+              <div class="form__grid">
+                <div class="form__row">
+                  <div class="field">
+      <label class="field__label" for="name">Как вас зовут <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="name" name="name" data-label="это поле" required placeholder="Имя и фамилия" aria-describedby="name-err">
+      <p class="field__error" id="name-err" role="alert"></p>
+    </div>
+                  <div class="field">
+      <label class="field__label" for="place">Регион, город или село <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="place" name="place" data-label="это поле" required placeholder="Республика Алтай, село Онгудай" aria-describedby="place-err">
+      <p class="field__error" id="place-err" role="alert"></p>
+    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__section">
+              <p class="form__legend">О вашем деле</p>
+              <p class="form__hint">
+                Пишите обычными словами, как рассказали бы знакомому. Литературную форму
+                мы придадим сами на этапе редактуры.
+              </p>
+              <div class="form__grid">
+                <div class="field">
+      <label class="field__label" for="work">Чем вы занимаетесь и что делаете для своего места <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="work" name="work" rows="6" data-label="это поле" required minlength="60" placeholder="Например, держу мастерскую, где учу подростков работать с деревом" aria-describedby="work-err"></textarea>
+      <p class="field__error" id="work-err" role="alert"></p>
+    </div>
+                <div class="field">
+      <label class="field__label" for="why">Почему считаете, что эту историю стоит рассказать <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="why" name="why" rows="5" data-label="это поле" required minlength="40" aria-describedby="why-note why-err"></textarea>
+      <p class="field__note" id="why-note">Нам важна личная причина, а не перечень достижений.</p>
+      <p class="field__error" id="why-err" role="alert"></p>
+    </div>
+                <div class="field">
+      <label class="field__label" for="links">Ссылки на соцсети, сайт, портфолио <span class="field__opt">по желанию</span></label>
+      <input class="input" type="text" id="links" name="links" data-label="это поле" placeholder="Через запятую" aria-describedby="links-err">
+      <p class="field__error" id="links-err" role="alert"></p>
+    </div>
+              </div>
+            </div>
+
+            <div class="form__section">
+              <p class="form__legend">Фотографии</p>
+              <p class="form__hint">
+                От одной до трёх: вы за работой, ваше место, результат. Подойдут снимки с телефона,
+                профессиональную съёмку мы проведём сами во время экспедиции.
+              </p>
+
+              <div class="field">
+                <div class="upload" data-upload>
+                  <input type="file" id="photos" name="photos" accept="image/jpeg,image/png,image/webp,image/heic" multiple>
+                  <label class="upload__cta" for="photos">Выбрать файлы</label>
+                  <span class="upload__note">или перетащите сюда. До трёх файлов, каждый до 10 МБ</span>
+                  <div class="upload__list"></div>
+                </div>
+                <p class="field__error" role="alert"></p>
+              </div>
+
+              <div class="form__grid form__grid--after">
+                <div class="field">
+      <label class="field__label" for="photo_link">Или ссылка на облако с фотографиями <span class="field__opt">по желанию</span></label>
+      <input class="input" type="text" id="photo_link" name="photo_link" data-label="это поле" placeholder="Яндекс.Диск, Google Диск, альбом ВКонтакте" aria-describedby="photo_link-note photo_link-err">
+      <p class="field__note" id="photo_link-note">Подойдёт, если файлы слишком тяжёлые для загрузки.</p>
+      <p class="field__error" id="photo_link-err" role="alert"></p>
+    </div>
+              </div>
+            </div>
+
+            <div class="form__section">
+              <p class="form__legend">Как с вами связаться</p>
+              <div class="form__grid">
+                <div class="form__row">
+                  <div class="field">
+      <label class="field__label" for="email">Почта <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="email" id="email" name="email" data-label="это поле" required placeholder="you@example.ru" aria-describedby="email-err">
+      <p class="field__error" id="email-err" role="alert"></p>
+    </div>
+                  <div class="field">
+      <label class="field__label" for="phone">Телефон или Telegram <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="tel" id="phone" name="phone" data-label="это поле" required placeholder="+7 900 000-00-00 или @nickname" aria-describedby="phone-err">
+      <p class="field__error" id="phone-err" role="alert"></p>
+    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form__section">
+              <div class="field">
+                <label class="check">
+                  <input type="checkbox" name="consent" id="consent" required
+                         data-error-required="Без этого согласия мы не сможем принять заявку"
+                         aria-describedby="consent-err">
+                  <span>Согласен на обработку персональных данных. Мы используем их только для связи по вашей заявке, никому не передаём и удаляем по первой просьбе. Подробности в <a href="privacy.html" target="_blank" rel="noopener">политике обработки персональных данных</a>.</span>
+                </label>
+                <p class="field__error" id="consent-err" role="alert"></p>
+              </div>
+            </div>
+
+            <div class="form__foot">
+              <button class="btn btn--primary btn--lg" type="submit" data-submit>Отправить заявку</button>
+              <p class="form__status" data-status role="status" aria-live="polite"></p>
+            </div>
+          </form>
+
+          <div class="sent" data-sent="hero">
+    <div class="paper paper--wide">
+      <span class="paper__label">Заявка принята</span>
+      <p class="paper__title">Мы получили вашу историю</p>
+      <p>Редакция разбирает заявки раз в неделю и отвечает в течение десяти рабочих дней на почту или в Telegram.</p>
+      <p>Если история войдёт в ближайший маршрут, мы согласуем дату и приедем к вам. Съёмка занимает один день, интервью около трёх часов.</p>
+      <p>Если по географии в этот раз не совпадёт, заявка останется в базе. Мы возвращаемся в регионы.</p>
+      <p>Если что-то изменилось или хотите дополнить заявку, напишите на <a href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>.</p>
+    </div>
+  </div>
+        </div>
+
+        <aside class="aside">
+          <div class="paper paper--right">
+            <span class="paper__label">Как проходит съёмка</span>
+            <p>Мы не приглашаем героя в студию, а приезжаем к нему в его среду. Готовиться
+               и заучивать ответы не нужно: мы задаём вопросы, вы рассказываете.</p>
+          </div>
+
+          <div class="card">
+            <h2 class="card__title">Участие бесплатное</h2>
+            <p class="card__text">
+              Герой ничего не платит и не получает гонорар. После публикации мы передаём все
+              фотографии в высоком разрешении и присылаем печатный зин с вашей историей.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2 class="card__title">Что это даёт</h2>
+            <ul class="list list--sm">
+              <li>Видимость и признание вклада в жизнь своего места</li>
+              <li>Связь с другими героями проекта</li>
+              <li>Продвижение вашего дела и услуг</li>
+              <li>Возможные коллаборации: мастер-классы, совместные события</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

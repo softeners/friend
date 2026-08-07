@@ -1,0 +1,332 @@
+{
+ "sunset-ridge": {
+  "w": 3456,
+  "h": 2304,
+  "src": "IMG_20220127_155623_159_(2).JPG"
+ },
+ "mountain-range": {
+  "w": 3456,
+  "h": 2304,
+  "src": "IMG_20220127_160026_928_(2).jpg"
+ },
+ "village-cat": {
+  "w": 3456,
+  "h": 2304,
+  "src": "IMG_20220322_143516_380_(1)_(2).jpg"
+ },
+ "golden-valley": {
+  "w": 853,
+  "h": 1280,
+  "src": "IMG_20220624_214458_996_(4).jpg"
+ },
+ "kids-group": {
+  "w": 5184,
+  "h": 3456,
+  "src": "IMG_3493_(2).JPG"
+ },
+ "child-portrait": {
+  "w": 5184,
+  "h": 3456,
+  "src": "IMG_3496_(2).JPG"
+ },
+ "field-girl": {
+  "w": 5184,
+  "h": 3456,
+  "src": "IMG_3498_(2).JPG"
+ },
+ "carousel": {
+  "w": 5184,
+  "h": 3456,
+  "src": "IMG_3507_(2).JPG"
+ },
+ "altay-10": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-10.jpg"
+ },
+ "altay-11": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-11.jpg"
+ },
+ "altay-15": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-15.jpg"
+ },
+ "altay-16": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-16.jpg"
+ },
+ "altay-17": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-17.jpg"
+ },
+ "altay-2": {
+  "w": 5184,
+  "h": 3456,
+  "src": "altay-2.jpg"
+ },
+ "altay-24": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-24.jpg"
+ },
+ "altay-27": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-27.jpg"
+ },
+ "altay-28": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-28.jpg"
+ },
+ "altay-3": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-3.jpg"
+ },
+ "altay-32": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-32.jpg"
+ },
+ "altay-33": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-33.jpg"
+ },
+ "altay-36": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-36.jpg"
+ },
+ "altay-37": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-37.jpg"
+ },
+ "altay-38": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-38.jpg"
+ },
+ "altay-39": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-39.jpg"
+ },
+ "altay-4": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-4.jpg"
+ },
+ "altay-40": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-40.jpg"
+ },
+ "altay-42": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-42.jpg"
+ },
+ "altay-43": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-43.jpg"
+ },
+ "altay-44": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-44.jpg"
+ },
+ "altay-45": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-45.jpg"
+ },
+ "altay-46": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-46.jpg"
+ },
+ "altay-47": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-47.jpg"
+ },
+ "altay-48": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-48.jpg"
+ },
+ "altay-5": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-5.jpg"
+ },
+ "altay-51": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-51.jpg"
+ },
+ "altay-53": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-53.jpg"
+ },
+ "altay-54": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-54.jpg"
+ },
+ "altay-55": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-55.jpg"
+ },
+ "altay-6": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-6.jpg"
+ },
+ "altay-7": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-7.jpg"
+ },
+ "altay-8": {
+  "w": 5184,
+  "h": 3456,
+  "src": "altay-8.jpg"
+ },
+ "altay-9": {
+  "w": 3456,
+  "h": 5184,
+  "src": "altay-9.jpg"
+ },
+ "notes-01": {
+  "w": 1626,
+  "h": 738,
+  "src": "notes-01.png"
+ },
+ "notes-02": {
+  "w": 1198,
+  "h": 1514,
+  "src": "notes-02.png"
+ },
+ "notes-03": {
+  "w": 946,
+  "h": 1424,
+  "src": "notes-03.png"
+ },
+ "notes-04": {
+  "w": 748,
+  "h": 1126,
+  "src": "notes-04.png"
+ },
+ "notes-05": {
+  "w": 870,
+  "h": 1332,
+  "src": "notes-05.png"
+ },
+ "notes-06": {
+  "w": 2000,
+  "h": 1333,
+  "src": "notes-06.jpg"
+ },
+ "notes-07": {
+  "w": 2000,
+  "h": 1333,
+  "src": "notes-07.jpg"
+ },
+ "notes-08": {
+  "w": 1333,
+  "h": 1999,
+  "src": "notes-08.jpg"
+ },
+ "notes-09": {
+  "w": 1960,
+  "h": 1298,
+  "src": "notes-09.png"
+ },
+ "notes-10": {
+  "w": 1290,
+  "h": 1305,
+  "src": "notes-10.jpg"
+ },
+ "notes-11": {
+  "w": 1290,
+  "h": 952,
+  "src": "notes-11.jpg"
+ },
+ "notes-12": {
+  "w": 640,
+  "h": 427,
+  "src": "notes-12.png"
+ },
+ "notes-13": {
+  "w": 1500,
+  "h": 1999,
+  "src": "notes-13.jpg"
+ },
+ "notes-14": {
+  "w": 862,
+  "h": 1304,
+  "src": "notes-14.png"
+ },
+ "notes-15": {
+  "w": 850,
+  "h": 1180,
+  "src": "notes-15.png"
+ },
+ "notes-16": {
+  "w": 1690,
+  "h": 838,
+  "src": "notes-16.png"
+ },
+ "notes-17": {
+  "w": 864,
+  "h": 1302,
+  "src": "notes-17.png"
+ },
+ "notes-18": {
+  "w": 1954,
+  "h": 1232,
+  "src": "notes-18.png"
+ },
+ "notes-19": {
+  "w": 1500,
+  "h": 1999,
+  "src": "notes-19.jpg"
+ },
+ "notes-20": {
+  "w": 1290,
+  "h": 981,
+  "src": "notes-20.jpg"
+ },
+ "notes-21": {
+  "w": 1290,
+  "h": 891,
+  "src": "notes-21.jpg"
+ },
+ "notes-22": {
+  "w": 1290,
+  "h": 912,
+  "src": "notes-22.jpg"
+ },
+ "notes-23": {
+  "w": 1290,
+  "h": 1827,
+  "src": "notes-23.jpg"
+ },
+ "notes-24": {
+  "w": 1333,
+  "h": 1999,
+  "src": "notes-24.jpg"
+ }
+}

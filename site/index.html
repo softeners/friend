@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ДРУГ — живые истории российских территорий</title>
+  <meta name="description" content="Культурно-медийный проект «Друг» знакомит со страной через доверие к человеку. Экспедиции в шесть регионов, доверительные интервью, документальная съёмка, цифровые выпуски и печатный зин.">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ДРУГ — живые истории российских территорий">
+  <meta property="og:description" content="Культурно-медийный проект «Друг» знакомит со страной через доверие к человеку. Экспедиции в шесть регионов, доверительные интервью, документальная съёмка, цифровые выпуски и печатный зин.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link">Экспедиции</a>
+        <a href="zines.html" class="nav__link">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link">Контакты</a>
+    </nav>
+
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Первый экран ── -->
+  <section class="hero">
+    <div class="hero__media">
+      <picture>
+      <source type="image/webp" srcset="assets/img/photo/sunset-ridge-600.webp 600w, assets/img/photo/sunset-ridge-1200.webp 1200w, assets/img/photo/sunset-ridge-2000.webp 2000w" sizes="100vw">
+      <img src="assets/img/photo/sunset-ridge-1200.jpg" alt="Закат над хребтом в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
+    </picture>
+    </div>
+
+    <div class="container hero__inner">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">культурно-медийный проект</span></span>
+
+      <h1 class="hero__title">Знакомим со страной через доверие к человеку</h1>
+
+      <p class="hero__lead">
+        Экспедиции в шесть регионов России, доверительные интервью и документальная съёмка.
+        Мы сохраняем живые истории, сказания и легенды и превращаем их в общее культурное наследие.
+      </p>
+
+      <div class="hero__foot">
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="become-hero.html">Рассказать свою историю</a>
+          <a class="btn btn--outline btn--lg" href="issues.html">Читать выпуски</a>
+        </div>
+
+        <div class="paper paper--right">
+          <span class="paper__label">Коротко о нас</span>
+          <p>Мы делаем так, чтобы медиа было как друг. Знакомим с отдалёнными уголками России
+             через крафтовые материалы «из уст в уста» и собираем сеть социальных связей.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Идея ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Идея</span></span>
+    <span class="section__num">01 / 05</span>
+  </div>
+
+      <div class="grid grid--sidebar">
+        <div class="prose">
+          <h2 class="h2">Человек, а не список объектов</h2>
+          <p class="lead">
+            «Друг» — культурно-медийный проект, который показывает Россию не через перечень
+            достопримечательностей, а через человека: мастера, учителя, художника, хранителя,
+            предпринимателя.
+          </p>
+          <p class="text">
+            Смысл места появляется тогда, когда конкретный человек рассказывает о своей малой
+            родине и любимых местах. Объясняет, почему остался или переехал, каким был его путь
+            и как на него повлияла среда.
+          </p>
+          <p class="text">
+            Мы записываем интервью от первого лица. Доверие и полное погружение рождаются
+            из личной речи с её интонацией, из деталей рассказчика и его обстановки.
+            Пересказ и редакционные колонки это теряют.
+          </p>
+        </div>
+
+        <figure class="ph ph--3x4">
+          <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-16-600.webp 600w, assets/img/photo/altay-16-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 38vw">
+      <img src="assets/img/photo/altay-16-1200.jpg" alt="Всадник на летнем выпасе, Республика Алтай" loading="lazy" decoding="async">
+    </picture>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Карта ── -->
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">География</span></span>
+    <span class="section__num">02 / 05</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Шесть регионов</h2>
+    <p class="lead">Новосибирская область, Республика Алтай, Шерегеш, Бурятия, Якутия и Приморье. По каждому региону выйдет отдельный выпуск.</p>
+  </div>
+
+      <div class="grid grid--sidebar map-layout">
+        <div class="map" data-map data-map-mode="link"></div>
+        <ul class="region-list" data-map-list></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Последний выпуск ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Журнал</span></span>
+    <span class="section__num">03 / 05</span>
+  </div>
+      <div class="latest reveal" data-latest-issue></div>
+    </div>
+  </section>
+
+  <!-- ── Два способа участвовать ── -->
+  <section class="section section--deep" id="join">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Участие</span></span>
+    <span class="section__num">04 / 05</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Два способа стать частью проекта</h2>
+  </div>
+
+      <article class="invite reveal">
+        <div class="ph ph--4x3 invite__media">
+          <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-11-600.webp 600w, assets/img/photo/altay-11-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw">
+      <img src="assets/img/photo/altay-11-1200.jpg" alt="Житель Республики Алтай на лесной дороге" loading="lazy" decoding="async">
+    </picture>
+        </div>
+
+        <div class="invite__body">
+          <span class="invite__kind">Героям</span>
+          <h3 class="h2 invite__title">Расскажите свою историю</h3>
+          <p class="text">
+            Мы приезжаем к тем, кто своим делом меняет жизнь небольшой территории. Публичность
+            и опыт интервью не нужны, важно само дело и ваша готовность о нём говорить.
+          </p>
+          <ul class="list">
+            <li>Видимость и признание вклада</li>
+            <li>Возможность поделиться видением мира и своей историей</li>
+            <li>Связь с другими героями проекта из разных регионов</li>
+            <li>Продвижение вашего дела и возможные коллаборации</li>
+            <li>Печатный зин с вашей историей и материалы съёмки</li>
+          </ul>
+          <a class="btn btn--primary btn--lg" href="become-hero.html">Рассказать свою историю</a>
+        </div>
+      </article>
+
+      <article class="invite invite--flip reveal">
+        <div class="ph ph--4x3 invite__media">
+          <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-2-600.webp 600w, assets/img/photo/altay-2-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw">
+      <img src="assets/img/photo/altay-2-1200.jpg" alt="Дорога между сёлами во время экспедиции" loading="lazy" decoding="async">
+    </picture>
+        </div>
+
+        <div class="invite__body">
+          <span class="invite__kind">Молодым авторам</span>
+          <h3 class="h2 invite__title">Поехать в экспедицию</h3>
+          <p class="text">
+            Участники экспедиций обучатся методам интервьюирования, видеосъёмке и основам
+            документальной фотографии. Познакомятся с людьми из интересующей их области,
+            увидят пути развития в своём регионе.
+          </p>
+          <p class="invite__note">
+            В экспедицию по региону едут те, кто в этом регионе живёт. Перед поездкой участники
+            проходят обучение методике с наставником.
+          </p>
+          <a class="btn btn--paper btn--lg" href="expedition.html">Узнать об экспедициях</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ── Вопросы и Telegram ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Вопросы</span></span>
+    <span class="section__num">05 / 05</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Что спрашивают чаще всего</h2>
+  </div>
+
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q">Герой что-то платит или получает?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Участие бесплатное, гонорар за интервью мы не платим.
+            Герой получает видимость и признание вклада, связь с другими участниками проекта,
+            все фотографии съёмки и печатный зин со своей историей.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Почему обязательно нужна экспедиция?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Доверие невозможно собрать дистанционно. Мы не приглашаем
+            героя в студию, а приезжаем к нему в среду. Это метод включённого наблюдения, который
+            даёт контекст, невозможный при удалённой работе.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Кто может поехать в экспедицию?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Молодые авторы, которые живут в одном из шести регионов
+            маршрута. Журналистское образование не требуется: методика построена так, чтобы
+            качественное интервью мог провести любой подготовленный человек.</p></div>
+        </details>
+      </div>
+
+      <div class="section__foot">
+        <a class="btn btn--ghost" href="faq.html">Все вопросы и ответы</a>
+      </div>
+
+      <div class="tg reveal">
+  <div class="tg__text">
+    <p class="tg__title">Следить за экспедицией</p>
+    <p class="tg__note">Короткие заметки прямо с маршрута. Кого встретили, что снимаем сегодня, где застряли.</p>
+  </div>
+  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

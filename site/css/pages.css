@@ -1,0 +1,771 @@
+/* ═══════════════════════════════════════════════════════════
+   ДРУГ — блоки страниц
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. Первый экран ───────────────────────────────────────── */
+/* Первый экран рассчитан так, чтобы целиком помещаться в окно:
+   размеры и отступы внутри зависят и от ширины, и от высоты экрана. */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: calc(var(--header-h) + clamp(1rem, 4vh, 2.5rem)) clamp(1.5rem, 5vh, 3rem);
+  overflow: hidden;
+}
+.hero__media { position: absolute; inset: 0; }
+.hero__media picture { display: block; width: 100%; height: 100%; }
+.hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* держим текст читаемым и на светлых кадрах: снег, небо, туман */
+  background: linear-gradient(180deg, rgba(28, 28, 28, .78) 0%, rgba(32, 32, 32, .56) 45%, var(--bg) 100%);
+}
+@media (max-width: 640px) {
+  /* на узком экране текста больше, а кадра меньше — затемняем сильнее */
+  .hero__media::after {
+    background: linear-gradient(180deg, rgba(28, 28, 28, .82) 0%, rgba(32, 32, 32, .7) 45%, var(--bg) 100%);
+  }
+}
+.hero__inner { position: relative; z-index: 1; width: 100%; }
+
+/* Один шаг между всеми элементами первого экрана: надзаголовок,
+   заголовок, подводка, кнопки. Расстояние подстраивается под высоту окна. */
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1rem, 2.6vh, 1.75rem);
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, min(5.4vw, 7.4vh), 4.5rem);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  letter-spacing: -.025em;
+  max-width: 17ch;
+  text-wrap: balance;
+}
+.hero__lead {
+  max-width: 46ch;
+  font-size: clamp(.95rem, min(1.35vw, 2.1vh), 1.2rem);
+  color: var(--text-dim);
+}
+
+.hero__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  width: 100%;
+}
+.hero__actions { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.hero .paper { font-size: clamp(.8125rem, 1.7vh, .9375rem); padding: 2rem 1.3rem 1.2rem; }
+
+/* На узком или низком экране записка не помещается вместе с заголовком.
+   Первый экран важнее: то же самое сказано в подводке под заголовком. */
+@media (max-width: 700px), (max-height: 700px) {
+  .hero .paper { display: none; }
+}
+
+/* Компактный первый экран внутренних страниц.
+   Отступ сверху = высота фиксированной шапки плюс полноценная отбивка:
+   заголовок не должен читаться как продолжение меню. */
+.pagehead { padding-block: calc(var(--header-h) + var(--s-8)) var(--s-7); }
+.pagehead > .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+.pagehead--doc > .container { display: block; }
+.pagehead__title { max-width: 20ch; }
+.pagehead__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
+.pagehead__back { font-size: var(--fs-sm); color: var(--text-mute); }
+.pagehead__back a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* секция сразу под первым экраном: свой отступ сверху не нужен */
+.section--flush { padding-top: 0; }
+
+/* Записка, которая стоит рядом с текстом: держим её по центру колонки
+   и прижимаем к правому краю, чтобы не висела в пустоте сверху. */
+.paper--mid { align-self: center; justify-self: end; }
+@media (max-width: 860px) {
+  .paper--mid { justify-self: start; }
+}
+
+/* ── 2. Мета-строка (Автор / Регион / Период) ──────────────── */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.25rem, 4vw, 3.5rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line-soft);
+  margin-top: 1.75rem;
+}
+.meta dt {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.meta dd { font-size: var(--fs-sm); margin-top: .3rem; }
+
+/* ── 3. Карта ──────────────────────────────────────────────── */
+.map-layout { gap: var(--gap-lg); }
+.map { width: 100%; }
+.map__canvas { position: relative; width: 100%; }
+.map__svg { width: 100%; height: auto; display: block; }
+.map__land {
+  fill: var(--surface);
+  stroke: var(--line);
+  stroke-width: .8;
+  stroke-linejoin: round;
+}
+
+.map__pin {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.map__dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+  transition: transform var(--dur-s) var(--ease), box-shadow var(--dur-s) var(--ease);
+}
+.map__pin.is-done .map__dot { background: var(--accent); }
+.map__pin.is-planned .map__dot { background: var(--text-mute); }
+
+.map__pin.is-done::after {
+  content: '';
+  position: absolute;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  animation: ping 2.6s var(--ease) infinite;
+}
+@keyframes ping {
+  0%   { transform: scale(1); opacity: .8; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .map__pin.is-done::after { animation: none; opacity: .5; } }
+
+.map__pin:hover .map__dot,
+.map__pin:focus-visible .map__dot,
+.map__pin.is-active .map__dot { transform: scale(1.45); box-shadow: 0 0 0 5px var(--accent-soft); }
+.map__pin.is-active .map__dot { background: var(--accent); }
+
+.map__tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: 17rem;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  padding: .65rem .8rem;
+  text-align: left;
+  box-shadow: var(--shadow-paper);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
+  z-index: 5;
+}
+.map__pin:hover .map__tip,
+.map__pin:focus-visible .map__tip { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+.map__tip-name { display: block; font-weight: 600; font-size: var(--fs-sm); }
+.map__tip-line { display: block; font-size: var(--fs-xs); line-height: 1.4; margin-top: .15rem; }
+.map__tip-meta {
+  display: block;
+  font-size: var(--fs-xs);
+  color: #8A7F73;
+  margin-top: .3rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.map__legend {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+}
+.map__legend li { display: flex; align-items: center; gap: .45rem; }
+.map__key { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.map__key.is-done { background: var(--accent); }
+.map__key.is-planned { background: var(--text-mute); }
+
+/* список регионов — дубль карты для клавиатуры и мобильных */
+.region-list { display: flex; flex-direction: column; }
+.region-row {
+  display: grid;
+  grid-template-columns: minmax(14rem, .9fr) minmax(0, 1.5fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left var(--dur-s) var(--ease), color var(--dur-s) var(--ease);
+}
+.region-list li:first-child .region-row { border-top: 1px solid var(--line); }
+.region-row:hover { padding-left: .5rem; }
+.region-row__name { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
+.region-row:hover .region-row__name { color: var(--accent); }
+.region-row__about { color: var(--text-dim); font-size: var(--fs-sm); }
+
+/* ── 4. Последний выпуск на главной ────────────────────────── */
+.latest {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-lg);
+  align-items: center;
+}
+.latest__body { display: flex; flex-direction: column; gap: var(--s-2); align-items: flex-start; }
+.latest__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.latest__sub { font-size: var(--fs-lead); color: var(--accent); }
+.latest__meta { font-size: var(--fs-xs); color: var(--text-mute); letter-spacing: .06em; text-transform: uppercase; }
+.latest__body .btn { margin-top: var(--s-3); }
+
+/* ── Приглашения: герои и молодые авторы ───────────────────── */
+.invite {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--gap-lg);
+  align-items: center;
+}
+.invite + .invite { margin-top: var(--s-8); }
+.invite--flip .invite__media { order: 2; }
+
+.invite__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-3);
+}
+.invite__kind {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.invite__title { max-width: 16ch; }
+.invite__note {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  color: var(--text-dim);
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}
+.invite__body .btn { margin-top: var(--s-2); }
+
+/* ── Путь участника: настоящая последовательность шагов ────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-lg);
+  counter-reset: step;
+}
+.steps__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding-top: var(--s-4);
+  border-top: 2px solid var(--line);
+}
+.steps__num {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.steps__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
+.steps__text { color: var(--text-dim); font-size: var(--fs-sm); line-height: 1.55; }
+
+/* ── Крупный призыв в конце страницы ───────────────────────── */
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin-top: var(--s-7);
+  padding: var(--s-6);
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  border-radius: var(--radius-lg);
+}
+.cta__body { display: flex; flex-direction: column; gap: .6rem; max-width: 46ch; }
+
+/* ── 5. Карточка выпуска ───────────────────────────────────── */
+.issue-card { padding: 0; overflow: hidden; gap: 0; }
+.issue-card__ph { border-radius: 0; position: relative; }
+.issue-card__num {
+  position: absolute;
+  left: .85rem;
+  top: .85rem;
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  background: var(--accent);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: .25rem .65rem;
+}
+.issue-card__body {
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+.issue-card__sub { color: var(--accent); font-size: var(--fs-sm); }
+.issue-card__meta {
+  margin-top: auto;
+  padding-top: .5rem;
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.issue-card.is-soon .issue-card__ph { opacity: .55; }
+.ph--empty-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  color: var(--text-mute);
+  font-size: var(--fs-xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+.ph__empty-inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  color: var(--text-mute);
+  font-size: var(--fs-xs);
+}
+
+/* ── 6. Архив ──────────────────────────────────────────────── */
+.archive__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--line);
+  margin-bottom: var(--s-6);
+}
+.archive__count {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.material-card { padding: 0; overflow: hidden; gap: 0; }
+.material-card__ph { border-radius: 0; }
+.material-card__kind {
+  display: inline-block;
+  margin: 1.1rem 1.1rem 0;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.material-card .card__title { margin: .35rem 1.1rem 0; }
+.material-card .card__text { margin: .3rem 1.1rem 0; }
+.material-card__meta {
+  margin: .75rem 1.1rem 1.2rem;
+  font-size: var(--fs-xs);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ── 7. Досье героя ────────────────────────────────────────── */
+.crumbs {
+  display: flex;
+  gap: .5rem;
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.crumbs a:hover { color: var(--accent); }
+
+.hero-doc__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
+  gap: var(--gap-lg);
+  align-items: start;
+  margin-bottom: var(--s-7);
+}
+.hero-doc__name { margin: .75rem 0 1.25rem; }
+.hero-doc__portrait { position: sticky; top: 100px; }
+
+.hero-doc__media { margin-top: var(--s-7); }
+.hero-doc__media .h2 { margin-bottom: var(--s-4); }
+
+.media-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+  margin-bottom: var(--s-5);
+}
+.media-slot {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+}
+.media-slot.is-filled { border-style: solid; border-color: var(--accent-line); }
+.media-slot__kind {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: .35rem;
+}
+.media-slot__note { font-size: var(--fs-sm); color: var(--text-mute); }
+
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--gap); }
+.gallery { margin-top: var(--s-4); }
+.gallery__item--wide { grid-column: 1 / -1; }
+
+.note-legal {
+  margin-top: 2rem;
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-dim);
+  max-width: var(--measure);
+}
+
+/* ── 8. Лонгрид выпуска ────────────────────────────────────── */
+.longread { max-width: 100%; }
+.longread__part--mid { margin-top: var(--s-8); }
+.longread__part {
+  display: block;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.longread p, .longread h2, .longread h3, .longread .list {
+  max-width: var(--measure);
+  margin-inline: auto;
+}
+.longread p + p { margin-top: var(--s-3); }
+.longread p { font-size: 1.075rem; line-height: 1.7; color: #E6E0D8; }
+.longread h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -.02em;
+  margin-top: var(--s-8);
+  margin-bottom: var(--s-4);
+}
+.longread h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  margin-top: 2.25rem;
+  margin-bottom: .75rem;
+}
+/* Обычный кадр идёт по ширине текстовой колонки, кадр с .is-wide —
+   во всю ширину контейнера. Без max-width у figure разницы не было бы,
+   а браузер выбирал бы файл по заниженному sizes и мылил картинку.
+   font-size здесь — не про текст, а про то, что figure сам по себе
+   ничего не пишет и наследует базовый --fs-body, а не 1.075rem у .longread p:
+   66ch от разных шрифтов — разная ширина в пикселях, и рамка фото
+   уезжала левее/уже текста. Задаём тот же font-size, что и у p,
+   чтобы ch совпадал и края кадра точно легли на края строки. */
+.longread figure {
+  margin-block: var(--s-7);
+  max-width: var(--measure);
+  margin-inline: auto;
+  font-size: 1.075rem;
+}
+.longread figure.is-wide { max-width: none; }
+.longread figcaption {
+  max-width: var(--measure);
+  margin: .7rem auto 0;
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+  line-height: 1.5;
+}
+.longread blockquote { margin-block: var(--s-7); }
+.longread .quote-block { max-width: var(--measure); margin-inline: auto; }
+.longread .paper { margin: var(--s-7) auto; }
+.longread .tg { max-width: var(--measure); margin: var(--s-8) auto; }
+
+/* Кадры лонгрида показываются целиком, без обрезки — автор уже выстроил
+   композицию, а фиксированная рамка .ph--<ratio> её кадрирует. Ширина
+   по-прежнему берётся от .ph--<ratio> / max-width figure, а высота
+   теперь следует за пропорциями исходника, а не наоборот. */
+.longread .ph {
+  aspect-ratio: auto;
+  background: none;
+}
+.longread .ph picture,
+.longread .ph img {
+  height: auto;
+}
+.longread .ph img {
+  object-fit: initial;
+  cursor: zoom-in;
+}
+
+/* Несколько кадров в ряд: триптих на дороге, пара на склоне. */
+.longread__row {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  align-items: start;
+  gap: var(--gap);
+  max-width: none;
+}
+@media (max-width: 700px) {
+  .longread__row { grid-template-columns: 1fr; }
+}
+
+/* Стихотворение: строки автора не переносим по своему усмотрению. */
+.verse {
+  white-space: pre-line;
+  font-family: var(--font-display);
+  font-size: 1.05rem !important;
+  font-weight: 400;
+  line-height: 1.65 !important;
+  color: var(--text) !important;
+}
+.verse__author {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm) !important;
+  color: var(--text-mute) !important;
+}
+
+.longread__lead {
+  font-size: var(--fs-lead) !important;
+  color: var(--text) !important;
+  line-height: 1.5 !important;
+}
+
+/* ── 9. Схема экосистемы ───────────────────────────────────── */
+.eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
+.eco__step { position: relative; }
+.eco__step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: calc(var(--gap) / -2 - .3em);
+  top: 1.9rem;
+  color: var(--accent);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+.eco__now {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .4rem;
+}
+
+/* ── 10. Новости экспедиции ────────────────────────────────── */
+.news { border-top: 1px solid var(--line); }
+.news__item {
+  display: grid;
+  grid-template-columns: minmax(8rem, .35fr) minmax(0, 1fr);
+  gap: var(--gap-lg);
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--line);
+}
+.news__date {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  padding-top: .2rem;
+}
+.news__body { display: flex; flex-direction: column; gap: .6rem; }
+.news__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
+
+/* ── 11. Партнёры ──────────────────────────────────────────── */
+.offer { display: flex; flex-direction: column; gap: 1rem; height: 100%; }
+.offer__kind {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.card--accent .offer__kind { color: var(--ink); opacity: .65; }
+.offer .btn { align-self: flex-start; margin-top: auto; }
+
+.partners__logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-lg);
+  align-items: center;
+  padding-block: var(--s-4);
+  border-block: 1px solid var(--line);
+}
+.partners__logo { font-size: var(--fs-sm); color: var(--text-mute); }
+
+/* ── 12. Зины ──────────────────────────────────────────────── */
+.zine-card__ph { margin: calc(-1 * clamp(1.15rem, 2vw, 1.7rem)) calc(-1 * clamp(1.15rem, 2vw, 1.7rem)) .5rem; border-radius: var(--radius) var(--radius) 0 0; }
+.zine-card__specs { display: flex; flex-direction: column; gap: .45rem; margin-top: .5rem; }
+.zine-card__specs > div { display: flex; gap: .5rem; font-size: var(--fs-xs); }
+.zine-card__specs dt { color: var(--text-mute); min-width: 5rem; }
+.zine-card__specs dd { color: var(--text-dim); }
+.zine-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  flex-wrap: wrap;
+}
+.zine-card__price { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 700; }
+
+/* ── Юридический документ ──────────────────────────────────── */
+.legal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-7);
+  max-width: 78ch;
+}
+.legal__summary { margin-bottom: var(--s-2); }
+
+.legal__block { display: flex; flex-direction: column; gap: var(--s-4); }
+.legal__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.25;
+}
+.legal__num {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  flex: none;
+  min-width: 2ch;
+}
+.legal__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  counter-reset: legal;
+  padding-left: calc(2ch + var(--s-3));
+}
+.legal__list li {
+  position: relative;
+  color: var(--text-dim);
+  line-height: 1.65;
+  counter-increment: legal;
+}
+.legal__list li::before {
+  content: counter(legal) '.';
+  position: absolute;
+  left: -2.6ch;
+  color: var(--text-mute);
+  font-variant-numeric: tabular-nums;
+}
+.legal__list a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+.legal__contacts { display: flex; flex-direction: column; gap: var(--s-4); }
+.legal__contacts .meta { margin-top: 0; padding-top: 0; border-top: 0; }
+
+@media (max-width: 640px) {
+  .legal__list { padding-left: var(--s-5); }
+  .legal__list li::before { left: -1.6em; }
+}
+
+/* ── 13. Контакты ──────────────────────────────────────────── */
+.contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.contact-card:hover { background: var(--surface-2); border-color: var(--accent-line); transform: translateY(-3px); }
+.contact-card__kind {
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+.contact-card__value { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; word-break: break-word; }
+.contact-card__note { font-size: var(--fs-sm); color: var(--text-dim); }
+.contact-card--accent { border-color: var(--accent-line); background: var(--accent-soft); }
+.contact-card--accent .contact-card__kind { color: var(--accent); }
+
+/* ── 14. Адаптив блоков ────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .eco { grid-template-columns: repeat(2, 1fr); }
+  .eco__step:nth-child(2)::after { display: none; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 860px) {
+  .latest, .hero-doc__head, .invite { grid-template-columns: 1fr; }
+  .invite--flip .invite__media { order: 0; }
+  .hero-doc__portrait { position: static; }
+  .media-slots { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .region-row { grid-template-columns: 1fr; gap: .4rem; }
+  .region-row .tag { justify-self: start; }
+  .map__tip { max-width: 13rem; }
+}
+
+@media (max-width: 640px) {
+  .eco, .steps { grid-template-columns: 1fr; }
+  .cta { flex-direction: column; align-items: flex-start; }
+  .eco__step::after { display: none !important; }
+  .gallery { grid-template-columns: 1fr; }
+  .news__item { grid-template-columns: 1fr; gap: .5rem; }
+  .hero { min-height: auto; padding-block: 7rem 3rem; }
+}

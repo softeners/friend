@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Экспедиции — ДРУГ</title>
+  <meta name="description" content="Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей с наставником, финальная работа и поездка в составе команды.">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Экспедиции — ДРУГ">
+  <meta property="og:description" content="Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей с наставником, финальная работа и поездка в составе команды.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link" aria-current="page">Экспедиции</a>
+        <a href="zines.html" class="nav__link">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link">Контакты</a>
+    </nav>
+
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Экспедиции</span></span>
+      <h1 class="h1 pagehead__title">Поехать в экспедицию</h1>
+      <p class="lead pagehead__lead">
+        Методика проекта построена так, чтобы качественное интервью мог провести человек
+        без журналистского образования. Мы обучаем ей молодых авторов, а затем едем
+        вместе с ними в регионы.
+      </p>
+      <div class="pagehead__actions">
+        <a class="btn btn--paper btn--lg" href="become-participant.html">Подать заявку</a>
+        <a class="btn btn--ghost btn--lg" href="#course">Программа курса</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <figure class="ph ph--16x9">
+        <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-38-600.webp 600w, assets/img/photo/altay-38-1200.webp 1200w, assets/img/photo/altay-38-2000.webp 2000w" sizes="100vw">
+      <img src="assets/img/photo/altay-38-1200.jpg" alt="Дорога вдоль реки в Республике Алтай" loading="lazy" decoding="async">
+    </picture>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── Путь участника: настоящая последовательность, поэтому нумеруем ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Путь</span></span>
+    <span class="section__num">01 / 04</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Как проходит участие</h2>
+  </div>
+
+      <ol class="steps">
+        <li class="steps__item">
+          <span class="steps__num">1</span>
+          <h3 class="steps__title">Заявка</h3>
+          <p class="steps__text">
+            Вы заполняете анкету и рассказываете о себе, своём регионе и о том, каких героев
+            видите в будущем выпуске.
+          </p>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">2</span>
+          <h3 class="steps__title">Отбор</h3>
+          <p class="steps__text">
+            Мы читаем заявки и приглашаем на короткий разговор. Готовиться к нему не нужно,
+            портфолио тоже не требуется.
+          </p>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">3</span>
+          <h3 class="steps__title">Курс с наставником</h3>
+          <p class="steps__text">
+            Шесть модулей и финальная работа: интервью с героем или обработка материалов.
+            Наставники — опытные авторы «Друг.Медиа».
+          </p>
+        </li>
+        <li class="steps__item">
+          <span class="steps__num">4</span>
+          <h3 class="steps__title">Экспедиция</h3>
+          <p class="steps__text">
+            После защиты работы вы получаете доступ к экспедиции в команде проекта
+            и вступаете в сообщество авторов.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Курс ── -->
+  <section class="section section--deep" id="course">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Программа</span></span>
+    <span class="section__num">02 / 04</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Шесть модулей курса</h2>
+    <p class="lead">Содержание курса — это методика, по которой работает редакция. Всё изучается с нуля, предварительной подготовки не требуется.</p>
+  </div>
+
+      <div class="grid grid--3">
+        <article class="card">
+          <span class="card__num">01</span>
+          <h3 class="card__title">Исследование территории</h3>
+          <p class="card__text">
+            Как изучить регион до поездки и найти в нём людей, о которых стоит рассказать.
+          </p>
+        </article>
+        <article class="card">
+          <span class="card__num">02</span>
+          <h3 class="card__title">Подготовка экспедиции</h3>
+          <p class="card__text">
+            Маршрут, договорённости с героями, распределение ролей в команде и план съёмочного дня.
+          </p>
+        </article>
+        <article class="card">
+          <span class="card__num">03</span>
+          <h3 class="card__title">Доверительное интервью</h3>
+          <p class="card__text">
+            Банк вопросов и сценарий разговора. Как построить беседу так, чтобы человек
+            рассказывал, а не отвечал.
+          </p>
+        </article>
+        <article class="card">
+          <span class="card__num">04</span>
+          <h3 class="card__title">Документирование</h3>
+          <p class="card__text">
+            Документальная фотография и видео по методике проекта, без постановки
+            и туристической оптики.
+          </p>
+        </article>
+        <article class="card">
+          <span class="card__num">05</span>
+          <h3 class="card__title">Редактура и архивирование</h3>
+          <p class="card__text">
+            Как собрать материал в историю с композицией и подготовить его для медиаархива.
+          </p>
+        </article>
+        <article class="card card--accent">
+          <span class="card__num">06</span>
+          <h3 class="card__title">Публичное представление</h3>
+          <p class="card__text">
+            Как показать готовый материал аудитории и рассказать о герое на встрече или показе.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Кого приглашаем ── -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Участники</span></span>
+    <span class="section__num">03 / 04</span>
+  </div>
+
+      <div class="grid grid--sidebar">
+        <div class="prose">
+          <h2 class="h2">Кого мы приглашаем</h2>
+          <p class="lead">
+            Молодых авторов, которые живут в одном из шести регионов маршрута и хотят
+            развивать свой путь в регионе.
+          </p>
+          <p class="text">
+            Журналистское образование не требуется. Методика проекта позволяет провести
+            качественное интервью и создать достоверный материал без специальной подготовки.
+            Опыт съёмки желателен, но не обязателен.
+          </p>
+          <p class="text">
+            Организацию экспедиции берёт на себя проект. От участника нужны время
+            и готовность работать в поле вместе с командой.
+          </p>
+        </div>
+
+        <div class="paper paper--right">
+          <span class="paper__label">Шесть регионов маршрута</span>
+          <p>Новосибирская область, Республика Алтай, Шерегеш, Республика Бурятия,
+             Республика Саха (Якутия), Приморский край.</p>
+          <p>Если вы живёте в другом регионе, заявку всё равно можно отправить.
+             География проекта будет расширяться.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Что даёт участие ── -->
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Результат</span></span>
+    <span class="section__num">04 / 04</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Что даёт участие</h2>
+  </div>
+
+      <div class="grid grid--4">
+        <article class="card">
+          <h3 class="card__title">Метод</h3>
+          <p class="card__text">
+            Не посещение музея, а способ глубокого знакомства с человеком в интересующей вас сфере.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Контакты</h3>
+          <p class="card__text">
+            Прямые знакомства с людьми, которые делают своё дело в вашем регионе.
+          </p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Взгляд на регион</h3>
+          <p class="card__text">
+            Понимание путей развития в регионе и слабых мест интересующей вас индустрии.
+          </p>
+        </article>
+        <article class="card card--accent">
+          <h3 class="card__title">Публикация</h3>
+          <p class="card__text">
+            Собранный вами материал выходит в цифровом выпуске и в печатном зине.
+          </p>
+        </article>
+      </div>
+
+      <div class="cta">
+        <div class="cta__body">
+          <h2 class="h2">Набор откроется 09.2027</h2>
+          <p class="text">
+            Сейчас мы формируем банк участников на следующий год. Если вы обучаетесь
+            на 1–3 курсе бакалавриата или 1 курсе магистратуры — вы можете податься
+            на участие в экспедиции. Финалистам будет доступен курс с сопровождением
+            наставников. Итоги отбора будут доступны 05.2027.
+          </p>
+        </div>
+        <a class="btn btn--paper btn--lg" href="become-participant.html">Подать заявку</a>
+      </div>
+
+      <div class="tg reveal">
+  <div class="tg__text">
+    <p class="tg__title">Следить за экспедицией</p>
+    <p class="tg__note">О новых наборах мы сообщаем в Telegram-канале.</p>
+  </div>
+  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

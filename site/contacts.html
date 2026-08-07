@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Контакты — ДРУГ</title>
+  <meta name="description" content="Связаться с проектом «Друг». Почта sycheva.alina.2000@bk.ru, телефон +7 961 879-55-42, Telegram-канал и сообщество ВКонтакте.">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Контакты — ДРУГ">
+  <meta property="og:description" content="Связаться с проектом «Друг». Почта sycheva.alina.2000@bk.ru, телефон +7 961 879-55-42, Telegram-канал и сообщество ВКонтакте.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:locale" content="ru_RU">
+
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link">Экспедиции</a>
+        <a href="zines.html" class="nav__link">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link" aria-current="page">Контакты</a>
+    </nav>
+
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Контакты</span></span>
+      <h1 class="h1 pagehead__title">Связаться с нами</h1>
+      <p class="lead pagehead__lead">Мы отвечаем в течение недели. Быстрее всего в Telegram.</p>
+    </div>
+  </section>
+
+  <section class="section section--flush">
+    <div class="container">
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:sycheva.alina.2000@bk.ru">
+          <span class="contact-card__kind">Почта</span>
+          <span class="contact-card__value">sycheva.alina.2000@bk.ru</span>
+          <span class="contact-card__note">Заявки, партнёрство и запросы на материалы архива</span>
+        </a>
+
+        <a class="contact-card" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">
+          <span class="contact-card__kind">Telegram</span>
+          <span class="contact-card__value">Канал проекта</span>
+          <span class="contact-card__note">Обновления с маршрута и анонсы выпусков</span>
+        </a>
+
+        <a class="contact-card" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">
+          <span class="contact-card__kind">ВКонтакте</span>
+          <span class="contact-card__value">Сообщество</span>
+          <span class="contact-card__note">То же самое для тех, кому удобнее эта площадка</span>
+        </a>
+
+        <a class="contact-card" href="tel:+79618795542">
+          <span class="contact-card__kind">Телефон</span>
+          <span class="contact-card__value">+7 961 879-55-42</span>
+          <span class="contact-card__note">Сычева Алина Артемовна, руководитель проекта</span>
+        </a>
+
+        <a class="contact-card contact-card--accent" href="become-hero.html">
+          <span class="contact-card__kind">Хотите стать героем</span>
+          <span class="contact-card__value">Рассказать свою историю</span>
+          <span class="contact-card__note">Форма занимает около десяти минут</span>
+        </a>
+
+        <a class="contact-card contact-card--accent" href="expedition.html">
+          <span class="contact-card__kind">Хотите в экспедицию</span>
+          <span class="contact-card__value">Поехать с нами</span>
+          <span class="contact-card__note">Для молодых авторов из шести регионов маршрута</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
