@@ -186,7 +186,8 @@
 }
 .paper p { line-height: 1.5; }
 .paper p + p { margin-top: .6rem; }
-.paper a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
+/* Ссылка в тексте записки подчёркнута, кнопка — нет: у неё своя форма */
+.paper a:not(.btn) { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 
 /* маркированный список внутри записки: тёмный текст по бумаге */
 .paper .list { gap: .5rem; }
