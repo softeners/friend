@@ -102,7 +102,37 @@ function startSafetyNet() {
   addEventListener('scroll', onScroll, { passive: true });
 }
 
-/** Шапка: фон при скролле, бургер, закрытие по Esc и по клику вне. */
+/** Элементы, до которых можно дотабаться, внутри контейнера. */
+function focusable(el) {
+  return [...el.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+    .filter(e => e.offsetParent !== null || e === document.activeElement);
+}
+
+/**
+ * Замыкает Tab внутри контейнера, пока он открыт.
+ * Возвращает функцию, которая снимает замок.
+ */
+export function trapFocus(container) {
+  const onKey = (e) => {
+    if (e.key !== 'Tab') return;
+    const items = focusable(container);
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  };
+  container.addEventListener('keydown', onKey);
+  return () => container.removeEventListener('keydown', onKey);
+}
+
+/** Шапка: фон при скролле, бургер, закрытие по Esc и по клику вне.
+ *
+ *  Мобильное меню в разметке стоит ПЕРЕД бургером, поэтому само по себе
+ *  оно не получает фокус при открытии, а Tab с бургера уходит в контент
+ *  под меню. Поэтому фокус переносим руками, замыкаем его внутри меню,
+ *  блокируем прокрутку фона и возвращаем фокус на бургер при закрытии.
+ */
 export function initHeader() {
   const header = document.querySelector('.header');
   const burger = document.querySelector('.burger');
@@ -116,29 +146,48 @@ export function initHeader() {
 
   if (!burger || !nav) return;
 
-  const close = () => {
+  let untrap = null;
+
+  const open = () => {
+    nav.classList.add('is-open');
+    burger.setAttribute('aria-expanded', 'true');
+    document.documentElement.classList.add('menu-open');
+    untrap = trapFocus(nav);
+    const first = focusable(nav)[0];
+    if (first) first.focus();
+  };
+
+  const close = ({ restoreFocus = true } = {}) => {
+    if (!nav.classList.contains('is-open')) return;
     nav.classList.remove('is-open');
     burger.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('menu-open');
+    if (untrap) { untrap(); untrap = null; }
+    if (restoreFocus) burger.focus();
   };
 
   burger.addEventListener('click', () => {
-    const open = nav.classList.toggle('is-open');
-    burger.setAttribute('aria-expanded', String(open));
+    if (nav.classList.contains('is-open')) close();
+    else open();
   });
 
   addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape' || !nav.classList.contains('is-open')) return;
-    close();
-    burger.focus();
+    if (e.key === 'Escape') close();
   });
 
-  nav.addEventListener('click', (e) => { if (e.target.closest('a')) close(); });
+  // Переход по ссылке уводит со страницы: возвращать фокус на бургер незачем
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) close({ restoreFocus: false }); });
 
   document.addEventListener('click', (e) => {
-    if (!nav.classList.contains('is-open')) return;
     if (e.target.closest('.nav') || e.target.closest('.burger')) return;
-    close();
+    close({ restoreFocus: false });
   });
+
+  // Меню живёт только на узких экранах. Если окно растянули при открытом
+  // меню, оно должно закрыться, иначе замок фокуса останется висеть.
+  const wide = matchMedia('(min-width: 961px)');
+  const onWide = () => { if (wide.matches) close({ restoreFocus: false }); };
+  wide.addEventListener ? wide.addEventListener('change', onWide) : wide.addListener(onWide);
 }
 
 /** Текущий год в футере. */
@@ -150,6 +199,8 @@ export function initYear() {
 
 export function initCommon() {
   initHeader();
-  initReveal();
   initYear();
+  // initReveal здесь не зовём: main.js вызывает его один раз после того,
+  // как модули дорисовали разметку. Два вызова заводили два наблюдателя
+  // на одних и тех же узлах.
 }

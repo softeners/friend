@@ -9,8 +9,27 @@ export function initHero() {
   const root = document.querySelector('[data-hero]');
   if (!root) return;
 
-  const h = heroes.find(x => x.slug === param('slug')) || heroes[0];
-  if (!h) return;
+  const slug = param('slug');
+  const h = slug ? heroes.find(x => x.slug === slug) : heroes[0];
+
+  // Пустой параметр открывает первое досье — это осмысленный вход.
+  // Но заданный и ненайденный slug — это опечатка или устаревшая ссылка,
+  // и подсовывать вместо неё случайного героя нельзя: человек решит,
+  // что открыл того, кого искал.
+  if (!h) {
+    document.title = 'Досье не найдено — медиаархив «ДРУГ»';
+    root.innerHTML = `
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="${ROOT}archive.html">Медиаархив</a>
+      </nav>
+      <div class="empty">
+        <p class="empty__title">Такого досье в архиве нет</p>
+        <p class="empty__text">Ссылка могла устареть или в ней опечатка.
+          Посмотрите, что уже опубликовано, — архив пополняется после каждой поездки.</p>
+        <a class="btn btn--primary" href="${ROOT}archive.html">Открыть медиаархив</a>
+      </div>`;
+    return;
+  }
 
   const region = regions.find(r => r.slug === h.region);
   const issue = issues.find(i => i.slug === h.issue);

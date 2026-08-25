@@ -92,14 +92,50 @@ export function initIssues() {
   const zineGrid = document.querySelector('[data-zines]');
   if (zineGrid) zineGrid.innerHTML = zines.map(zineCard).join('');
 
-  // Выбор издания в форме заказа — подставляем то, что открыли по ссылке
-  const select = document.querySelector('[data-zine-select]');
-  if (select) {
-    const forSale = zines.filter(z => z.available);
-    select.innerHTML = forSale.map(z =>
-      `<option value="${esc(z.title)}">${esc(z.title)}, ${z.price.toLocaleString('ru-RU')} ₽</option>`).join('');
-    const want = new URLSearchParams(location.search).get('zine');
-    const found = forSale.find(z => z.slug === want);
-    if (found) select.value = found.title;
-  }
+  initOrder();
 }
+
+/** Форма заказа: выбор издания по ссылке и видимая сумма.
+ *
+ *  Варианты в <select> впечатывает сборщик (см. _build/site_data.py),
+ *  чтобы форму можно было отправить и без скрипта. Здесь — только то,
+ *  что без скрипта невозможно: подстановка по ссылке и подсчёт итога.
+ */
+function initOrder() {
+  const select = document.querySelector('[data-zine-select]');
+  if (!select) return;
+
+  const forSale = zines.filter(z => z.available);
+  if (!select.options.length) {
+    select.innerHTML = forSale.map(z =>
+      `<option value="${esc(z.title)}" data-price="${z.price}">${esc(z.title)}, ${z.price.toLocaleString('ru-RU')} ₽</option>`).join('');
+  }
+
+  const want = new URLSearchParams(location.search).get('zine');
+  const found = forSale.find(z => z.slug === want);
+  if (found) select.value = found.title;
+
+  const total = document.querySelector('[data-order-total]');
+  const qty = document.getElementById('qty');
+  if (!total || !qty) return;
+
+  // Человек выбирает количество до двадцати штук и до этого места
+  // нигде не видел, во сколько ему обойдётся заказ.
+  const draw = () => {
+    const price = Number(select.selectedOptions[0]?.dataset.price || 0);
+    const n = Number(qty.value);
+    if (!price || !Number.isInteger(n) || n < 1) { total.textContent = ''; return; }
+    const money = (v) => v.toLocaleString('ru-RU');
+    total.innerHTML = n === 1
+      ? `К оплате <b>${money(price)} ₽</b> плюс доставка.`
+      : `${money(price)} ₽ × ${n} шт. — к оплате <b>${money(price * n)} ₽</b> плюс доставка.`;
+  };
+
+  select.addEventListener('change', draw);
+  qty.addEventListener('input', draw);
+  draw();
+}
+
+/** Издание, которого нет в продаже, приходило по ссылке молча подменённым.
+ *  Здесь ничего не подменяем: если slug не найден, остаётся первый вариант,
+ *  а человек видит это в поле — оно заполнено и подписано. */

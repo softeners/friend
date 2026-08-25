@@ -6,7 +6,8 @@
 структура курса, механика доступа, устойчивость и монетизация.
 """
 
-from shell import page, tg_block, head_block, EMAIL, PHONE, PHONE_HREF, TELEGRAM, VK
+from shell import page, tg_block, head_block, card_preload, EMAIL, PHONE, PHONE_HREF, TELEGRAM, VK
+from site_data import region_options, zine_options, first_zine_cover
 
 PHOTO = 'assets/img/photo'
 
@@ -88,6 +89,7 @@ def sent_screen(form_id, title, lines):
 # 1. ЭКСПЕДИЦИИ
 # ═══════════════════════════════════════════════════════════════
 EXPEDITION = page(
+    slug='expedition.html',
     title='Экспедиции — ДРУГ',
     description='Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей '
                 'с наставником, финальная работа и поездка в составе команды.',
@@ -304,6 +306,7 @@ EXPEDITION = page(
 # 2. СТАТЬ ГЕРОЕМ
 # ═══════════════════════════════════════════════════════════════
 BECOME_HERO = page(
+    slug='become-hero.html',
     title='Рассказать свою историю — ДРУГ',
     description='Форма заявки для героев проекта «Друг». Расскажите, чем занимаетесь '
                 'и что делаете для места, где живёте.',
@@ -444,6 +447,7 @@ STATUS_OPTIONS = [
 ]
 
 BECOME_PARTICIPANT = page(
+    slug='become-participant.html',
     title='Заявка в экспедицию — ДРУГ',
     description='Анкета участника экспедиции проекта «Друг» для молодых авторов '
                 'из шести регионов маршрута.',
@@ -505,7 +509,9 @@ BECOME_PARTICIPANT = page(
                 <div class="field">
                   <label class="field__label" for="region">Регион проживания <span class="field__req" aria-hidden="true">*</span></label>
                   <select class="select" id="region" name="region" required data-label="регион"
-                          data-region-select aria-describedby="region-note region-err"></select>
+                          data-region-select aria-describedby="region-note region-err">
+                    {region_options()}
+                  </select>
                   <p class="field__note" id="region-note">
                     Если вы живёте в другом регионе, выберите «Другой регион» и всё равно отправьте
                     заявку. География проекта будет расширяться.
@@ -606,6 +612,9 @@ BECOME_PARTICIPANT = page(
 # 4. ПЕЧАТНЫЕ ИЗДАНИЯ
 # ═══════════════════════════════════════════════════════════════
 ZINES = page(
+    slug='zines.html',
+    needs_js=True,
+    preload=card_preload(first_zine_cover()),
     title='Печатные издания — ДРУГ',
     description='Пилотный зин проекта «Друг» — компиляция материалов шести регионов. '
                 'Печатный артефакт, который работает и на героя, и на аудиторию.',
@@ -646,14 +655,18 @@ ZINES = page(
                 <div class="field">
                   <label class="field__label" for="zine">Что заказываете <span class="field__req" aria-hidden="true">*</span></label>
                   <select class="select" id="zine" name="zine" required data-label="издание"
-                          data-zine-select aria-describedby="zine-err"></select>
+                          data-zine-select aria-describedby="zine-err">
+                    {zine_options()}
+                  </select>
                   <p class="field__error" id="zine-err" role="alert"></p>
                 </div>
 
                 <div class="form__row">
-                  {field('qty', 'Количество экземпляров', kind='number', extra=' min="1" max="20" value="1"')}
+                  {field('qty', 'Количество экземпляров', kind='number', extra=' min="1" max="20" step="1" value="1"')}
                   {field('name', 'Имя и фамилия', placeholder='Для получения на почте')}
                 </div>
+
+                <p class="order-total" data-order-total role="status"></p>
 
                 {field('address', 'Адрес доставки', rows=3,
                        placeholder='Индекс, город, улица, дом, квартира',
@@ -726,6 +739,7 @@ SUBJ_NKO = 'Сотрудничество%3A%20институция%20или%20ф
 SUBJ_BIZ = 'Сотрудничество%3A%20бизнес'
 
 PARTNERS = page(
+    slug='partners.html',
     title='Сотрудничество — ДРУГ',
     description='Партнёрство с проектом «Друг» для институций и фондов и отдельно для бизнеса '
                 'в регионах: совместные события, доступ к архиву, спецвыпуски, лицензирование съёмки.',
@@ -812,6 +826,7 @@ PARTNERS = page(
 # 6. ХОД ПРОЕКТА
 # ═══════════════════════════════════════════════════════════════
 NEWS = page(
+    slug='news.html',
     title='Ход проекта — ДРУГ',
     description='На каком этапе находится проект «Друг» и что уже сделано.',
     active='',
@@ -887,6 +902,7 @@ def faq_page():
         </details>''' for q, a in FAQ_ITEMS)
 
     return page(
+        slug='faq.html',
         title='Вопрос-ответ — ДРУГ',
         description='Как стать героем проекта «Друг», что получает герой, как попасть '
                     'в экспедицию, как заказать зин и на каких условиях доступен архив.',
@@ -919,6 +935,7 @@ def faq_page():
 # 8. КОНТАКТЫ
 # ═══════════════════════════════════════════════════════════════
 CONTACTS = page(
+    slug='contacts.html',
     title='Контакты — ДРУГ',
     description=f'Связаться с проектом «Друг». Почта {EMAIL}, телефон {PHONE}, '
                 f'Telegram-канал и сообщество ВКонтакте.',

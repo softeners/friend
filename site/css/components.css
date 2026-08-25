@@ -64,7 +64,7 @@
   transition: color var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease);
 }
 .nav__link:hover { color: var(--text); }
-.nav__link[aria-current='page'] { color: var(--accent); border-bottom-color: var(--accent); }
+.nav__link[aria-current='page'] { color: var(--accent-text); border-bottom-color: var(--accent); }
 
 .header__cta { flex: none; }
 
@@ -129,6 +129,13 @@
 .btn[disabled] { opacity: .55; cursor: not-allowed; transform: none; }
 
 /* ── 3. Бумажная записка — сигнатурный элемент ─────────────── */
+/* Бумага и терракотовая карточка — светлые поверхности внутри тёмной темы.
+   Подменяем на них ровно два токена, и весь текст внутри становится
+   читаемым сам, без правок в каждом вложенном правиле. */
+.paper       { --accent-text: var(--accent-ink); --text-mute: var(--paper-mute); }
+.card--accent,
+.is-on-accent { --accent-text: var(--ink); --text-mute: var(--ink); }
+
 .paper {
   position: relative;
   background: var(--paper);
@@ -157,7 +164,7 @@
   height: 46px;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 46' fill='none' stroke='%23968D82' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M4.1 40.5V8.6a4.4 4.4 0 0 1 8.8 0v28.6'/%3E%3Cpath d='M12.9 37.2a4.4 4.4 0 0 1-8.8 0V12.4a2 2 0 0 1 4 0v26'/%3E%3C/svg%3E") no-repeat center / contain;
   transform: rotate(-7deg);
-  filter: drop-shadow(0 1px 1px rgba(42, 35, 32, .28));
+  filter: drop-shadow(0 1px 1px var(--ink));
   pointer-events: none;
 }
 .paper--noclip::before { display: none; }
@@ -168,7 +175,7 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: #8A7F73;
+  color: var(--paper-mute);
   margin-bottom: .5rem;
 }
 .paper__title {
@@ -179,7 +186,7 @@
 }
 .paper p { line-height: 1.5; }
 .paper p + p { margin-top: .6rem; }
-.paper a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 2px; }
+.paper a { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 2px; }
 
 /* маркированный список внутри записки: тёмный текст по бумаге */
 .paper .list { gap: .5rem; }
@@ -208,10 +215,10 @@ a.card:hover, .card--hover:hover {
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-top: -.35rem;
 }
-.card--accent .card__role { color: var(--ink); opacity: .6; }
+.card--accent .card__role { color: var(--ink); }
 .card__text { color: var(--text-dim); font-size: var(--fs-sm); line-height: 1.5; }
 .card__foot { margin-top: auto; padding-top: var(--s-3); }
 
@@ -220,7 +227,7 @@ a.card:hover, .card--hover:hover {
   border-color: var(--accent);
   color: var(--ink);
 }
-.card--accent .card__text { color: rgba(42, 35, 32, .78); }
+.card--accent .card__text { color: var(--ink); }
 .card--accent:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
 
 /* Карточка-приглашение с крупной цифрой */
@@ -228,10 +235,10 @@ a.card:hover, .card--hover:hover {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3vw, 2.4rem);
   font-weight: 800;
-  color: var(--accent);
+  color: var(--accent-text);
   line-height: 1;
 }
-.card--accent .card__num { color: var(--ink); opacity: .55; }
+.card--accent .card__num { color: var(--ink); }
 
 /* ── 5. Фото ───────────────────────────────────────────────── */
 .ph {
@@ -328,7 +335,7 @@ a.card:hover, .card--hover:hover {
   border-radius: 999px;
   padding: .28rem .7rem;
 }
-.tag--done { color: var(--accent); border-color: var(--accent-line); }
+.tag--done { color: var(--accent-text); border-color: var(--accent-line); }
 .tag--planned { color: var(--text-mute); }
 
 /* ── 8. Цитата героя ───────────────────────────────────────── */
@@ -340,7 +347,7 @@ a.card:hover, .card--hover:hover {
   letter-spacing: -.015em;
   max-width: 24ch;
 }
-.quote--accent { color: var(--accent); }
+.quote--accent { color: var(--accent-text); }
 .quote__author {
   display: block;
   margin-top: 1rem;
@@ -358,7 +365,7 @@ a.card:hover, .card--hover:hover {
   border-radius: var(--radius);
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
-.quote-block .quote__author { color: rgba(42, 35, 32, .72); }
+.quote-block .quote__author { color: var(--ink); }
 
 /* ── 9. Списки ─────────────────────────────────────────────── */
 .list { display: flex; flex-direction: column; gap: var(--s-2); }
@@ -375,9 +382,9 @@ a.card:hover, .card--hover:hover {
   content: '—';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--accent-text);
 }
-.card--accent .list li { color: rgba(42, 35, 32, .82); }
+.card--accent .list li { color: var(--ink); }
 .card--accent .list li::before { color: var(--ink); }
 
 /* ── 10. Статистика ────────────────────────────────────────── */
@@ -388,7 +395,7 @@ a.card:hover, .card--hover:hover {
   font-weight: 800;
   line-height: 1;
   letter-spacing: -.03em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .card--accent .stat__num { color: var(--ink); }
 .stat__label {
@@ -397,7 +404,7 @@ a.card:hover, .card--hover:hover {
   font-size: var(--fs-sm);
   color: var(--text-dim);
 }
-.card--accent .stat__label { color: rgba(42, 35, 32, .78); }
+.card--accent .stat__label { color: var(--ink); }
 
 /* ── 11. Аккордеон на <details> ────────────────────────────── */
 .faq { border-top: 1px solid var(--line); }
@@ -417,7 +424,7 @@ a.card:hover, .card--hover:hover {
 }
 .faq__q::-webkit-details-marker { display: none; }
 .faq__q:hover { color: var(--text); }
-.faq__item[open] .faq__q { color: var(--accent); }
+.faq__item[open] .faq__q { color: var(--accent-text); }
 
 .faq__sign {
   margin-left: auto;
@@ -454,6 +461,7 @@ a.card:hover, .card--hover:hover {
   border-radius: var(--radius);
   padding: var(--s-5);
 }
+.tg__actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-left: auto; }
 .tg__text { flex: 1 1 22ch; }
 .tg__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
 .tg__note { color: var(--text-dim); font-size: var(--fs-sm); margin-top: .3rem; }
@@ -484,7 +492,7 @@ a.card:hover, .card--hover:hover {
 
 .field { display: flex; flex-direction: column; gap: .5rem; }
 .field__label { font-size: var(--fs-sm); font-weight: 500; }
-.field__req { color: var(--accent); }
+.field__req { color: var(--accent-text); }
 .field__note { font-size: var(--fs-xs); color: var(--text-mute); line-height: 1.5; }
 .field__opt { font-weight: 400; color: var(--text-mute); font-size: var(--fs-xs); }
 .field__count {
@@ -494,12 +502,12 @@ a.card:hover, .card--hover:hover {
   font-variant-numeric: tabular-nums;
   margin-top: -.15rem;
 }
-.field__count.is-full { color: var(--accent); }
+.field__count.is-full { color: var(--accent-text); }
 
 .input, .textarea, .select {
   width: 100%;
   background: var(--bg-deep);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius-sm);
   padding: .8rem 1rem;
   color: var(--text);
@@ -546,7 +554,7 @@ a.card:hover, .card--hover:hover {
   width: 22px;
   height: 22px;
   margin-top: .1rem;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 5px;
   background: var(--bg-deep);
   flex: none;
@@ -559,16 +567,17 @@ a.card:hover, .card--hover:hover {
   border-color: var(--accent);
 }
 .check input[aria-invalid='true'] { border-color: var(--error); }
-.check a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.check a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 2px; }
 
 /* загрузка файлов */
+/* Пунктир зоны загрузки — управляющий элемент, а не украшение: 3:1 */
 .upload {
   /* колонка с gap: строчные подписи иначе налезают друг на друга при переносе */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: .4rem;
-  border: 1px dashed var(--line);
+  border: 1px dashed var(--line-strong);
   border-radius: var(--radius-sm);
   padding: 1.5rem;
   text-align: center;
@@ -576,7 +585,7 @@ a.card:hover, .card--hover:hover {
 }
 .upload:hover, .upload.is-over { border-color: var(--accent); background: var(--accent-soft); }
 .upload input { position: absolute; width: 1px; height: 1px; opacity: 0; }
-.upload__cta { font-size: var(--fs-sm); font-weight: 500; color: var(--accent); cursor: pointer; }
+.upload__cta { font-size: var(--fs-sm); font-weight: 500; color: var(--accent-text); cursor: pointer; }
 .upload__note { font-size: var(--fs-xs); color: var(--text-mute); line-height: 1.5; }
 .upload__list { display: flex; flex-direction: column; gap: .4rem; margin-top: .6rem; text-align: left; align-self: stretch; }
 .upload__list:empty { display: none; }
@@ -619,6 +628,38 @@ a.card:hover, .card--hover:hover {
 .form__status--error { color: var(--error); }
 
 /* экран после отправки */
+/* Экран «отправлять пока некуда»: показывается вместо ложного «принято»,
+   когда адрес приёмника заявок не задан. Форма при этом НЕ прячется —
+   человек должен видеть, что он написал. */
+/* Итоговая сумма заказа: видна рядом с количеством, а не только в письме */
+.order-total {
+  font-size: var(--fs-sm);
+  color: var(--text-dim);
+  border-left: 3px solid var(--accent);
+  padding: .5rem .9rem;
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.order-total:empty { display: none; }
+.order-total b { color: var(--text); font-weight: 600; }
+
+.unwired { max-width: none; margin-top: var(--s-5); }
+.unwired__text {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  background: var(--paper-shade);
+  border-radius: var(--radius-sm);
+  padding: .9rem 1rem;
+  margin: var(--s-3) 0;
+  max-height: 22rem;
+}
+.unwired__actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.unwired__note:empty { display: none; }
+.unwired__note { margin-top: var(--s-2); font-size: var(--fs-sm); }
+
 .sent { display: none; }
 .sent.is-open { display: block; animation: slide-in .35s var(--ease); }
 .form.is-sent { display: none; }
@@ -652,7 +693,8 @@ a.card:hover, .card--hover:hover {
   margin-bottom: .3rem;
 }
 .footer__link { color: var(--text-dim); font-size: var(--fs-sm); transition: color var(--dur-s) var(--ease); }
-.footer__link:hover { color: var(--accent); }
+.footer__link:hover { color: var(--accent-text); }
+.footer__legal { display: flex; flex-wrap: wrap; gap: .35rem 1.2rem; }
 .footer__contact { font-size: var(--fs-lead); font-family: var(--font-display); }
 
 .footer__bottom {
@@ -719,6 +761,24 @@ a.card:hover, .card--hover:hover {
 }
 html.lightbox-open { overflow: hidden; }
 
+/* Заметка над сеткой: объясняет, почему показали не то, что просили */
+/* Заметка над сеткой и предупреждение без скриптов */
+.notice {
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
+  padding: .8rem 1rem;
+  margin-bottom: var(--s-4);
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+.notice a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.notice--noscript {
+  max-width: var(--container);
+  margin: var(--s-5) auto 0;
+  width: calc(100% - var(--gutter) * 2);
+}
+
 /* ── 16. Пустое состояние ──────────────────────────────────── */
 .empty {
   border: 1px dashed var(--line);
@@ -740,10 +800,19 @@ html.lightbox-open { overflow: hidden; }
     border-bottom: 1px solid var(--line);
     padding: .5rem var(--gutter) 1.5rem;
     transform: translateY(-130%);
-    transition: transform var(--dur) var(--ease);
+    /* visibility убирает закрытое меню из порядка табуляции и из дерева
+       доступности. Без неё восемь ссылок оставались фокусируемыми
+       за верхним краем экрана: человек на клавиатуре проходил их вслепую.
+       Задержка снятия равна длительности ухода, чтобы анимация была видна. */
+    visibility: hidden;
+    transition: transform var(--dur) var(--ease), visibility 0s var(--dur);
     margin-left: 0;
   }
-  .nav.is-open { transform: none; }
+  .nav.is-open {
+    transform: none;
+    visibility: visible;
+    transition: transform var(--dur) var(--ease);
+  }
   .nav__link {
     padding: .95rem 0;
     border-bottom: 1px solid var(--line);

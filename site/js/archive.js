@@ -8,25 +8,40 @@ import { photo, esc, ROOT } from './ui.js';
 import { setActiveRegion } from './map.js';
 
 const state = { region: '', type: '', format: '' };
+// Что пришло в адресе, но такого значения не существует. Держим отдельно,
+// чтобы объяснить человеку, а не показывать безликое «ничего не нашлось».
+const unknown = { region: '', type: '', format: '' };
+
+const known = {
+  region: () => regions.map(r => r.slug),
+  type: () => Object.keys(typeLabels),
+  format: () => Object.keys(formatLabels),
+};
 
 function readUrl() {
   const q = new URLSearchParams(location.search);
-  state.region = q.get('region') || '';
-  state.type = q.get('type') || '';
-  state.format = q.get('format') || '';
+  Object.keys(state).forEach(k => {
+    const v = q.get(k) || '';
+    const ok = !v || known[k]().includes(v);
+    state[k] = ok ? v : '';
+    unknown[k] = ok ? '' : v;
+  });
 }
 
-function writeUrl() {
+function writeUrl(push) {
   const q = new URLSearchParams();
   Object.entries(state).forEach(([k, v]) => { if (v) q.set(k, v); });
   const url = q.toString() ? `?${q}` : location.pathname;
-  history.replaceState(null, '', url);
+  // pushState, а не replaceState: человек накликал три фильтра — «Назад»
+  // должен снимать последний, а не выбрасывать со страницы целиком.
+  if (push) history.pushState({ ...state }, '', url);
+  else history.replaceState({ ...state }, '', url);
 }
 
 function match(m) {
   return (!state.region || m.region === state.region)
     && (!state.type || m.type === state.type)
-    && (!state.format || m.formats.includes(state.format));
+    && (!state.format || (m.formats || []).includes(state.format));
 }
 
 function card(m) {
@@ -40,6 +55,29 @@ function card(m) {
       <p class="card__text">${esc(m.lead)}</p>
       <p class="material-card__meta">${esc(region ? region.short : '')} · ${esc(m.date)}</p>
     </a>`;
+}
+
+/** Заметка о том, что в ссылке было значение, которого не существует.
+ *  Показываем её независимо от того, нашлись материалы или нет: после
+ *  очистки битого фильтра архив выдаёт полный список, и без объяснения
+ *  человек решит, что открыл не ту ссылку. */
+function renderNotice() {
+  const grid = document.querySelector('[data-archive]');
+  if (!grid) return;
+  const prev = document.querySelector('[data-archive-notice]');
+  if (prev) prev.remove();
+
+  const bad = Object.entries(unknown).filter(([, v]) => v);
+  if (!bad.length) return;
+
+  const what = { region: 'региону', type: 'типу материалов', format: 'формату' };
+  const list = bad.map(([k, v]) => `${what[k]} «${esc(v)}»`).join(' и ');
+  const box = document.createElement('p');
+  box.className = 'notice';
+  box.setAttribute('data-archive-notice', '');
+  box.setAttribute('role', 'status');
+  box.innerHTML = `В ссылке был фильтр по ${list} — такого у нас нет. Показываем архив целиком.`;
+  grid.parentNode.insertBefore(box, grid);
 }
 
 function emptyState() {
@@ -74,10 +112,13 @@ function emptyState() {
 function chipRow(key, items, allLabel) {
   const btn = (val, label) =>
     `<button type="button" class="chip" data-filter="${key}" data-value="${esc(val)}"
-       aria-pressed="${state[key] === val}">${esc(label)}</button>`;
+       aria-pressed="false">${esc(label)}</button>`;
   return btn('', allLabel) + items.map(([v, l]) => btn(v, l)).join('');
 }
 
+/** Плашки рисуются один раз. Перерисовка на каждый клик сбрасывала фокус
+ *  на <body>: человек на клавиатуре после каждого фильтра начинал табаться
+ *  заново с самого верха страницы. */
 function renderFilters() {
   const box = document.querySelector('[data-filters]');
   if (!box) return;
@@ -103,8 +144,17 @@ function renderFilters() {
     </div>`;
 }
 
+/** Переставляем только состояние — сами кнопки остаются теми же узлами,
+ *  поэтому фокус на нажатой плашке никуда не девается. */
+function syncFilters() {
+  document.querySelectorAll('[data-filter]').forEach(btn => {
+    btn.setAttribute('aria-pressed', String(state[btn.dataset.filter] === btn.dataset.value));
+  });
+}
+
 function render() {
-  renderFilters();
+  syncFilters();
+  renderNotice();
   setActiveRegion(state.region);
 
   const grid = document.querySelector('[data-archive]');
@@ -123,32 +173,39 @@ function render() {
   }
 }
 
+function apply(changes, { push = true } = {}) {
+  Object.assign(state, changes);
+  Object.keys(unknown).forEach(k => { unknown[k] = ''; });
+  writeUrl(push);
+  render();
+}
+
 export function initArchive() {
   if (!document.querySelector('[data-archive]')) return;
   readUrl();
+  renderFilters();
   render();
+  writeUrl(false);   // мусорные параметры вычищаем из адреса сразу
 
   document.addEventListener('click', (e) => {
     const chip = e.target.closest('[data-filter]');
     if (chip) {
       const key = chip.dataset.filter;
-      state[key] = state[key] === chip.dataset.value ? '' : chip.dataset.value;
-      writeUrl();
-      render();
+      apply({ [key]: state[key] === chip.dataset.value ? '' : chip.dataset.value });
       return;
     }
-    if (e.target.closest('[data-reset]')) {
-      state.region = state.type = state.format = '';
-      writeUrl();
-      render();
-    }
+    if (e.target.closest('[data-reset]')) apply({ region: '', type: '', format: '' });
   });
 
-  // клик по пину карты фильтрует, а не уводит со страницы
+  // клик по пину карты или по строке региона фильтрует, а не уводит со страницы
   document.addEventListener('map:select', (e) => {
-    state.region = state.region === e.detail ? '' : e.detail;
-    writeUrl();
-    render();
+    apply({ region: state.region === e.detail ? '' : e.detail });
     document.querySelector('[data-archive]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // «Назад» и «Вперёд» откатывают фильтры, а не уводят со страницы
+  addEventListener('popstate', () => {
+    readUrl();
+    render();
   });
 }
