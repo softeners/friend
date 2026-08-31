@@ -7,13 +7,20 @@
   <meta name="description" content="Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей с наставником, финальная работа и поездка в составе команды.">
   <meta name="theme-color" content="#2C2C2C">
 
+  <link rel="canonical" href="https://softeners.github.io/friend/site/expedition.html">
+
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ДРУГ">
   <meta property="og:title" content="Экспедиции — ДРУГ">
   <meta property="og:description" content="Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей с наставником, финальная работа и поездка в составе команды.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:image" content="https://softeners.github.io/friend/site/assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:image:alt" content="Как попасть в экспедицию проекта «Друг»: заявка, отбор, курс из шести модулей с наставником, финальная работа и поездка в составе команды.">
+  <meta property="og:url" content="https://softeners.github.io/friend/site/expedition.html">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/img/favicon.png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/fonts.css">
@@ -21,6 +28,21 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Модули грузятся водопадом: main.js → его импорты → их импорты.
+       На медленном канале это три круга по 150 мс, и сетка выпусков
+       дорисовывается через три секунды после первой отрисовки, сдвигая
+       всё, что ниже. modulepreload запускает загрузку всех сразу. -->
+  <link rel="modulepreload" href="js/main.js">
+  <link rel="modulepreload" href="js/ui.js">
+  <link rel="modulepreload" href="js/map.js">
+  <link rel="modulepreload" href="js/russia.js">
+  <link rel="modulepreload" href="js/data.js">
+  <link rel="modulepreload" href="js/archive.js">
+  <link rel="modulepreload" href="js/hero.js">
+  <link rel="modulepreload" href="js/issues.js">
+  <link rel="modulepreload" href="js/forms.js">
+  <link rel="modulepreload" href="js/lightbox.js">
 
   <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
        не прячут блоки перед анимацией, и сайт читается даже без JS. -->
@@ -49,13 +71,14 @@
 
     <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
 
-    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
+    <button type="button" class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
 <main id="main">
+
 
   <section class="section pagehead">
     <div class="container">
@@ -289,7 +312,10 @@
     <p class="tg__title">Следить за экспедицией</p>
     <p class="tg__note">О новых наборах мы сообщаем в Telegram-канале.</p>
   </div>
-  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+  <div class="tg__actions">
+    <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+    <a class="btn btn--ghost" href="news.html">Ход проекта</a>
+  </div>
 </div>
     </div>
   </section>
@@ -311,7 +337,7 @@
       <div class="footer__col">
         <span class="footer__head">Написать</span>
         <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7&nbsp;961&nbsp;879&#8209;55&#8209;42</a>
       </div>
 
       <div class="footer__col">
@@ -320,12 +346,14 @@
         <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
         <a class="footer__link" href="issues.html">Цифровые выпуски</a>
         <a class="footer__link" href="archive.html">Медиаархив</a>
+        <a class="footer__link" href="news.html">Ход проекта</a>
       </div>
 
       <div class="footer__col">
         <span class="footer__head">Участвовать</span>
         <a class="footer__link" href="become-hero.html">Стать героем</a>
         <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="become-participant.html">Заявка в экспедицию</a>
         <a class="footer__link" href="zines.html">Заказать зин</a>
         <a class="footer__link" href="partners.html">Сотрудничество</a>
       </div>
@@ -334,7 +362,10 @@
     <div class="footer__bottom">
       <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
         <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span class="footer__legal">
+        <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+        <a class="footer__link" href="privacy.html">Обработка персональных данных</a>
+      </span>
     </div>
   </div>
 </footer>

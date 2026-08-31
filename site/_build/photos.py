@@ -29,7 +29,11 @@ SRC = os.path.join(ROOT, 'материалы', 'photo-source')
 DST = os.path.join(ROOT, 'site', 'assets', 'img', 'photo')
 
 WIDTHS = (2000, 1200, 600)      # 1200 дополнительно сохраняется в JPEG
-QUALITY_WEBP = 82
+
+# Качество по ширине, а не одно на всех. Кадры в проекте зернистые, и на
+# превью 600 px это зерно съедает по 150–190 КБ на карточку, хотя на экране
+# она занимает треть колонки. Чем меньше рендер, тем меньше видно сжатие.
+QUALITY_WEBP = {2000: 80, 1200: 80, 600: 72}
 QUALITY_JPEG = 80
 
 # Понятные имена вместо номеров с телефона.
@@ -61,7 +65,7 @@ def process(filename, force=False):
         # не растягиваем кадр, если оригинал меньше нужной ширины
         out.thumbnail((min(width, w), 10 ** 6), Image.LANCZOS)
         out.save(os.path.join(DST, f'{slug}-{width}.webp'), 'WEBP',
-                 quality=QUALITY_WEBP, method=5)
+                 quality=QUALITY_WEBP[width], method=6)   # method=6 медленнее, но плотнее
         if width == 1200:
             out.save(os.path.join(DST, f'{slug}-1200.jpg'), 'JPEG',
                      quality=QUALITY_JPEG, optimize=True, progressive=True)

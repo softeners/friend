@@ -14,6 +14,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+from shell import SITE_URL
 import pages_a as A
 import pages_b as B
 import notes as N
@@ -40,6 +41,32 @@ FILES = {
 }
 
 
+# Страницы, которые не должны попадать в поиск: досье открывается
+# только по параметру и без него показывает первого героя.
+NOINDEX = {'hero.html'}
+
+
+def write_sitemap():
+    """Карта сайта и robots.txt. Пятнадцать статических страниц — их
+    незачем оставлять на угадывание краулеру."""
+    urls = [SITE_URL + ('' if n == 'index.html' else n)
+            for n in FILES if n not in NOINDEX]
+    body = '\n'.join(f'  <url><loc>{u}</loc></url>' for u in urls)
+    sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+               f'{body}\n</urlset>\n')
+    with open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+        f.write(sitemap)
+
+    robots = ('User-agent: *\n'
+              'Allow: /\n'
+              'Disallow: /_build/\n'
+              f'Sitemap: {SITE_URL}sitemap.xml\n')
+    with open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8') as f:
+        f.write(robots)
+    return len(urls)
+
+
 def main():
     os.makedirs(os.path.join(OUT, 'notes'), exist_ok=True)
     total = 0
@@ -49,6 +76,8 @@ def main():
             f.write(html)
         total += len(html)
         print(f'  {name:26s} {len(html) / 1024:6.1f} KB')
+    n = write_sitemap()
+    print(f'  sitemap.xml, robots.txt    {n} адресов')
     print(f'\nГотово: {len(FILES)} страниц, {total / 1024:.0f} KB разметки')
 
 

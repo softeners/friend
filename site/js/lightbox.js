@@ -3,7 +3,7 @@
    Работает по data-slug на <picture>, который проставляет notes.py.
    ═══════════════════════════════════════════════════════════ */
 
-import { photo } from './ui.js';
+import { photo, trapFocus } from './ui.js';
 
 export function initLightbox() {
   const root = document.querySelector('.longread');
@@ -11,6 +11,11 @@ export function initLightbox() {
 
   const overlay = document.createElement('div');
   overlay.className = 'lightbox';
+  // Оверлей перекрывает страницу целиком, поэтому объявляем его диалогом:
+  // иначе скринридер продолжает читать текст под затемнением как обычный.
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Фотография на весь экран');
   overlay.innerHTML = `
     <button class="lightbox__close" type="button" aria-label="Закрыть">&times;</button>
     <div class="lightbox__frame"></div>
@@ -20,19 +25,23 @@ export function initLightbox() {
   const frame = overlay.querySelector('.lightbox__frame');
   const closeBtn = overlay.querySelector('.lightbox__close');
   let lastFocus = null;
+  let untrap = null;
 
   function open(slug, alt) {
     frame.innerHTML = photo(slug, alt, { sizes: '92vw', big: true, eager: true });
+    lastFocus = document.activeElement;
     overlay.classList.add('is-open');
     document.documentElement.classList.add('lightbox-open');
-    lastFocus = document.activeElement;
+    untrap = trapFocus(overlay);
     closeBtn.focus();
   }
 
   function close() {
+    if (!overlay.classList.contains('is-open')) return;
     overlay.classList.remove('is-open');
     document.documentElement.classList.remove('lightbox-open');
     frame.innerHTML = '';
+    if (untrap) { untrap(); untrap = null; }
     lastFocus?.focus();
   }
 
@@ -47,6 +56,6 @@ export function initLightbox() {
     if (e.target === overlay) close();
   });
   addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+    if (e.key === 'Escape') close();
   });
 }

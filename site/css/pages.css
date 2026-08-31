@@ -128,7 +128,7 @@
 .pagehead__title { max-width: 20ch; }
 .pagehead__actions { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-2); }
 .pagehead__back { font-size: var(--fs-sm); color: var(--text-mute); }
-.pagehead__back a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.pagehead__back a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 
 /* секция сразу под первым экраном: свой отступ сверху не нужен */
 .section--flush { padding-top: 0; }
@@ -288,6 +288,15 @@
   stroke-linejoin: round;
 }
 
+/* Выноска: тонкая линия от настоящей точки региона к нажимаемому пину.
+   Нужна там, где регионы стоят вплотную и пины иначе перекрываются. */
+.map__lead {
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.map__anchor { fill: var(--text-mute); }
+
 .map__pin {
   position: absolute;
   width: 34px;
@@ -354,10 +363,23 @@
 .map__tip-meta {
   display: block;
   font-size: var(--fs-xs);
-  color: #8A7F73;
+  color: var(--paper-mute);
   margin-top: .3rem;
   text-transform: uppercase;
   letter-spacing: .06em;
+}
+
+.map__hint {
+  display: none;
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+  color: var(--text-dim);
+}
+@media (max-width: 640px) {
+  .map__hint { display: block; }
+  /* Пины перестают быть целями: на 390 px между ними 15 px, попасть нельзя */
+  .map__pin { pointer-events: none; }
+  .map__pin.is-active .map__dot { transform: scale(1.45); }
 }
 
 .map__legend {
@@ -388,7 +410,9 @@
 .region-list li:first-child .region-row { border-top: 1px solid var(--line); }
 .region-row:hover { padding-left: .5rem; }
 .region-row__name { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
-.region-row:hover .region-row__name { color: var(--accent); }
+.region-row:hover .region-row__name { color: var(--accent-text); }
+.region-row.is-active { border-color: var(--accent-line); background: var(--accent-soft); }
+.region-row.is-active .region-row__name { color: var(--accent-text); }
 .region-row__about { color: var(--text-dim); font-size: var(--fs-sm); }
 
 /* ── 4. Последний выпуск на главной ────────────────────────── */
@@ -406,7 +430,7 @@
   text-transform: uppercase;
   color: var(--text-mute);
 }
-.latest__sub { font-size: var(--fs-lead); color: var(--accent); }
+.latest__sub { font-size: var(--fs-lead); color: var(--accent-text); }
 .latest__meta { font-size: var(--fs-xs); color: var(--text-mute); letter-spacing: .06em; text-transform: uppercase; }
 .latest__body .btn { margin-top: var(--s-3); }
 
@@ -430,7 +454,7 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .invite__title { max-width: 16ch; }
 .invite__note {
@@ -461,7 +485,7 @@
   font-size: clamp(1.75rem, 3vw, 2.5rem);
   font-weight: 800;
   line-height: 1;
-  color: var(--accent);
+  color: var(--accent-text);
   font-variant-numeric: tabular-nums;
 }
 .steps__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
@@ -504,7 +528,7 @@
   flex-direction: column;
   gap: .5rem;
 }
-.issue-card__sub { color: var(--accent); font-size: var(--fs-sm); }
+.issue-card__sub { color: var(--accent-text); font-size: var(--fs-sm); }
 .issue-card__meta {
   margin-top: auto;
   padding-top: .5rem;
@@ -513,7 +537,10 @@
   text-transform: uppercase;
   letter-spacing: .06em;
 }
-.issue-card.is-soon .issue-card__ph { opacity: .55; }
+/* Приглушаем только подложку обложки. Если гасить весь контейнер,
+   плашка с номером выпуска гаснет вместе с ним и её контраст падает
+   до 2,4:1 — прозрачность всегда бьёт по тексту внутри. */
+.issue-card.is-soon .issue-card__ph > :not(.issue-card__num) { opacity: .55; }
 .ph--empty-label {
   position: absolute;
   inset: 0;
@@ -564,7 +591,7 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .material-card .card__title { margin: .35rem 1.1rem 0; }
 .material-card .card__text { margin: .3rem 1.1rem 0; }
@@ -585,7 +612,7 @@
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
-.crumbs a:hover { color: var(--accent); }
+.crumbs a:hover { color: var(--accent-text); }
 
 .hero-doc__head {
   display: grid;
@@ -645,7 +672,7 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 1rem;
 }
 .longread p, .longread h2, .longread h3, .longread .list {
@@ -755,7 +782,7 @@
   position: absolute;
   right: calc(var(--gap) / -2 - .3em);
   top: 1.9rem;
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 1.1rem;
   line-height: 1;
 }
@@ -764,7 +791,7 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: .4rem;
 }
 
@@ -793,9 +820,9 @@
   font-size: var(--fs-xs);
   letter-spacing: var(--ls-caps);
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
-.card--accent .offer__kind { color: var(--ink); opacity: .65; }
+.card--accent .offer__kind { color: var(--ink); }
 .offer .btn { align-self: flex-start; margin-top: auto; }
 
 .partners__logos {
@@ -848,7 +875,7 @@
   font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: .1em;
-  color: var(--accent);
+  color: var(--accent-text);
   font-variant-numeric: tabular-nums;
   flex: none;
   min-width: 2ch;
@@ -873,7 +900,7 @@
   color: var(--text-mute);
   font-variant-numeric: tabular-nums;
 }
-.legal__list a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.legal__list a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 
 .legal__contacts { display: flex; flex-direction: column; gap: var(--s-4); }
 .legal__contacts .meta { margin-top: 0; padding-top: 0; border-top: 0; }
@@ -905,7 +932,7 @@
 .contact-card__value { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; word-break: break-word; }
 .contact-card__note { font-size: var(--fs-sm); color: var(--text-dim); }
 .contact-card--accent { border-color: var(--accent-line); background: var(--accent-soft); }
-.contact-card--accent .contact-card__kind { color: var(--accent); }
+.contact-card--accent .contact-card__kind { color: var(--accent-text); }
 
 /* ── 14. Адаптив блоков ────────────────────────────────────── */
 /* .region-row переходит на список раньше остальных: пока .map-layout
