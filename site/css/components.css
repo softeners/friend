@@ -145,6 +145,10 @@
 .paper--flat { transform: none; }
 .paper--wide { max-width: none; }
 
+/* записка не должна липнуть к сетке карточек, которая идёт перед ней —
+   лёгкий поворот иначе заводит скрепку прямо на нижнюю карточку */
+.grid + .paper { margin-top: var(--s-6); }
+
 /* Скрепка в левом верхнем углу. Нарисована проволокой в SVG: два витка,
    как у настоящей канцелярской скрепки. Высота подобрана так, чтобы
    нижний виток заканчивался выше текста. */
@@ -329,6 +333,7 @@ a.card:hover, .card--hover:hover {
   padding: .28rem .7rem;
 }
 .tag--done { color: var(--accent); border-color: var(--accent-line); }
+.tag--progress { color: var(--ok); border-color: rgba(127, 169, 127, .38); }
 .tag--planned { color: var(--text-mute); }
 
 /* ── 8. Цитата героя ───────────────────────────────────────── */
@@ -352,13 +357,8 @@ a.card:hover, .card--hover:hover {
   line-height: 1.5;
 }
 
-.quote-block {
-  background: var(--accent);
-  color: var(--ink);
-  border-radius: var(--radius);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-}
-.quote-block .quote__author { color: rgba(42, 35, 32, .72); }
+/* .quote-block теперь садится на .paper (см. блок 3) — своего фона и
+   отступов ему выдавать не нужно, только типографику ниже. */
 
 /* ── 9. Списки ─────────────────────────────────────────────── */
 .list { display: flex; flex-direction: column; gap: var(--s-2); }

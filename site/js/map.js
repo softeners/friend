@@ -10,6 +10,10 @@ import { esc, ROOT } from './ui.js';
 
 const VB = RUSSIA_VIEWBOX.split(' ').map(Number);   // [0,0,1000,460]
 
+function statusLabel(status) {
+  return status === 'done' ? 'пройдено' : status === 'in-progress' ? 'в работе' : 'запланирована';
+}
+
 export function initMap() {
   const roots = document.querySelectorAll('[data-map]');
   if (!roots.length) return;
@@ -20,10 +24,12 @@ export function initMap() {
     const pins = regions.map(r => {
       const left = ((r.x - VB[0]) / VB[2] * 100).toFixed(3);
       const top = ((r.y - VB[1]) / VB[3] * 100).toFixed(3);
-      const done = r.status === 'done';
-      const label = `${r.name}. ${done ? 'Экспедиция пройдена' : 'Экспедиция запланирована'}, ${r.period}`;
+      const cls = r.status === 'done' ? 'is-done' : r.status === 'in-progress' ? 'is-progress' : 'is-planned';
+      const statusText = r.status === 'done' ? 'Экспедиция пройдена'
+        : r.status === 'in-progress' ? 'Экспедиция в работе' : 'Экспедиция запланирована';
+      const label = `${r.name}. ${statusText}, ${r.period}`;
       return `<button type="button"
-          class="map__pin ${done ? 'is-done' : 'is-planned'}"
+          class="map__pin ${cls}"
           style="left:${left}%; top:${top}%"
           data-region="${r.slug}"
           aria-label="${esc(label)}">
@@ -31,7 +37,7 @@ export function initMap() {
           <span class="map__tip" role="presentation">
             <span class="map__tip-name">${esc(r.name)}</span>
             <span class="map__tip-line">${esc(r.about)}</span>
-            <span class="map__tip-meta">${done ? 'пройдено' : 'запланирована'} · ${esc(r.period)}</span>
+            <span class="map__tip-meta">${statusLabel(r.status)} · ${esc(r.period)}</span>
           </span>
         </button>`;
     }).join('');
@@ -46,6 +52,7 @@ export function initMap() {
       </div>
       <ul class="map__legend">
         <li><span class="map__key is-done" aria-hidden="true"></span>экспедиция пройдена</li>
+        <li><span class="map__key is-progress" aria-hidden="true"></span>в работе</li>
         <li><span class="map__key is-planned" aria-hidden="true"></span>экспедиция впереди</li>
       </ul>`;
 
@@ -57,8 +64,8 @@ export function initMap() {
           <a class="region-row" href="${ROOT}archive.html?region=${r.slug}">
             <span class="region-row__name">${esc(r.name)}</span>
             <span class="region-row__about">${esc(r.about)}</span>
-            <span class="tag ${r.status === 'done' ? 'tag--done' : 'tag--planned'}">
-              ${r.status === 'done' ? 'пройдено' : r.period}
+            <span class="tag ${r.status === 'done' ? 'tag--done' : r.status === 'in-progress' ? 'tag--progress' : 'tag--planned'}">
+              ${r.status === 'done' ? 'пройдено' : r.status === 'in-progress' ? 'в работе' : r.period}
             </span>
           </a>
         </li>`).join('');

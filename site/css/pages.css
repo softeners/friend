@@ -23,6 +23,49 @@
   /* держим текст читаемым и на светлых кадрах: снег, небо, туман */
   background: linear-gradient(180deg, rgba(28, 28, 28, .78) 0%, rgba(32, 32, 32, .56) 45%, var(--bg) 100%);
 }
+
+/* Кинематографичный первый экран: медленное наплывающее приближение кадра
+   (Ken Burns) и лёгкая виньетка по краям — ощущение кадра из фильма,
+   а не статичной подложки под текст. */
+.hero--cinematic .hero__media img {
+  animation: hero-kenburns 22s ease-in-out infinite alternate;
+}
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+.hero--cinematic .hero__media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: inset 0 0 min(14vw, 220px) rgba(10, 9, 8, .55);
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero--cinematic .hero__media img { animation: none; }
+}
+
+/* Текст первого экрана мягко проявляется при загрузке страницы —
+   отдельно от .reveal: hero виден сразу, скролл тут ни при чём. */
+.hero--cinematic .hero__inner {
+  animation: hero-rise .9s var(--ease) both;
+}
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.hero__accent {
+  max-width: 42ch;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  font-weight: 500;
+  color: var(--accent);
+  line-height: 1.5;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
 @media (max-width: 640px) {
   /* на узком экране текста больше, а кадра меньше — затемняем сильнее */
   .hero__media::after {
@@ -45,7 +88,7 @@
   font-weight: 800;
   line-height: var(--lh-tight);
   letter-spacing: -.025em;
-  max-width: 17ch;
+  max-width: 34ch;
   text-wrap: balance;
 }
 .hero__lead {
@@ -97,6 +140,125 @@
   .paper--mid { justify-self: start; }
 }
 
+/* ── 1.1 Маршрут «Как работает Друг» ───────────────────────── */
+.route {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-lg);
+}
+/* соединительная линия маршрута за узлами шагов */
+.route::before {
+  content: '';
+  position: absolute;
+  left: 27px;
+  top: 28px;
+  bottom: 28px;
+  width: 2px;
+  background: var(--line);
+}
+.route__item {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: var(--gap);
+  align-items: start;
+}
+.route__node {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--text-mute);
+  transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              background var(--dur) var(--ease);
+}
+.route__node svg { width: 26px; height: 26px; }
+/* узел «загорается» терракотой, когда шаг появился при скролле */
+.route__item.is-visible .route__node {
+  color: var(--accent);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+.route__body { padding-top: .6rem; display: flex; flex-direction: column; gap: .4rem; }
+.route__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--text-mute);
+  font-variant-numeric: tabular-nums;
+}
+.route__title { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 500; }
+.route__text { color: var(--text-dim); font-size: var(--fs-sm); line-height: 1.55; max-width: 52ch; }
+
+/* каждый шаг проявляется на свою долю секунды позже предыдущего —
+   маршрут «проходится» по мере скролла, а не появляется весь разом */
+.route__item:nth-child(2) { transition-delay: .08s; }
+.route__item:nth-child(3) { transition-delay: .16s; }
+.route__item:nth-child(4) { transition-delay: .24s; }
+
+/* декоративная графика справа от шагов — топографические линии и
+   маршрут между точками; текст в .route__text ограничен 52ch и не
+   доходит до правого края контейнера, там и живёт */
+.route__graphic { display: none; }
+@media (min-width: 1040px) {
+  .route__graphic {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: min(30%, 340px);
+    height: 90%;
+    max-height: 620px;
+    transform: translateY(-50%);
+    opacity: .9;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* ── 1.2 Категории героев ──────────────────────────────────── */
+.category-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--gap); }
+.category-grid .ph--empty {
+  aspect-ratio: 4 / 3;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+}
+/* подпись под фото — та же карточка, что и .ph--empty, просто с кадром;
+   min-height держит нижний край карточек ровным, пока подписи разной
+   длины («Мастера» vs «Создатели локальных инициатив») */
+.category-grid .ph__caption {
+  margin-top: .75rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  text-align: center;
+  min-height: 2.6em;
+}
+
+/* ── 1.3 Пул-цитата «Почему это важно» ─────────────────────── */
+.quote-block__lines {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  line-height: 1.7;
+}
+
+.section__note {
+  margin-top: var(--s-4);
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+}
+
 /* ── 2. Мета-строка (Автор / Регион / Период) ──────────────── */
 .meta {
   display: flex;
@@ -143,6 +305,7 @@
   transition: transform var(--dur-s) var(--ease), box-shadow var(--dur-s) var(--ease);
 }
 .map__pin.is-done .map__dot { background: var(--accent); }
+.map__pin.is-progress .map__dot { background: var(--ok); }
 .map__pin.is-planned .map__dot { background: var(--text-mute); }
 
 .map__pin.is-done::after {
@@ -208,13 +371,14 @@
 .map__legend li { display: flex; align-items: center; gap: .45rem; }
 .map__key { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
 .map__key.is-done { background: var(--accent); }
+.map__key.is-progress { background: var(--ok); }
 .map__key.is-planned { background: var(--text-mute); }
 
 /* список регионов — дубль карты для клавиатуры и мобильных */
 .region-list { display: flex; flex-direction: column; }
 .region-row {
   display: grid;
-  grid-template-columns: minmax(14rem, .9fr) minmax(0, 1.5fr) auto;
+  grid-template-columns: minmax(14rem, .9fr) minmax(8rem, 1.5fr) auto;
   gap: 1rem;
   align-items: center;
   padding: 1.05rem 0;
@@ -744,10 +908,22 @@
 .contact-card--accent .contact-card__kind { color: var(--accent); }
 
 /* ── 14. Адаптив блоков ────────────────────────────────────── */
+/* .region-row переходит на список раньше остальных: пока .map-layout
+   ещё не сложился в одну колонку (см. 860px ниже), .region-list делит
+   контейнер с картой и получает только ~45% ширины — при трёх колонках
+   в строке (имя / описание / плашка) средняя, minmax(0, 1.5fr), схлопывается
+   почти в ноль и текст переносится по одной букве. Собственный, более
+   широкий порог держит колонку с описанием живой. */
+@media (max-width: 1180px) {
+  .region-row { grid-template-columns: 1fr; gap: .4rem; }
+  .region-row .tag { justify-self: start; }
+}
+
 @media (max-width: 1100px) {
   .eco { grid-template-columns: repeat(2, 1fr); }
   .eco__step:nth-child(2)::after { display: none; }
   .steps { grid-template-columns: repeat(2, 1fr); }
+  .category-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 860px) {
@@ -756,8 +932,6 @@
   .hero-doc__portrait { position: static; }
   .media-slots { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
-  .region-row { grid-template-columns: 1fr; gap: .4rem; }
-  .region-row .tag { justify-self: start; }
   .map__tip { max-width: 13rem; }
 }
 
@@ -768,4 +942,9 @@
   .gallery { grid-template-columns: 1fr; }
   .news__item { grid-template-columns: 1fr; gap: .5rem; }
   .hero { min-height: auto; padding-block: 7rem 3rem; }
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .route::before { left: 23px; }
+  .route__item { grid-template-columns: 48px minmax(0, 1fr); }
+  .route__node { width: 48px; height: 48px; }
+  .route__node svg { width: 22px; height: 22px; }
 }
