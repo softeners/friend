@@ -6,7 +6,8 @@
 import { photo } from './ui.js';
 
 export function initLightbox() {
-  const root = document.querySelector('.longread');
+  // Лонгриды (picture[data-slug]) и любые картинки с data-zoom — статьи и админка.
+  const root = document.querySelector('.longread, [data-lightbox]');
   if (!root) return;
 
   const overlay = document.createElement('div');
@@ -21,8 +22,10 @@ export function initLightbox() {
   const closeBtn = overlay.querySelector('.lightbox__close');
   let lastFocus = null;
 
-  function open(slug, alt) {
-    frame.innerHTML = photo(slug, alt, { sizes: '92vw', big: true, eager: true });
+  function open(slug, alt, src) {
+    frame.innerHTML = src
+      ? `<img src="${src.replace(/"/g, '&quot;')}" alt="${alt.replace(/"/g, '&quot;')}">`
+      : photo(slug, alt, { sizes: '92vw', big: true, eager: true });
     overlay.classList.add('is-open');
     document.documentElement.classList.add('lightbox-open');
     lastFocus = document.activeElement;
@@ -36,8 +39,10 @@ export function initLightbox() {
     lastFocus?.focus();
   }
 
-  root.addEventListener('click', (e) => {
-    const picture = e.target.closest('picture[data-slug]');
+  document.addEventListener('click', (e) => {
+    const zoom = e.target.closest('img[data-zoom]');
+    if (zoom) { e.preventDefault(); open('', zoom.alt || '', zoom.currentSrc || zoom.src); return; }
+    const picture = e.target.closest('.longread picture[data-slug]');
     if (!picture) return;
     open(picture.dataset.slug, picture.querySelector('img')?.alt || '');
   });

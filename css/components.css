@@ -861,3 +861,11 @@ html.lightbox-open { overflow: hidden; }
   .zine-preview__loading,
   .zine-preview__frame { transition: none; }
 }
+
+/* ── Пометка демо-версии (админка, статьи из хранилища) ────── */
+.demo-note {
+  margin-block: var(--s-6);
+  font-size: var(--fs-xs);
+  color: var(--text-mute);
+  text-align: center;
+}

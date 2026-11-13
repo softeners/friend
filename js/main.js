@@ -11,6 +11,7 @@ import { initIssues } from './issues.js';
 import { initForms } from './forms.js';
 import { initLightbox } from './lightbox.js';
 import { initZinePreview } from './zine-preview.js';
+import { initArticle } from './article.js';
 
 initCommon();
 initMap();
@@ -20,6 +21,7 @@ initHero();
 initForms();
 initLightbox();
 initZinePreview();
+initArticle();
 
 // Модули выше дорисовывают разметку, поэтому наблюдателя запускаем ещё раз:
 // иначе блоки с классом .reveal, созданные из JS, останутся прозрачными.

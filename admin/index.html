@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" data-root="../">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Админка — ДРУГ</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#2C2C2C">
+
+  <link rel="icon" href="../assets/img/logo.png" type="image/png">
+  <link rel="preload" href="../assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header is-scrolled">
+  <div class="container header__inner">
+    <a href="../index.html" class="logo" aria-label="ДРУГ — на сайт">
+      <img src="../assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    </a>
+    <div class="admin-bar">
+      <span class="admin-bar__label">Админка</span>
+      <button type="button" class="btn btn--ghost" data-logout hidden>Выйти</button>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="admin" data-lightbox>
+  <div class="container">
+
+    <!-- ── Вход ── -->
+    <section class="admin-login" data-login hidden>
+      <form class="card" data-login-form novalidate>
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Админка</span></span>
+        <h1 class="card__title">Вход для редакции</h1>
+        <div class="field">
+          <label class="field__label" for="pass">Пароль</label>
+          <input class="input" type="password" id="pass" autocomplete="current-password" required aria-describedby="pass-err">
+          <p class="field__error" id="pass-err" role="alert"></p>
+        </div>
+        <button class="btn btn--primary" type="submit">Войти</button>
+      </form>
+    </section>
+
+    <!-- ── Рабочая часть ── -->
+    <section data-app hidden>
+      <div class="admin-tabs">
+        <div class="chips" aria-label="Разделы">
+          <button type="button" class="chip" data-tab="requests">Заявки</button>
+          <button type="button" class="chip" data-tab="articles">Статьи</button>
+        </div>
+        <button type="button" class="btn btn--ghost" data-reset-demo>Сбросить демо-данные</button>
+      </div>
+
+      <div data-view="requests" hidden>
+        <div class="chips admin-sub" aria-label="Статус заявок">
+          <button type="button" class="chip" data-sub="new">Новые<span class="chip__count" data-count="new"></span></button>
+          <button type="button" class="chip" data-sub="approved">Подтверждённые<span class="chip__count" data-count="approved"></span></button>
+        </div>
+        <div class="admin-split" data-split>
+          <div class="admin-list" data-req-list></div>
+          <article class="card admin-detail" data-req-detail aria-live="polite"></article>
+        </div>
+      </div>
+
+      <div data-view="articles" hidden>
+        <div data-art-list-view>
+          <div class="admin-editor__head" style="margin-bottom: var(--s-4)">
+            <h1 class="h2">Статьи</h1>
+            <button type="button" class="btn btn--primary" data-art-new>Новая статья</button>
+          </div>
+          <div class="admin-articles" data-art-list></div>
+        </div>
+        <div data-art-editor hidden></div>
+      </div>
+    </section>
+
+    <p class="demo-note">Демо-версия: данные хранятся только в этом браузере</p>
+  </div>
+</main>
+
+<script type="module" src="../js/admin.js"></script>
+</body>
+</html>

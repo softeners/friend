@@ -20,6 +20,8 @@
    ═══════════════════════════════════════════════════════════ */
 
 import { regions } from './data.js';
+import { addRequest } from './store.js';
+import { compressImage } from './ui.js';
 
 const FORM_ENDPOINT = null;
 
@@ -41,7 +43,10 @@ function fieldError(el) {
   if (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
     return 'Проверьте адрес, похоже, тут опечатка';
   }
-  if (el.type === 'tel' && v.replace(/\D/g, '').length < 10) {
+  // Поле «Телефон или Telegram» (placeholder «… или @nickname») принимает и ник, и t.me-ссылку.
+  const tgOk = /telegram/i.test(el.closest('.field')?.querySelector('.field__label')?.textContent || '')
+    && /^(@|https?:\/\/)?(t\.me\/)?@?[a-z0-9_]{5,32}$/i.test(v) && /[a-z_]/i.test(v);
+  if (el.type === 'tel' && !tgOk && v.replace(/\D/g, '').length < 10) {
     return 'Телефон коротковат, нужно десять или одиннадцать цифр';
   }
   if (el.type === 'number') {
@@ -176,8 +181,19 @@ function initGuardian(form) {
   sync();
 }
 
+/** Заявка героя → js/store.js (демо: localStorage, позже — Directus). */
+async function saveHeroRequest(form, getFiles) {
+  const data = Object.fromEntries([...new FormData(form).entries()]
+    .filter(([k, v]) => k !== 'photos' && k !== 'consent' && !(v instanceof File))
+    .map(([k, v]) => [k, String(v).trim()]));
+  const photos = (await Promise.all((getFiles ? getFiles() : []).map(f => compressImage(f)))).filter(Boolean);
+  await addRequest({ ...data, photos, createdAt: new Date().toISOString() });
+}
+
 /* ── Отправка ──────────────────────────────────────────────── */
 async function send(form, getFiles) {
+  if (form.dataset.form === 'hero') await saveHeroRequest(form, getFiles);
+
   const data = new FormData(form);
   data.delete('photos');
   (getFiles ? getFiles() : []).forEach((f, i) => data.append(`photo_${i + 1}`, f, f.name));
@@ -249,7 +265,9 @@ export function initForms() {
         btn.disabled = false;
         btn.textContent = btnLabel;
         status.className = 'form__status form__status--error';
-        status.textContent = 'Заявка не ушла, похоже, пропала связь. Попробуйте ещё раз через минуту. '
+        status.textContent = err.code === 'quota'
+          ? 'Фотографии слишком тяжёлые для демо-версии. Уберите одно-два фото или пришлите ссылку на облако.'
+          : 'Заявка не ушла, похоже, пропала связь. Попробуйте ещё раз через минуту. '
           + 'Если не получится, напишите нам на почту sycheva.alina.2000@bk.ru';
         console.error(err);
       }

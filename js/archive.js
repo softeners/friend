@@ -4,10 +4,34 @@
    ═══════════════════════════════════════════════════════════ */
 
 import { materials, regions, typeLabels, formatLabels } from './data.js';
-import { photo, esc, ROOT } from './ui.js';
+import { photo, esc, ROOT, imgSrc, monthYear, dateKey } from './ui.js';
 import { setActiveRegion } from './map.js';
+import { getArticles } from './store.js';
 
 const state = { region: '', type: '', format: '' };
+
+/* Список материалов архива: статичные из data.js плюс статьи,
+   опубликованные в админке (js/store.js). Новые сверху. */
+let allMaterials = materials;
+
+async function collectMaterials() {
+  let articles = [];
+  try { articles = await getArticles({ published: true }); } catch (err) { console.error(err); }
+  const fromStore = articles.map(a => ({
+    slug: a.id,
+    type: a.type,
+    region: a.region,
+    formats: a.formats || [],
+    title: a.title,
+    lead: a.lead,
+    coverSrc: imgSrc(a.cover),
+    url: `article.html?id=${encodeURIComponent(a.id)}`,
+    date: monthYear(a.date),
+    sortKey: dateKey(a.date)
+  }));
+  return [...materials.map(m => ({ ...m, sortKey: dateKey(m.date) })), ...fromStore]
+    .sort((a, b) => b.sortKey - a.sortKey);
+}
 
 function readUrl() {
   const q = new URLSearchParams(location.search);
@@ -33,7 +57,9 @@ function card(m) {
   const region = regions.find(r => r.slug === m.region);
   return `<a class="card material-card" href="${ROOT}${m.url}">
       <div class="ph ph--4x3 ph--zoom material-card__ph">
-        ${photo(m.cover, m.title, { sizes: '(max-width: 860px) 90vw, 30vw' })}
+        ${m.coverSrc
+          ? `<img src="${esc(m.coverSrc)}" alt="${esc(m.title)}" loading="lazy" decoding="async">`
+          : photo(m.cover, m.title, { sizes: '(max-width: 860px) 90vw, 30vw' })}
       </div>
       <span class="material-card__kind">${esc(typeLabels[m.type] || m.type)}</span>
       <h2 class="card__title">${esc(m.title)}</h2>
@@ -111,7 +137,7 @@ function render() {
   const count = document.querySelector('[data-archive-count]');
   if (!grid) return;
 
-  const found = materials.filter(match);
+  const found = allMaterials.filter(match);
   grid.className = found.length ? 'grid grid--3 archive__grid' : 'archive__grid';
   grid.innerHTML = found.length ? found.map(card).join('') : emptyState();
 
@@ -123,9 +149,11 @@ function render() {
   }
 }
 
-export function initArchive() {
+export async function initArchive() {
   if (!document.querySelector('[data-archive]')) return;
   readUrl();
+  render();
+  allMaterials = await collectMaterials();
   render();
 
   document.addEventListener('click', (e) => {

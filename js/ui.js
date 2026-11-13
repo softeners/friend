@@ -34,6 +34,59 @@ export function photo(slug, alt, opts = {}) {
     </picture>`;
 }
 
+/**
+ * Адрес картинки из хранилища (js/store.js): data:-строку и внешнюю ссылку
+ * оставляем как есть, путь от корня сайта дополняем ROOT.
+ */
+export function imgSrc(src) {
+  if (!src) return '';
+  return /^(data:|blob:|https?:)/.test(src) ? src : ROOT + src;
+}
+
+const MONTHS = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь',
+  'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+
+/** 'ГГГГ-ММ-ДД' → 'май 2026', как в карточках архива. */
+export function monthYear(iso) {
+  const m = /^(\d{4})-(\d{2})/.exec(iso || '');
+  return m ? `${MONTHS[Number(m[2]) - 1]} ${m[1]}` : '';
+}
+
+/** 'май 2026' или 'ГГГГ-ММ-ДД' → число для сортировки по дате. */
+export function dateKey(s) {
+  const iso = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(s || '');
+  if (iso) return Number(iso[1]) * 10000 + Number(iso[2]) * 100 + Number(iso[3] || 1);
+  const ru = /^([а-яё]+)\s+(\d{4})$/i.exec((s || '').trim());
+  if (ru) {
+    const mi = MONTHS.indexOf(ru[1].toLowerCase());
+    if (mi >= 0) return Number(ru[2]) * 10000 + (mi + 1) * 100 + 1;
+  }
+  return 0;
+}
+
+/* ── Сжатие фото для демо-хранилища (js/store.js) ─────────────
+   Длинная сторона до 1200px, JPEG — чтобы данные влезали в localStorage.
+   Файл, который браузер не умеет открыть (например, HEIC), пропускаем. */
+export async function compressImage(file, max = 1200) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((res, rej) => {
+      const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = url;
+    });
+    const k = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+    const c = document.createElement('canvas');
+    c.width = Math.round(img.naturalWidth * k);
+    c.height = Math.round(img.naturalHeight * k);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', 0.82);
+  } catch {
+    console.warn(`[ДРУГ] Не удалось открыть «${file.name}», фото пропущено`);
+    return null;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 /** Значение query-параметра. */
 export function param(name) {
   return new URLSearchParams(location.search).get(name);
