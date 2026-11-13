@@ -731,6 +731,20 @@
 }
 .longread__col > .longread__part:first-child { margin-top: 0; }
 .longread__col figure { margin-block: var(--s-7); }
+/* В статьях подзаголовок раздела и подпись к фото крупнее, чем в заметках:
+   подзаголовок — как .longread h3, подпись — читаемым мелким текстом. */
+.longread__col > .longread__part {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+.longread__col figcaption {
+  font-size: .9375rem;
+  line-height: 1.5;
+}
 
 /* ── 9. Схема экосистемы ───────────────────────────────────── */
 .eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
