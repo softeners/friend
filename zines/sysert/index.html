@@ -249,7 +249,7 @@ for(const [i,L] of LEAVES.entries()){
     const T=BOARD, g=new THREE.BoxGeometry(L.w,L.h,T); g.translate(L.w/2,0,i===0?T/2:-T/2);
     const side=new THREE.MeshLambertMaterial({color:0x6E2A1A});
     const mats=[side,side,side,side,new THREE.MeshLambertMaterial({map:L.texF}),new THREE.MeshLambertMaterial({map:L.texB})];
-    L.board=new THREE.Mesh(g,mats);L.board.castShadow=true;L.board.receiveShadow=true;
+    L.board=new THREE.Mesh(g,mats);L.board.castShadow=true;L.board.receiveShadow=true;L.board.frustumCulled=false;
     L.pivot=new THREE.Group();L.pivot.add(L.board);book.add(L.pivot);
     L.turned=false;L.idx=i;continue;
   }
@@ -258,6 +258,9 @@ for(const [i,L] of LEAVES.entries()){
   L.geo=geo; L.flat=Float32Array.from(geo.attributes.position.array);
   const mk=(map,side)=>{const m=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({map,side,alphaTest:.5}));
     m.castShadow=true;m.receiveShadow=true;
+    // Лист изгибается и переворачивается, а рамка для отсечения считается один раз по плоскому листу справа.
+    // Без этого при сильном приближении перевёрнутый лист слева пропадал и сквозь него была видна прошлая страница.
+    m.frustumCulled=false;
     m.customDepthMaterial=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,map,alphaTest:.5,side});
     return m;};
   L.meshF=mk(L.texF,THREE.FrontSide); L.meshB=mk(L.texB,THREE.BackSide);
