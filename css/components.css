@@ -759,3 +759,105 @@ html.lightbox-open { overflow: hidden; }
   .form__row { grid-template-columns: 1fr; }
   .paper { transform: none; }
 }
+
+
+/* ── Пример зина: карточка, которая раскрывается в книжку ─── */
+.zine-preview {
+  position: relative;
+  overflow: hidden;
+  gap: 0;
+  height: var(--zp-h, auto);
+  transition: height .5s cubic-bezier(.22, .8, .3, 1);
+}
+.zine-preview__head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+.zine-preview__text { display: flex; flex-direction: column; gap: .35rem; }
+.zine-preview__text,
+.zine-preview__open {
+  transition: opacity .3s var(--ease), visibility 0s linear 0s, transform var(--dur-s) var(--ease);
+}
+/* В раскрытом виде подпись и кнопка плавно гаснут, книжка занимает всю карточку */
+.zine-preview.is-open .zine-preview__head { pointer-events: none; }
+.zine-preview.is-open .zine-preview__text,
+.zine-preview.is-open .zine-preview__open {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s var(--ease), visibility 0s linear .3s;
+}
+
+.zine-preview__tools {
+  position: absolute;
+  z-index: 3;
+  top: var(--s-2);
+  right: var(--s-2);
+  display: flex;
+  gap: .4rem;
+}
+.zine-preview__tools[hidden] { display: none; }
+.zine-preview__tool {
+  appearance: none;
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(42, 36, 33, .25);
+  background: rgba(245, 237, 227, .82);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur-s) var(--ease), color var(--dur-s) var(--ease);
+}
+.zine-preview__tool:hover { background: var(--ink); color: var(--paper); }
+.zine-preview__tool:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.zine-preview__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: none;
+}
+.zine-preview.is-open .zine-preview__stage { display: block; }
+.zine-preview__loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  font-size: var(--fs-xs);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  transition: opacity .3s var(--ease);
+}
+.zine-preview__loading.is-hidden { opacity: 0; }
+.zine-preview__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+  overscroll-behavior: contain;
+}
+.zine-preview__frame.is-ready { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .zine-preview,
+  .zine-preview__open,
+  .zine-preview__text,
+  .zine-preview.is-open .zine-preview__open,
+  .zine-preview.is-open .zine-preview__text,
+  .zine-preview__loading,
+  .zine-preview__frame { transition: none; }
+}

@@ -1,0 +1,499 @@
+<meta charset="utf-8">
+<title>Друг · Сысерть</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+@font-face{font-family:'DAMN';src:url('fonts/DAMN.ttf') format('truetype')}
+/* Layout: a real book lying on a work table, seen from slightly above; quiet UI at the edges. */
+:root{
+  --table:#D3CDC4; --table-2:#BEB6AA; --ink:#2A2421; --muted:#675E55;
+  --maroon:#9C3A24; --paper:#F2EDE4; --terra:#9C3A24;
+  --f-display:'Oswald','Arial Narrow',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{background:var(--table);color:var(--ink);overflow:hidden;font-family:var(--f-mono);margin:0}
+#gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#gl.grabbing{cursor:grabbing}
+.vignette{position:fixed;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 46%,transparent 45%,rgba(120,105,90,.35) 100%)}
+.ui{position:fixed;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:calc(12px + env(safe-area-inset-top,0px)) calc(12px + env(safe-area-inset-bottom,0px))}
+header,footer{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.mark{font-family:'DAMN',var(--f-display);font-weight:400;font-size:26px;letter-spacing:.02em;color:var(--maroon);line-height:1}
+a.mark{text-decoration:none;pointer-events:auto}
+a.mark:focus-visible{outline:2px solid var(--terra);outline-offset:4px}
+html,body{overscroll-behavior:none}
+/* во фрейме на сайте справа сверху стоят кнопки сайта — подпись выпуска там не нужна */
+.embedded header .meta{display:none}
+.meta{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.meta b{font-weight:500;color:var(--ink)}
+footer .ctl{display:flex;align-items:center;gap:14px;pointer-events:auto}
+button{appearance:none;border:1px solid rgba(42,36,33,.35);background:rgba(242,237,228,.4);color:var(--ink);
+  width:40px;height:40px;border-radius:50%;font:500 16px/1 var(--f-mono);cursor:pointer;display:grid;place-items:center}
+button:hover:not(:disabled){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+button:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+button:disabled{opacity:.3;cursor:default}
+.count{font-size:12px;letter-spacing:.08em;min-width:12ch;text-align:center;font-variant-numeric:tabular-nums}
+.hint{max-width:36ch}
+.rotate{display:none;text-align:center}
+.loading{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;transition:opacity .4s}
+.loading.done{opacity:0}
+@media (max-width:700px){.hint{display:none}}
+.zoomctl{display:flex;gap:8px}
+.zoomctl button{width:36px;height:36px;font-size:15px}
+#mode{width:auto;padding:0 14px;border-radius:20px;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+@media (max-width:560px){header .meta{display:none}}
+/* узкий экран (телефон, фрейм на сайте): на телефоне приближают щипком, кнопки −/+ не нужны */
+@media (max-width:440px){footer .ctl{gap:8px;width:100%;justify-content:space-between}#zin,#zout{display:none}.count{min-width:0;font-size:11px}}
+</style>
+
+<script>if(window.self!==window.top)document.documentElement.classList.add('embedded')</script>
+<canvas id="gl" aria-label="Зин «Друг», выпуск о Сысерти. Листайте стрелками или перетаскивайте листы."></canvas>
+<div class="vignette"></div>
+<div class="loading meta" id="loading">Раскладываем страницы…</div>
+<div class="ui">
+  <header>
+    <a class="mark" href="../../index.html" target="_top" aria-label="ДРУГ — на главную сайта">ДРУГ</a>
+    <div class="meta"><b>Выпуск 01 · Сысерть</b></div>
+  </header>
+  <footer>
+    <div class="meta hint">Тяните лист или листайте стрелками · щипок, колёсико или двойной клик — приблизить</div>
+    <div class="ctl">
+      <div class="zoomctl"><button id="zout" aria-label="Отдалить">−</button><button id="zin" aria-label="Приблизить">+</button><button id="mode" aria-label="Режим просмотра">страница</button></div>
+      <button id="prev" aria-label="Предыдущий разворот">←</button>
+      <span class="count meta" id="count" aria-live="polite">Обложка</span>
+      <button id="next" aria-label="Следующий разворот">→</button>
+    </div>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(async function(){
+const W=297, H=210;                       // page size, mm (A4 landscape)
+const LEAVES=[
+  {front:'pages/cover.jpg', back:'pages/s01_L.jpg', w:297, h:210, edge:'cover', rigid:true, name:'Обложка'},
+  {front:'pages/s01_R.jpg', back:'pages/s02_L.jpg', w:297, h:210, edge:'flat', name:'О проекте'},
+  {front:'pages/s02_R.jpg', back:'pages/s03_L.jpg', w:297, h:210, edge:'flat', name:'Карта Сысерти'},
+  {front:'pages/s03_R.jpg', back:'pages/s04_L.jpg', w:297, h:210, edge:'flat', name:'Фарфоровый завод'},
+  {front:'pages/s04_R.jpg', back:'pages/s05_L.jpg', w:297, h:210, edge:'flat', name:'Почерк'},
+  {front:'pages/s05_R.jpg', back:'pages/s06_L.jpg', w:297, h:210, edge:'flat', name:'Дефицит · Дед Мороз'},
+  {front:'pages/s06_R.jpg', back:'pages/s07_L.jpg', w:297, h:210, edge:'flat', name:'Трудности · Праздники'},
+  {front:'pages/s07_R.jpg', back:'pages/s08_L.jpg', w:297, h:210, edge:'flat', name:'Дарить · Дети завода'},
+  {front:'pages/s08_R.jpg', back:'pages/s09_L.jpg', w:297, h:210, edge:'flat', name:'Жидкое золото'},
+  {front:'pages/s09_R.jpg', back:'pages/s10_L.jpg', w:297, h:210, edge:'flat', name:'Стыд · Огород'},
+  {front:'pages/s10_R.jpg', back:'pages/s11_L.jpg', w:297, h:210, edge:'flat', name:'Узнавание'},
+  {front:'pages/s11_R.jpg', back:'pages/s12_L.jpg', w:297, h:210, edge:'flat', name:'Тайна'},
+  {front:'pages/s12_R.jpg', back:'pages/s13_L.jpg', w:297, h:210, edge:'flat', name:'Склеп · Ярмарка'},
+  {front:'pages/s13_R.jpg', back:'pages/s14_L.jpg', w:297, h:210, edge:'flat', name:'Тонкость · Родина фарфора'},
+  {front:'pages/s14_R.jpg', back:'pages/s15_L.jpg', w:297, h:210, edge:'flat', name:'Сегодня · Полезно знать'},
+  {front:'pages/s15_R.jpg', back:'pages/s16_L.jpg', w:297, h:210, edge:'flat', name:'Железоделательный · Электротехнический'},
+  {front:'pages/s16_R.jpg', back:'pages/s17_L.jpg', w:297, h:210, edge:'flat', name:'Сокращение · Память'},
+  {front:'pages/s17_R.jpg', back:'@blank', w:297, h:210, edge:'flat', name:'Соседи · Переплетение'},
+  {front:'pages/board.jpg', back:'pages/back.jpg', w:297, h:210, edge:'cover', rigid:true, name:'Конец'},
+];
+const NAMES=[...LEAVES.map(l=>l.name).slice(0,-1),'Конец','Задняя обложка'];
+const C={maroon:'#9C3A24', paper:'#F2EDE4', paperEdge:'#F6F2EA', cream:'#E3C9B8'};
+
+// ---------- renderer / scene
+const canvas=document.getElementById('gl');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.outputEncoding=THREE.sRGBEncoding;
+renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(26,1,10,5000);
+scene.add(new THREE.AmbientLight(0xffffff,.62));
+const sun=new THREE.DirectionalLight(0xfff6ea,.55);
+sun.position.set(-260,220,900); sun.castShadow=true;
+sun.shadow.mapSize.set(2048,2048);
+Object.assign(sun.shadow.camera,{left:-420,right:420,top:300,bottom:-300,near:100,far:2000});
+sun.shadow.bias=-0.0004; sun.shadow.normalBias=.6; sun.shadow.radius=6;
+scene.add(sun);
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),new THREE.ShadowMaterial({opacity:.22}));
+ground.position.z=-3; ground.receiveShadow=true; scene.add(ground);
+const maxAniso=renderer.capabilities.getMaxAnisotropy();
+
+// ---------- helpers
+function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const loadImg=src=>new Promise((res,rej)=>{const i=new Image();i.onload=()=>res(i);i.onerror=rej;i.src=src});
+try{await Promise.race([document.fonts.load('700 40px Oswald'),new Promise(r=>setTimeout(r,1500))])}catch(e){}
+
+// torn outline in canvas px; spine (x=0) straight. returns {pts,nrm}
+function outline(cw,ch,kind,seed,ampK,inset){
+  const r=rng(seed), pts=[], nrm=[], s=Math.min(cw,ch);
+  const amp=s*ampK;
+  const side=(x0,y0,x1,y1,nx,ny,tear)=>{
+    const len=Math.hypot(x1-x0,y1-y0), n=Math.max(2,Math.round(len/(kind==='rip'?2.2:1.6)));
+    const waves=[0,1,2,3,4].map(k=>[ (kind==='rip'? s*(.04+r()*.25) : s*(.01+r()*.06)), r()*6.3, .4+r()*.6 ]);
+    const norm=waves.reduce((a,w)=>a+w[2],0); let j=0;
+    for(let i=0;i<n;i++){const t=i/n,d=t*len;let off=0;
+      if(tear){const low=waves.reduce((a,[wl,ph,a2])=>a+a2*Math.sin(d/wl*6.283+ph),0)/norm;
+        j=j*.55+(r()*2-1)*.45;
+        off=inset+amp*(.5+.5*low)+amp*(kind==='rip'?.18:.35)*j;
+        if(kind==='rip'&&r()<.02) off+=amp*.6*r();
+        off=Math.max(inset,off);}
+      pts.push([x0+(x1-x0)*t+nx*off,y0+(y1-y0)*t+ny*off]); nrm.push([-nx,-ny]);}
+  };
+  side(0,0,cw,0,0,1,true); side(cw,0,cw,ch,-1,0,true); side(cw,ch,0,ch,0,-1,true); side(0,ch,0,0,1,0,false);
+  return {pts,nrm};
+}
+function pathOf(ctx,pts){ctx.beginPath();pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath()}
+
+let PAPER=null;
+function paperTex(cw,ch){
+  if(PAPER&&PAPER.width===cw&&PAPER.height===ch) return PAPER;
+  const c=document.createElement('canvas');c.width=cw;c.height=ch;const x=c.getContext('2d');
+  const r=rng(4242),u=cw/1000;
+  x.fillStyle='#fff';x.fillRect(0,0,cw,ch);
+  // мягкие пятна — неравномерность бумаги
+  for(let i=0;i<90;i++){const px=r()*cw,py=r()*ch,rad=(40+r()*160)*u;const g=x.createRadialGradient(px,py,0,px,py,rad);
+    g.addColorStop(0,`rgba(150,128,98,${.035+r()*.04})`);g.addColorStop(1,'rgba(150,128,98,0)');x.fillStyle=g;x.fillRect(px-rad,py-rad,rad*2,rad*2);}
+  // волокна
+  x.lineCap='round';
+  for(let i=0;i<2600;i++){const px=r()*cw,py=r()*ch,L=(3+r()*11)*u,a=r()*Math.PI;
+    const ex=px+Math.cos(a)*L,ey=py+Math.sin(a)*L,mx=(px+ex)/2+(r()-.5)*3*u,my=(py+ey)/2+(r()-.5)*3*u;
+    x.strokeStyle=`rgba(${120+r()*40|0},${100+r()*30|0},${75+r()*25|0},${.12+r()*.22})`;x.lineWidth=(.25+r()*.45)*u;
+    x.beginPath();x.moveTo(px,py);x.quadraticCurveTo(mx,my,ex,ey);x.stroke();}
+  // зерно
+  const n=document.createElement('canvas');n.width=n.height=512;const nc=n.getContext('2d');const id=nc.createImageData(512,512);
+  for(let i=0;i<id.data.length;i+=4){const v=215+Math.random()*40;id.data[i]=v;id.data[i+1]=v-3;id.data[i+2]=v-8;id.data[i+3]=255}
+  nc.putImageData(id,0,0);x.save();x.globalCompositeOperation='multiply';x.globalAlpha=.55;x.fillStyle=x.createPattern(n,'repeat');x.fillRect(0,0,cw,ch);x.restore();
+  PAPER=c;return c;
+}
+function applyPaper(x,cw,ch,clipPts){
+  x.save(); if(clipPts){pathOf(x,clipPts);x.clip();}
+  x.globalCompositeOperation='multiply';x.globalAlpha=.9;x.drawImage(paperTex(cw,ch),0,0);x.restore();
+}
+function grain(ctx,cw,ch,alpha){
+  const g=document.createElement('canvas');g.width=256;g.height=256;const gc=g.getContext('2d');
+  const id=gc.createImageData(256,256);for(let i=0;i<id.data.length;i+=4){const v=Math.random()*255;id.data[i]=id.data[i+1]=id.data[i+2]=v;id.data[i+3]=255}
+  gc.putImageData(id,0,0);ctx.save();ctx.globalAlpha=alpha;ctx.globalCompositeOperation='overlay';
+  ctx.fillStyle=ctx.createPattern(g,'repeat');ctx.fillRect(0,0,cw,ch);ctx.restore();
+}
+function endpaper(cw,ch,which){
+  const c=document.createElement('canvas');c.width=cw;c.height=ch;const x=c.getContext('2d');
+  if(which==='@blank'){x.fillStyle='#ECE6D9';x.fillRect(0,0,cw,ch);return c;}
+  x.fillStyle=C.maroon;x.fillRect(0,0,cw,ch);grain(x,cw,ch,.18);
+  const u=cw/297;
+  x.fillStyle=C.paper;x.font=`700 ${34*u}px Oswald, Arial Narrow, sans-serif`;x.textBaseline='alphabetic';
+  const t1=which==='@endpaper'?'СЫСЕРТЬ':which==='@end'?'КОНЕЦ ПРИМЕРА':'ДРУГ';
+  const t2=which==='@endpaper'?'ПРОГУЛКА ПО ГОРОДУ С МЕСТНЫМИ':which==='@end'?'ОСТАЛЬНЫЕ РАЗВОРОТЫ ПОЯВЯТСЯ, КОГДА БУДЕТ ГОТОВ ТЕКСТ':'ПРОДОЛЖЕНИЕ СЛЕДУЕТ';
+  if(which==='@board'){x.textAlign='center';x.font=`700 ${48*u}px Oswald, Arial Narrow, sans-serif`;x.fillText(t1,cw/2,ch/2);
+    x.font=`500 ${6.5*u}px "IBM Plex Mono", monospace`;x.fillStyle=C.cream;x.fillText(t2,cw/2,ch/2+14*u);}
+  else{x.fillText(t1,22*u,ch-30*u);x.font=`500 ${6.5*u}px "IBM Plex Mono", monospace`;x.fillStyle=C.cream;x.fillText(t2,22*u,ch-20*u);}
+  return c;
+}
+// Build front/back textures with torn alpha baked in. Back is mirrored so it reads correctly from behind.
+function makeTex(srcImg,cw,ch,leaf,mirror,seed){
+  const c=document.createElement('canvas');c.width=cw;c.height=ch;const x=c.getContext('2d');
+  const kind=leaf.edge;
+  if(kind==='cover'){
+    const rad=cw*.012;x.beginPath();x.moveTo(0,0);x.lineTo(cw-rad,0);x.quadraticCurveTo(cw,0,cw,rad);x.lineTo(cw,ch-rad);
+    x.quadraticCurveTo(cw,ch,cw-rad,ch);x.lineTo(0,ch);x.closePath();x.save();x.clip();
+    x.save();if(mirror){x.translate(cw,0);x.scale(-1,1)}x.drawImage(srcImg,0,0,cw,ch);x.restore();
+    // board edge darkening
+    const g=x.createLinearGradient(cw*.94,0,cw,0);g.addColorStop(0,'rgba(0,0,0,0)');g.addColorStop(1,'rgba(0,0,0,.25)');
+    x.fillStyle=g;x.fillRect(0,0,cw,ch);applyPaper(x,cw,ch,null);x.restore();
+  }else if(kind==='flat'){
+    x.save();if(mirror){x.translate(cw,0);x.scale(-1,1)}x.drawImage(srcImg,0,0,cw,ch);x.restore();
+    applyPaper(x,cw,ch,null);
+    const g=x.createLinearGradient(0,0,cw*.035,0);g.addColorStop(0,'rgba(60,45,30,.10)');g.addColorStop(1,'rgba(60,45,30,0)');
+    if(!mirror){x.fillStyle=g;x.fillRect(0,0,cw*.035,ch);}else{x.save();x.translate(cw,0);x.scale(-1,1);x.fillStyle=g;x.fillRect(0,0,cw*.035,ch);x.restore();}
+  }else{
+    const ampK=kind==='rip'?.035:.0075;
+    const o=outline(cw,ch,kind,seed,ampK,0);
+    const inn=outline(cw,ch,kind,seed+1,ampK*(kind==='rip'?1.15:.9),kind==='rip'?cw*.012:cw*.0012);
+    // paper body (shows as white fibrous rim)
+    pathOf(x,o.pts);x.fillStyle=C.paperEdge;x.fill();
+    // fibers poking out of the torn edge
+    const r=rng(seed+7);x.strokeStyle=C.paperEdge;x.lineCap='round';
+    o.pts.forEach(([px,py],i)=>{if(o.nrm[i][0]===-1&&px<2)return; if(r()<(kind==='rip'?.5:.35)){
+      const [nx,ny]=o.nrm[i],L=(kind==='rip'?2:1)+r()*(kind==='rip'?6:3.5),a=(r()-.5)*1.2;
+      const dx=nx*Math.cos(a)-ny*Math.sin(a),dy=nx*Math.sin(a)+ny*Math.cos(a);
+      x.lineWidth=.6+r()*.9;x.beginPath();x.moveTo(px-dx,py-dy);x.lineTo(px+dx*L,py+dy*L);x.stroke();}});
+    // printed image inside the inner tear
+    x.save();pathOf(x,inn.pts);x.clip();
+    if(mirror){x.translate(cw,0);x.scale(-1,1)}
+    x.drawImage(srcImg,0,0,cw,ch);x.restore();
+    applyPaper(x,cw,ch,o.pts);
+    if(kind==='rip'){ // fibrous soft inner edge
+      x.save();pathOf(x,inn.pts);x.lineWidth=2.2;x.strokeStyle='rgba(246,242,234,.65)';x.stroke();x.restore();}
+  }
+  const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=maxAniso;
+  t.minFilter=THREE.LinearMipmapLinearFilter;return t;
+}
+
+// ---------- build leaves
+const SEG_X=64, SEG_Y=40, BOARD=3.2;
+const book=new THREE.Group();scene.add(book);
+const n=LEAVES.length;
+for(const [i,L] of LEAVES.entries()){
+  const fImg=await loadImg(L.front);
+  const cw=fImg.naturalWidth, ch=Math.round(cw*L.h/L.w);
+  const bSrc=L.back.startsWith('@')?endpaper(cw,ch,L.back):await loadImg(L.back);
+  const seed=101+i*131;
+  L.texF=makeTex(fImg,cw,ch,L,false,seed);
+  L.texB=makeTex(bSrc,cw,ch,L,!L.rigid,seed);
+  if(L.rigid){
+    const T=BOARD, g=new THREE.BoxGeometry(L.w,L.h,T); g.translate(L.w/2,0,i===0?T/2:-T/2);
+    const side=new THREE.MeshLambertMaterial({color:0x6E2A1A});
+    const mats=[side,side,side,side,new THREE.MeshLambertMaterial({map:L.texF}),new THREE.MeshLambertMaterial({map:L.texB})];
+    L.board=new THREE.Mesh(g,mats);L.board.castShadow=true;L.board.receiveShadow=true;
+    L.pivot=new THREE.Group();L.pivot.add(L.board);book.add(L.pivot);
+    L.turned=false;L.idx=i;continue;
+  }
+  const geo=new THREE.PlaneGeometry(L.w,L.h,L.rigid?8:SEG_X,L.rigid?6:SEG_Y);
+  geo.translate(L.w/2,0,0);
+  L.geo=geo; L.flat=Float32Array.from(geo.attributes.position.array);
+  const mk=(map,side)=>{const m=new THREE.Mesh(geo,new THREE.MeshLambertMaterial({map,side,alphaTest:.5}));
+    m.castShadow=true;m.receiveShadow=true;
+    m.customDepthMaterial=new THREE.MeshDepthMaterial({depthPacking:THREE.RGBADepthPacking,map,alphaTest:.5,side});
+    return m;};
+  L.meshF=mk(L.texF,THREE.FrontSide); L.meshB=mk(L.texB,THREE.BackSide);
+  L.meshF.userData.leaf=i; L.meshB.userData.leaf=i;
+  book.add(L.meshF,L.meshB);
+  L.turned=false; L.idx=i;
+}
+document.getElementById('loading').classList.add('done');
+
+// ---------- geometry deformation
+const PI=Math.PI;
+function baseZ(L){return L.turned?(L.idx+1)*.55+1.4:(n-L.idx)*.55+1.4}
+// right-space: page flat at x>=0. G = grab point, T = where the grab point should be now (both page-plane, local y).
+function deform(L,G,T,mirror,z0){
+  const pos=L.rigid?null:L.geo.attributes.position.array, f=L.rigid?null:L.flat;
+  if(L.rigid){
+    const p=Math.min(1,Math.max(0,(G.x-T.x)/(2*G.x))), th=mirror?PI*(1-p):PI*p;
+    L.pivot.rotation.y=-th; L.pivot.position.z=z0+2*Math.sin(PI*p); return;
+  }
+  {
+    let dx=G.x-T.x, dy=G.y-T.y, D=Math.hypot(dx,dy);
+    const p=Math.min(1,Math.max(0,(G.x-T.x)/(2*G.x)));
+    if(D<1e-3){for(let k=0;k<pos.length;k+=3){pos[k]=(mirror?-1:1)*f[k];pos[k+1]=f[k+1];pos[k+2]=z0}}
+    else{
+      const ux=dx/D, uy=dy/D;
+      const R=Math.max(.3,Math.min(D/PI*.98, .3+36*Math.sin(PI*Math.min(1,p*1.06))));
+      const sG=(D+PI*R)/2; let mx=G.x-ux*sG, my=G.y-uy*sG;
+      // the spine never leaves the binding: push the fold line off both spine corners
+      const sc=Math.max((0-mx)*ux+(L.h/2-my)*uy,(0-mx)*ux+(-L.h/2-my)*uy);
+      if(sc>0){mx+=ux*sc;my+=uy*sc;}
+      for(let k=0;k<pos.length;k+=3){
+        const px=f[k],py=f[k+1]; const s=(px-mx)*ux+(py-my)*uy;
+        let x=px,y=py,z=0;
+        if(s>0){ if(s<PI*R){const th=s/R; x=px-ux*s+ux*R*Math.sin(th); y=py-uy*s+uy*R*Math.sin(th); z=R*(1-Math.cos(th));}
+                 else{const e=s-PI*R; x=px-ux*s-ux*e; y=py-uy*s-uy*e; z=2*R;} }
+        // soft paper: a faint uneven ripple where it bends
+        if(z>0) z+=Math.sin(px*.045+py*.03)*Math.min(1.2,z*.04);
+        pos[k]=(mirror?-1:1)*x; pos[k+1]=y; pos[k+2]=z0+z;
+      }
+    }
+  }
+  L.geo.attributes.position.needsUpdate=true; L.geo.computeVertexNormals();
+}
+function rest(L){deform(L,{x:1,y:0},{x:1,y:0},L.turned,baseZ(L))}
+LEAVES.forEach(rest);
+
+// ---------- camera: spread / single page, zoom and pan
+let turnedCount=0, act=null;
+const cam={x:W/2,y:0,d:900,tilt:.3};           // current (smoothed)
+const view={mode:'spread',focus:'R',zoom:1,panX:0,panY:0};
+let baseD={spread:900,page:600};
+const isNarrow=()=>innerWidth/innerHeight<1.35||innerWidth<820;
+function fit(){
+  const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();
+  const vf=camera.fov*PI/180, hf=2*Math.atan(Math.tan(vf/2)*camera.aspect), usableH=Math.max(.5,1-140/h);
+  const dist=(needW,needH)=>Math.max((needW/2)/Math.tan(hf/2),(needH/2)/Math.tan(vf/2)/usableH);
+  baseD={spread:dist(2*W+50,H+60), page:dist(W+18,H+40)};
+}
+function pageCenter(){ // x of what we're looking at
+  if(view.mode==='spread') return turnedCount===0?W/2:(turnedCount===n?-W/2:0);
+  if(turnedCount===0) return W/2; if(turnedCount===n) return -W/2;
+  return view.focus==='L'?-W/2:W/2;
+}
+function target(){
+  const z=view.zoom, d=baseD[view.mode]/z;
+  const tilt=(view.mode==='spread'?.28:.12)/Math.max(1,z*.9);
+  return {x:pageCenter()+view.panX,y:view.panY,d,tilt};
+}
+function clampPan(){
+  const z=view.zoom, ex=view.mode==='spread'?W:W/2;
+  const mx=Math.max(0,(ex+20)*(1-1/z)), my=Math.max(0,(H/2+20)*(1-1/z));
+  view.panX=Math.max(-mx,Math.min(mx,view.panX)); view.panY=Math.max(-my,Math.min(my,view.panY));
+}
+function placeCam(){camera.position.set(cam.x,cam.y-cam.d*Math.sin(cam.tilt)-6,cam.d*Math.cos(cam.tilt));camera.lookAt(cam.x,cam.y-6,0)}
+function snapCam(){Object.assign(cam,target());placeCam()}
+function setMode(m){view.mode=m;view.zoom=1;view.panX=view.panY=0;
+  document.getElementById('mode').textContent=m==='spread'?'страница':'разворот';
+  document.getElementById('mode').setAttribute('aria-label',m==='spread'?'Показать одну страницу':'Показать разворот');}
+addEventListener('resize',()=>{fit();});
+fit(); setMode(isNarrow()?'page':'spread'); snapCam();
+
+// ---------- state
+// act: {L,mirror,G,T,Tt,mode,anim}
+const ray=new THREE.Raycaster(), ndc=new THREE.Vector2(), plane=new THREE.Plane(new THREE.Vector3(0,0,1),-4);
+function planePoint(ev){const r=canvas.getBoundingClientRect();ndc.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);
+  ray.setFromCamera(ndc,camera);const v=new THREE.Vector3();return ray.ray.intersectPlane(plane,v)?v:null}
+const topRight=()=>LEAVES.find(L=>!L.turned), topLeft=()=>[...LEAVES].reverse().find(L=>L.turned);
+function constrain(L,G,T){ // keep the page hinged at the spine
+  const top={x:0,y:L.h/2}, bot={x:0,y:-L.h/2};
+  for(const S of [top,bot]){const r=Math.hypot(G.x-S.x,G.y-S.y), dx=T.x-S.x, dy=T.y-S.y, d=Math.hypot(dx,dy);
+    if(d>r){T.x=S.x+dx*r/d;T.y=S.y+dy*r/d}}
+  return T;
+}
+function updateUI(){
+  document.getElementById('prev').disabled=turnedCount===0||!!(act&&act.mode==='anim');
+  document.getElementById('next').disabled=turnedCount===n||!!(act&&act.mode==='anim');
+  document.getElementById('count').textContent=`${String(turnedCount).padStart(2,'0')} / ${String(n).padStart(2,'0')} · ${NAMES[turnedCount]}`;
+}
+updateUI();
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const easeOut=t=>1-Math.pow(1-t,3);
+function zFor(L,a){ // height glides from one stack to the other, with a soft lift in the middle
+  const p=Math.min(1,Math.max(0,(a.G.x-a.T.x)/(2*a.G.x)));
+  const zR=(n-L.idx)*.55+1.4, zL=(L.idx+1)*.55+1.4, zs=a.mirror?zL:zR, ze=a.mirror?zR:zL;
+  // while turning, the leaf stays above BOTH stacks and only settles at the very start/end
+  const m=Math.max(zs,ze)+.4, z=p<.15?zs+(m-zs)*(p/.15):p>.85?m+(ze-m)*((p-.85)/.15):m;
+  return z+1.2*Math.sin(PI*p);
+}
+
+function startAnim(L,mirror,G,from,complete,dur){
+  const to=complete?{x:-G.x,y:G.y}:{x:G.x,y:G.y};
+  act={L,mirror,G,T:{...from},mode:'anim',anim:{from:{...from},to,t0:performance.now(),dur,complete,ease:(from.x===G.x&&from.y===G.y)?ease:easeOut}};updateUI();
+}
+function autoTurn(dir){
+  if(act&&act.mode==='anim')return;
+  const L=dir>0?topRight():topLeft(); if(!L)return;
+  const G={x:L.w*.97,y:-L.h*.36};
+  startAnim(L,dir<0,G,{...G},true,1100);
+}
+function go(dir){
+  if(act&&act.mode==='anim')return;
+  view.zoom=1;view.panX=view.panY=0;
+  if(view.mode==='page'&&turnedCount>0&&turnedCount<n){
+    if(dir>0&&view.focus==='L'){view.focus='R';return}
+    if(dir<0&&view.focus==='R'){view.focus='L';return}
+  }
+  autoTurn(dir);
+}
+document.getElementById('next').onclick=()=>go(1);
+document.getElementById('prev').onclick=()=>go(-1);
+document.getElementById('mode').onclick=()=>setMode(view.mode==='spread'?'page':'spread');
+function zoomBy(f,cx,cy){
+  const r=canvas.getBoundingClientRect(); const ev={clientX:cx??r.left+r.width/2,clientY:cy??r.top+r.height/2};
+  const P1=planePoint(ev);
+  view.zoom=Math.max(1,Math.min(4,view.zoom*f)); if(view.zoom<1.02){view.zoom=1;view.panX=view.panY=0;clampPan();return}
+  const save={...cam}; Object.assign(cam,target()); placeCam(); camera.updateMatrixWorld();
+  const P2=planePoint(ev); if(P1&&P2){view.panX+=P1.x-P2.x;view.panY+=P1.y-P2.y}
+  clampPan(); Object.assign(cam,save); placeCam();
+}
+document.getElementById('zin').onclick=()=>zoomBy(1.4);
+document.getElementById('zout').onclick=()=>zoomBy(1/1.4);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1);
+  if(e.key==='+'||e.key==='=')zoomBy(1.4);if(e.key==='-')zoomBy(1/1.4);if(e.key==='Escape'){view.zoom=1;view.panX=view.panY=0}});
+canvas.addEventListener('wheel',ev=>{ev.preventDefault();
+  if(ev.ctrlKey||ev.metaKey) zoomBy(Math.exp(-ev.deltaY*.012),ev.clientX,ev.clientY);
+  else if(view.zoom>1){const k=cam.d/1400; view.panX+=ev.deltaX*k; view.panY-=ev.deltaY*k; clampPan();}
+  else if(Math.abs(ev.deltaY)>40&&!ev.shiftKey) zoomBy(Math.exp(-ev.deltaY*.004),ev.clientX,ev.clientY);
+},{passive:false});
+// Книжка может жить во фрейме на странице сайта: колесо и жесты над интерфейсом
+// (кнопки, подписи) не должны прокручивать или масштабировать страницу снаружи.
+addEventListener('wheel',ev=>{if(ev.target!==canvas)ev.preventDefault()},{passive:false});
+addEventListener('touchmove',ev=>{if(ev.touches.length>1||ev.target===canvas)ev.preventDefault()},{passive:false});
+['gesturestart','gesturechange'].forEach(t=>addEventListener(t,ev=>ev.preventDefault()));
+canvas.addEventListener('dblclick',ev=>{if(view.zoom>1.05){view.zoom=1;view.panX=view.panY=0}else zoomBy(2.2,ev.clientX,ev.clientY)});
+
+// pointer
+let down=null; const ptrs=new Map(); let pinch=null, pan=null;
+function pinchState(){const [a,b]=[...ptrs.values()];return {d:Math.hypot(a.x-b.x,a.y-b.y),cx:(a.x+b.x)/2,cy:(a.y+b.y)/2}}
+canvas.addEventListener('pointerdown',ev=>{
+  ptrs.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+  if(ptrs.size===2){ if(act&&act.mode==='drag'){rest(act.L);act=null;updateUI()} down=null; pan=null; pinch=pinchState(); return }
+  if(ptrs.size>2)return;
+  if(view.zoom>1.02){pan={x:ev.clientX,y:ev.clientY};canvas.setPointerCapture(ev.pointerId);canvas.classList.add('grabbing');return}
+  if(act&&act.mode==='anim')return;
+  const P=planePoint(ev); if(!P)return;
+  const side=P.x>=0?1:-1;
+  down={x:ev.clientX,y:ev.clientY,t:performance.now(),moved:false,swipe:true};
+  if(view.mode==='page'){ // only the page you're looking at can be grabbed
+    const f=turnedCount===0?'R':turnedCount===n?'L':view.focus;
+    if((side>0)!==(f==='R')){canvas.setPointerCapture(ev.pointerId);return}
+  }
+  const L=side>0?topRight():topLeft(); if(!L)return;
+  const lx=Math.abs(P.x), ly=P.y;
+  if(lx>L.w+6||Math.abs(ly)>L.h/2+6) {canvas.setPointerCapture(ev.pointerId);return}
+  const G={x:L.w*.98,y:Math.max(-L.h/2*.92,Math.min(L.h/2*.92,ly))}, P0={x:lx,y:ly};
+  act={L,mirror:side<0,G,P0,T:{...G},Tt:{...G},mode:'drag',vx:0,last:{x:G.x,t:performance.now()}};
+  canvas.setPointerCapture(ev.pointerId);canvas.classList.add('grabbing');
+});
+canvas.addEventListener('pointermove',ev=>{
+  if(ptrs.has(ev.pointerId))ptrs.set(ev.pointerId,{x:ev.clientX,y:ev.clientY});
+  if(pinch&&ptrs.size===2){const q=pinchState(); zoomBy(q.d/pinch.d,q.cx,q.cy);
+    const k=cam.d*2*Math.tan(camera.fov*PI/360)/innerHeight; view.panX-=(q.cx-pinch.cx)*k; view.panY+=(q.cy-pinch.cy)*k; clampPan(); pinch=q; return}
+  if(pan){const k=cam.d*2*Math.tan(camera.fov*PI/360)/innerHeight; view.panX-=(ev.clientX-pan.x)*k; view.panY+=(ev.clientY-pan.y)*k; clampPan(); pan={x:ev.clientX,y:ev.clientY}; return}
+  const P=planePoint(ev); if(!P)return;
+  if(act&&act.mode==='drag'&&down){
+    if(Math.hypot(ev.clientX-down.x,ev.clientY-down.y)>4)down.moved=true;
+    const lp={x:act.mirror?-P.x:P.x,y:P.y}; const T={x:act.G.x+(lp.x-act.P0.x)*1.25,y:act.G.y+(lp.y-act.P0.y)};
+    const pr=Math.min(1,Math.max(0,(act.G.x-T.x)/(2*act.G.x)));
+    T.y=act.G.y+(T.y-act.G.y)*.55*(1-pr); // the further it turns, the straighter it lies
+    constrain(act.L,act.G,T);act.Tt=T;
+    const now=performance.now(),dt=Math.max(1,now-act.last.t);act.vx=act.vx*.6+((T.x-act.last.x)/dt)*.4;act.last={x:T.x,t:now};
+  }else if(!act||act.mode==='hover'){ // corner peel when hovering near the outer edge
+    const side=P.x>=0?1:-1, L=side>0?topRight():topLeft();
+    if(false){const lx=Math.abs(P.x);
+      const near=lx>L.w-28&&lx<L.w+8&&Math.abs(P.y)<L.h/2+4;
+      if(near){const G={x:L.w,y:Math.max(-L.h/2,Math.min(L.h/2,P.y))};
+        const T={x:Math.min(L.w-4,lx-4),y:P.y*.96};constrain(L,G,T);
+        if(!act||act.L!==L||act.mirror!==(side<0))act={L,mirror:side<0,G,T:{...G},Tt:T,mode:'hover'};else{act.G=G;act.Tt=T}}
+      else if(act&&act.mode==='hover'){act.Tt={...act.G};act.release=true}}
+  }
+});
+function release(ev){
+  ptrs.delete(ev.pointerId); if(ptrs.size<2)pinch=null;
+  if(pan){pan=null;canvas.classList.remove('grabbing');return}
+  if(!down)return;
+  const dx=ev.clientX-down.x, quick=performance.now()-down.t<1000&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(ev.clientY-down.y);
+  if(!act||act.mode!=='drag'){down=null;canvas.classList.remove('grabbing');if(quick&&view.mode==='page')go(dx<0?1:-1);return}
+  canvas.classList.remove('grabbing');
+  const {L,mirror,G,T}=act; const p=(G.x-T.x)/(2*G.x);
+  if(view.mode==='page'&&p<.12&&quick){rest(L);act=null;updateUI();down=null;go(dx<0?1:-1);return}
+  if(!down.moved){rest(L);act=null;updateUI()}
+  else{const complete=p>.42||act.vx<-.35; startAnim(L,mirror,G,{...T},complete,complete?Math.max(350,700*(1-p)):Math.max(300,650*p))}
+  down=null;
+}
+canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
+canvas.addEventListener('pointerleave',()=>{if(act&&act.mode==='hover'){act.Tt={...act.G};act.release=true}});
+
+// ---------- loop
+let lastT=performance.now();
+function frame(now){
+  const dt=Math.min(.1,(now-lastT)/1000); lastT=now;
+  if(act){
+    const {L}=act;
+    if(act.mode==='drag'||act.mode==='hover'){
+      const k=1-Math.exp(-dt*(act.mode==='drag'?13:11)); act.T.x+=(act.Tt.x-act.T.x)*k; act.T.y+=(act.Tt.y-act.T.y)*k;
+      deform(L,act.G,act.T,act.mirror,zFor(L,act));
+      if(act.mode==='hover'&&act.release&&Math.hypot(act.T.x-act.G.x,act.T.y-act.G.y)<.3){rest(L);act=null}
+    }else{
+      const a=act.anim, t=Math.min(1,(now-a.t0)/a.dur), e=a.ease(t);
+      const lift=a.complete?Math.sin(PI*e)*(-.18*act.G.y):0;
+      act.T={x:a.from.x+(a.to.x-a.from.x)*e, y:a.from.y+(a.to.y-a.from.y)*e+lift};
+      deform(L,act.G,act.T,act.mirror,zFor(L,act));
+      if(t>=1){
+        if(a.complete){L.turned=!act.mirror; turnedCount=LEAVES.filter(l=>l.turned).length; view.focus=act.mirror?'R':'L';}
+        LEAVES.forEach(rest); act=null; updateUI();
+      }
+    }
+  }
+  const t=target(), k=1-Math.exp(-dt*7); for(const key of ['x','y','d','tilt'])cam[key]+=(t[key]-cam[key])*k; placeCam();
+  renderer.render(scene,camera); requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+window.__fb={autoTurn,go,setMode,zoomBy,view,get act(){return act},get turned(){return turnedCount},LEAVES};
+})();
+</script>
