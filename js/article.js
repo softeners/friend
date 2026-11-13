@@ -10,30 +10,44 @@ import { esc, param, imgSrc, monthYear } from './ui.js';
 import { getArticle } from './store.js';
 
 /** Абзацы внутри одного текстового блока — по пустой строке. */
-function paras(text, cls = '') {
-  return String(text || '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean)
-    .map(t => `<p${cls ? ` class="${cls}"` : ''}>${esc(t).replace(/\n/g, '<br>')}</p>`).join('\n');
+function splitParas(text) {
+  return String(text || '').split(/\n\s*\n/).map(t => t.trim()).filter(Boolean);
 }
 
-export function blockHtml(b) {
+/*
+ * Разметка блоков — та же, что в путевых заметках (notes/altay.html):
+ *   подзаголовок  <span class="longread__part longread__part--mid">…</span>
+ *                 (первый блок статьи — без --mid, как «Дорога» в начале заметок)
+ *   вводный абзац <p class="longread__lead">…</p>  — первый абзац статьи
+ *   абзац         <p>…</p>
+ *   цитата        <blockquote><p class="verse">…</p><p class="verse__author">…</p></blockquote>
+ *   фото          <figure class=""><div class="ph ph--4x3"><img></div><figcaption>…</figcaption></figure>
+ * Все блоки стоят в .longread__col — одной колонке шириной с абзац.
+ */
+export function blockHtml(b, i = 1, ctx = { leadDone: true }) {
   switch (b.t) {
     case 'h':
-      // Как разделы в путевых заметках («Дорога», «Встреча»): терракотовая подпись над текстом.
-      return b.text ? `<span class="longread__part longread__part--mid" role="heading" aria-level="2">${esc(b.text)}</span>` : '';
+      return b.text
+        ? `<span class="longread__part${i === 0 ? '' : ' longread__part--mid'}">${esc(b.text)}</span>`
+        : '';
     case 'quote':
-      return b.text ? `<blockquote class="quote-block">
-          <div class="quote">«${esc(b.text.replace(/^[«"]+|[»"]+$/g, ''))}»</div>
-          ${b.author ? `<span class="quote__author">${esc(b.author)}</span>` : ''}
-        </blockquote>` : '';
+      return b.text ? `<blockquote>
+        <p class="verse">${esc(b.text)}</p>
+        ${b.author ? `<p class="verse__author">${esc(b.author)}</p>` : ''}
+      </blockquote>` : '';
     case 'photo':
-      return b.src ? `<figure>
-          <div class="ph ph--4x3">
-            <img src="${esc(imgSrc(b.src))}" alt="${esc(b.caption || '')}" loading="lazy" decoding="async" data-zoom>
-          </div>
-          ${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ''}
-        </figure>` : '';
+      return b.src ? `<figure class="">
+        <div class="ph ph--4x3">
+          <img src="${esc(imgSrc(b.src))}" alt="${esc(b.caption || '')}" loading="lazy" decoding="async" data-zoom>
+        </div>
+        ${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ''}
+      </figure>` : '';
     default:
-      return paras(b.text);
+      return splitParas(b.text).map(t => {
+        const lead = !ctx.leadDone;
+        ctx.leadDone = true;
+        return `<p${lead ? ' class="longread__lead"' : ''}>${esc(t).replace(/\n/g, '<br>')}</p>`;
+      }).join('\n');
   }
 }
 
@@ -73,8 +87,10 @@ export async function initArticle() {
 
     <article class="section longread">
       <div class="container">
-        ${(a.blocks || []).map(blockHtml).join('\n')}
-        <p class="section__foot"><a class="btn btn--ghost" href="archive.html${region ? `?region=${region.slug}` : ''}">Ещё материалы${region ? ` · ${esc(region.short)}` : ''}</a></p>
+        <div class="longread__col">
+          ${(() => { const ctx = { leadDone: false }; return (a.blocks || []).map((b, i) => blockHtml(b, i, ctx)).join('\n'); })()}
+          <p class="section__foot"><a class="btn btn--ghost" href="archive.html${region ? `?region=${region.slug}` : ''}">Ещё материалы${region ? ` · ${esc(region.short)}` : ''}</a></p>
+        </div>
       </div>
     </article>`;
 }

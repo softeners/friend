@@ -715,6 +715,23 @@
   line-height: 1.5 !important;
 }
 
+/* Колонка чтения статьи из админки (article.html). Классы блоков те же,
+   что в путевых заметках; колонка только ставит их на один левый край:
+   ширина = ширина абзаца лонгрида (66ch при 1.075rem, как у figure). */
+.longread__col {
+  max-width: var(--measure);
+  margin-inline: auto;
+  font-size: 1.075rem;
+}
+.longread__col > *,
+.longread__col blockquote > p,
+.longread__col figcaption {
+  max-width: none;
+  margin-inline: 0;
+}
+.longread__col > .longread__part:first-child { margin-top: 0; }
+.longread__col figure { margin-block: var(--s-7); }
+
 /* ── 9. Схема экосистемы ───────────────────────────────────── */
 .eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
 .eco__step { position: relative; }
