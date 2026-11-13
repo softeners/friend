@@ -1,499 +1,492 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-root="">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ДРУГ — живые истории российских территорий</title>
+  <title>ДРУГ — медиа о людях, которые делают российские регионы особенными</title>
+  <meta name="description" content="Культурно-медийный проект «Друг» показывает Россию через людей: мастеров, художников, предпринимателей, хранителей традиций. Экспедиции по регионам, документальные интервью, цифровые выпуски и печатный зин.">
+  <meta name="theme-color" content="#2C2C2C">
 
-  <meta name="description" content="«ДРУГ» — федеральный культурно-медийный проект: живые истории российских территорий.">
-  <meta name="theme-color" content="#17130F">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="ДРУГ — живые истории российских территорий">
-  <meta property="og:description" content="Федеральный культурно-медийный проект о людях и территориях России.">
-  <meta property="og:image" content="assets/img/og.jpg">
+  <meta property="og:title" content="ДРУГ — медиа о людях, которые делают российские регионы особенными">
+  <meta property="og:description" content="Культурно-медийный проект «Друг» показывает Россию через людей: мастеров, художников, предпринимателей, хранителей традиций. Экспедиции по регионам, документальные интервью, цифровые выпуски и печатный зин.">
+  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
   <meta property="og:locale" content="ru_RU">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
+       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
-<!-- ─────────────────────────  ШАПКА  ───────────────────────── -->
-<header class="header" id="header">
+<a class="skip-link" href="#main">Перейти к содержимому</a>
+
+<header class="header">
   <div class="container header__inner">
-    <a href="#hero" class="header__logo">
-      <img src="assets/img/logo.png" alt="ДРУГ">
+    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
+      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
     </a>
 
-    <nav class="nav" id="nav">
-      <a href="#about"    class="nav__link">О проекте</a>
-      <a href="#problem"  class="nav__link">Проблема</a>
-      <a href="#regions"  class="nav__link">Регионы</a>
-      <a href="#team"     class="nav__link">Команда</a>
-      <a href="#budget"   class="nav__link">Бюджет</a>
-      <a href="#contacts" class="nav__link">Контакты</a>
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="about.html" class="nav__link">О проекте</a>
+        <a href="issues.html" class="nav__link">Выпуски</a>
+        <a href="archive.html" class="nav__link">Архив</a>
+        <a href="expedition.html" class="nav__link">Экспедиции</a>
+        <a href="zines.html" class="nav__link">Зины</a>
+        <a href="partners.html" class="nav__link">Сотрудничество</a>
+        <a href="faq.html" class="nav__link">Вопросы</a>
+        <a href="contacts.html" class="nav__link">Контакты</a>
     </nav>
 
-    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+
+    <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </header>
 
-<main>
+<main id="main">
 
-  <!-- ─────────────────────────  HERO  ───────────────────────── -->
-  <section class="hero" id="hero">
+  <!-- ── Первый экран ── -->
+  <section class="hero hero--cinematic">
     <div class="hero__media">
-      <!-- сюда фото/видео фоном: assets/img/hero.jpg -->
+      <picture>
+      <source type="image/webp" srcset="assets/img/photo/sunset-ridge-600.webp 600w, assets/img/photo/sunset-ridge-1200.webp 1200w, assets/img/photo/sunset-ridge-2000.webp 2000w" sizes="100vw">
+      <img src="assets/img/photo/sunset-ridge-1200.jpg" alt="Закат над хребтом в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
+    </picture>
     </div>
 
     <div class="container hero__inner">
-      <span class="eyebrow">Проект</span>
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">культурно-медийный проект</span></span>
 
-      <img src="assets/img/logo.png" alt="ДРУГ" class="hero__logo">
+      <h1 class="hero__title">Медиа о&nbsp;людях, которые делают<br>российские регионы особенными</h1>
 
-      <h1 class="hero__title">Живые истории<br>российских территорий</h1>
+      <p class="hero__lead">
+        Мы отправляемся в&nbsp;экспедиции по&nbsp;России, записываем документальные интервью
+        с&nbsp;местными жителями и&nbsp;превращаем их истории в&nbsp;цифровые выпуски,
+        фотографии и&nbsp;печатные издания.
+      </p>
 
-      <dl class="hero__meta">
-        <div class="hero__meta-item">
-          <dt>Соавтор</dt>
-          <dd>Алина Артюхова</dd>
-        </div>
-        <div class="hero__meta-item">
-          <dt>Регион</dt>
-          <dd>Новосибирская область</dd>
-        </div>
-        <div class="hero__meta-item">
-          <dt>Статус</dt>
-          <dd>Федеральный</dd>
-        </div>
-        <div class="hero__meta-item">
-          <dt>Год</dt>
-          <dd>2026</dd>
-        </div>
-        <div class="hero__meta-item">
-          <dt>Телефон</dt>
-          <dd><a href="tel:+79822539">+7 (982) 878-39-42</a></dd>
-        </div>
-      </dl>
+      <p class="hero__accent">
+        Главная идея проекта — показать Россию через людей, а&nbsp;не через список
+        достопримечательностей.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--primary btn--lg" href="issues.html">Читать выпуски</a>
+        <a class="btn btn--outline btn--lg" href="become-hero.html">Рассказать историю</a>
+      </div>
     </div>
   </section>
 
-  <!-- ─────────────────────────  О ПРОЕКТЕ  ───────────────────────── -->
-  <section class="section" id="about">
+  <!-- ── Как работает «Друг» ── -->
+  <section class="section" id="how">
     <div class="container">
       <div class="section__head">
-        <span class="section__label">Блок 01 — О проекте</span>
-        <span class="section__num">01</span>
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Как это устроено</span></span>
+    <span class="section__num">01 / 09</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Как работает «Друг»</h2>
+  </div>
+
+      <div class="route">
+        <div class="route__item reveal">
+          <span class="route__node" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="7.5"/><path d="M17.5 17.5L23 23"/></svg></span>
+          <div class="route__body">
+            <span class="route__num">01</span>
+            <h3 class="route__title">Находим героев</h3>
+            <p class="route__text">Мастеров, художников, предпринимателей, хранителей традиций,
+              исследователей и&nbsp;других людей, связанных с&nbsp;жизнью территории.</p>
+          </div>
+        </div>
+
+        <div class="route__item reveal">
+          <span class="route__node" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 20Q10 8 14 14T24 8" stroke-dasharray=".5 4.2"/><circle cx="24" cy="8" r="2.2" fill="currentColor" stroke="none"/></svg></span>
+          <div class="route__body">
+            <span class="route__num">02</span>
+            <h3 class="route__title">Приезжаем к&nbsp;ним</h3>
+            <p class="route__text">Проводим интервью в&nbsp;их реальной среде и&nbsp;снимаем
+              документальные фотографии и&nbsp;видео.</p>
+          </div>
+        </div>
+
+        <div class="route__item reveal">
+          <span class="route__node" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9c-2.2-1.6-5.2-2-9-1.6v13.2c3.8-.4 6.8 0 9 1.6 2.2-1.6 5.2-2 9-1.6V7.4c-3.8-.4-6.8 0-9 1.6Z"/><path d="M14 9v13.2"/></svg></span>
+          <div class="route__body">
+            <span class="route__num">03</span>
+            <h3 class="route__title">Рассказываем их истории</h3>
+            <p class="route__text">Создаём цифровые выпуски, публикации и&nbsp;печатные зины.</p>
+          </div>
+        </div>
+
+        <div class="route__item reveal">
+          <span class="route__node" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10.5" cy="14" r="6"/><circle cx="18.5" cy="14" r="6"/></svg></span>
+          <div class="route__body">
+            <span class="route__num">04</span>
+            <h3 class="route__title">Соединяем людей</h3>
+            <p class="route__text">Помогаем героям становиться видимыми за&nbsp;пределами своего
+              региона и&nbsp;создаём связи между участниками проекта.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Кого мы показываем ── -->
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Люди</span></span>
+    <span class="section__num">02 / 09</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Людей, через которых можно узнать место</h2>
+    <p class="lead">Мы рассказываем о&nbsp;людях, которые своим делом формируют жизнь территории: мастерах, художниках, предпринимателях, учителях, исследователях, хранителях традиций и&nbsp;создателях локальных инициатив.</p>
+  </div>
+
+      <div class="category-grid">
+        <div class="ph ph--4x3 ph--empty"><span>Мастера</span></div>
+        <div class="ph ph--4x3 ph--empty"><span>Художники</span></div>
+        <div class="ph ph--4x3 ph--empty"><span>Предприниматели</span></div>
+        <div class="ph ph--4x3 ph--empty"><span>Хранители традиций</span></div>
+        <div class="ph ph--4x3 ph--empty"><span>Исследователи</span></div>
+        <div class="ph ph--4x3 ph--empty"><span>Создатели локальных инициатив</span></div>
       </div>
 
-      <h2 class="section__title">Что такое «ДРУГ»?</h2>
+      <div class="section__foot">
+        <a class="btn btn--primary btn--lg" href="become-hero.html">Рассказать историю</a>
+      </div>
+    </div>
+  </section>
 
-      <div class="grid grid--2">
-        <div class="col">
+  <!-- ── Герой получает медиаподдержку ── -->
+  <section class="section" id="support">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Героям</span></span>
+    <span class="section__num">03 / 09</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Герой получает медиаподдержку</h2>
+    <p class="lead">Участие в&nbsp;проекте бесплатно. Мы создаём материалы о&nbsp;человеке и&nbsp;его деле и&nbsp;передаём герою готовые фотографии и&nbsp;другие материалы.</p>
+  </div>
+
+      <div class="grid grid--3">
+        <article class="card">
+          <h3 class="card__title">История на платформе</h3>
+          <p class="card__text">Публикация истории героя на&nbsp;сайте проекта.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Профессиональные фотографии</h3>
+          <p class="card__text">Фотографии героя, его работы и&nbsp;среды, в&nbsp;которой
+            он&nbsp;живёт и&nbsp;работает.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Публикация материалов о вас и вашем деле</h3>
+          <p class="card__text">В&nbsp;социальных сетях проекта и&nbsp;на&nbsp;партнёрских
+            площадках.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Внимание к своему делу</h3>
+          <p class="card__text">Рассказ о&nbsp;мастерской, продукте, инициативе, услуге
+            или&nbsp;другом деле героя аудитории проекта.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Участие в печатных выпусках</h3>
+          <p class="card__text">История героя может войти в&nbsp;тематический выпуск проекта
+            и&nbsp;печатный зин.</p>
+        </article>
+        <article class="card card--accent">
+          <h3 class="card__title">Новые знакомства и коллаборации</h3>
+          <p class="card__text">Возможность познакомиться с&nbsp;другими героями, авторами
+            и&nbsp;партнёрами проекта.</p>
+        </article>
+      </div>
+
+      <div class="paper paper--wide">
+        <span class="paper__label">Важно</span>
+        <p>Мы не&nbsp;берём с&nbsp;героев плату за&nbsp;участие и&nbsp;не&nbsp;получаем процент
+           от&nbsp;их продаж, заказов или&nbsp;других результатов публикации.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Почему это важно ── -->
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Смысл</span></span>
+    <span class="section__num">04 / 09</span>
+  </div>
+
+      <div class="grid grid--sidebar">
+        <div class="prose">
+          <h2 class="h2">Почему это важно</h2>
           <p class="lead">
-            «ДРУГ» — федеральный культурно-медийный проект, который создаёт
-            живой цифровой портрет российских территорий.
+            О&nbsp;регионе часто рассказывают через места: что посмотреть, куда сходить
+            и&nbsp;где остановиться. «Друг» смотрит на&nbsp;территорию иначе — через людей,
+            которые в&nbsp;ней живут, работают и&nbsp;создают что-то важное для&nbsp;себя
+            и&nbsp;окружающих.
           </p>
           <p class="text">
-            Текст описания проекта. Замените на финальный.
+            Мы делаем эти истории доступными тем, кто живёт далеко от&nbsp;героя, и&nbsp;создаём
+            возможность для&nbsp;новых знакомств, поездок и&nbsp;сотрудничества.
           </p>
         </div>
 
-        <figure class="figure">
-          <img src="assets/img/about.jpg" alt="" loading="lazy">
-        </figure>
-      </div>
-
-      <!-- Табы -->
-      <div class="tabs" data-tabs>
-        <div class="tabs__nav">
-          <button class="tabs__btn is-active" data-tab="t1">Форматы</button>
-          <button class="tabs__btn" data-tab="t2">Гид</button>
-          <button class="tabs__btn" data-tab="t3">Истории</button>
-          <button class="tabs__btn" data-tab="t4">Архив</button>
-        </div>
-        <div class="tabs__panels">
-          <div class="tabs__panel is-active" id="t1"><p class="text">Контент вкладки 1.</p></div>
-          <div class="tabs__panel" id="t2"><p class="text">Контент вкладки 2.</p></div>
-          <div class="tabs__panel" id="t3"><p class="text">Контент вкладки 3.</p></div>
-          <div class="tabs__panel" id="t4"><p class="text">Контент вкладки 4.</p></div>
+        <div class="quote-block">
+          <p class="quote-block__lines">
+            История мастера помогает узнать о&nbsp;ремесле.<br>
+            История художника — увидеть локальную культуру.<br>
+            История предпринимателя — понять, как устроена жизнь территории.<br>
+            История хранителя традиции — сохранить знание, которое может исчезнуть.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────────────────  ПРОБЛЕМА  ───────────────────────── -->
-  <section class="section" id="problem">
+  <!-- ── Карта ── -->
+  <section class="section" id="expeditions">
     <div class="container">
       <div class="section__head">
-        <span class="section__label">Блок 02 — Проблематика</span>
-        <span class="section__num">02</span>
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">География</span></span>
+    <span class="section__num">05 / 09</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Экспедиции</h2>
+    <p class="lead">В 2026–2027 годах «Друг» отправляется в&nbsp;разные регионы России, чтобы собрать истории людей и&nbsp;локальных сообществ.</p>
+  </div>
+
+      <div class="grid grid--sidebar map-layout">
+        <div class="map" data-map data-map-mode="link"></div>
+        <ul class="region-list" data-map-list></ul>
       </div>
 
-      <h2 class="section__title">Что мы решаем?</h2>
-
-      <div class="grid grid--4">
-        <article class="card card--accent">
-          <h3 class="card__title">Утрата локальной идентичности</h3>
-          <p class="card__text">Описание проблемы.</p>
-        </article>
-        <article class="card">
-          <h3 class="card__title">Отсутствие живого контента</h3>
-          <p class="card__text">Описание проблемы.</p>
-        </article>
-        <article class="card">
-          <h3 class="card__title">Разрыв поколений</h3>
-          <p class="card__text">Описание проблемы.</p>
-        </article>
-        <article class="card">
-          <h3 class="card__title">Личный опыт</h3>
-          <p class="card__text">Описание проблемы.</p>
-        </article>
-      </div>
+      <p class="section__note">География будет расширяться.</p>
     </div>
   </section>
 
-  <!-- ─────────────────────────  РЕШЕНИЕ  ───────────────────────── -->
-  <section class="section" id="solution">
+  <!-- ── Последний выпуск ── -->
+  <section class="section section--deep">
     <div class="container">
       <div class="section__head">
-        <span class="section__label">Блок 03 — Решение</span>
-        <span class="section__num">03</span>
-      </div>
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Журнал</span></span>
+    <span class="section__num">06 / 09</span>
+  </div>
+      <div class="latest reveal" data-latest-issue></div>
+    </div>
+  </section>
 
-      <h2 class="section__title">Как мы это меняем?</h2>
+  <!-- ── Два способа участвовать ── -->
+  <section class="section" id="join">
+    <div class="container">
+      <div class="section__head">
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Участие</span></span>
+    <span class="section__num">07 / 09</span>
+  </div>
 
-      <div class="grid grid--2">
-        <!-- Аккордеон -->
-        <div class="accordion" data-accordion>
-          <div class="accordion__item is-open">
-            <button class="accordion__head">
-              <span class="accordion__num">01</span>
-              <span class="accordion__title">Экспедиции в регионы</span>
-              <span class="accordion__icon"></span>
-            </button>
-            <div class="accordion__body"><p class="text">Описание.</p></div>
-          </div>
-          <div class="accordion__item">
-            <button class="accordion__head">
-              <span class="accordion__num">02</span>
-              <span class="accordion__title">Визуальная документация</span>
-              <span class="accordion__icon"></span>
-            </button>
-            <div class="accordion__body"><p class="text">Описание.</p></div>
-          </div>
-          <div class="accordion__item">
-            <button class="accordion__head">
-              <span class="accordion__num">03</span>
-              <span class="accordion__title">Локальные медиа</span>
-              <span class="accordion__icon"></span>
-            </button>
-            <div class="accordion__body"><p class="text">Описание.</p></div>
-          </div>
-          <div class="accordion__item">
-            <button class="accordion__head">
-              <span class="accordion__num">04</span>
-              <span class="accordion__title">Редакторская работа</span>
-              <span class="accordion__icon"></span>
-            </button>
-            <div class="accordion__body"><p class="text">Описание.</p></div>
-          </div>
+  <div class="section__intro">
+    <h2 class="h2">Два способа стать частью проекта</h2>
+  </div>
+
+      <article class="invite reveal">
+        <div class="ph ph--4x3 invite__media">
+          <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-11-600.webp 600w, assets/img/photo/altay-11-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw">
+      <img src="assets/img/photo/altay-11-1200.jpg" alt="Житель Республики Алтай на лесной дороге" loading="lazy" decoding="async">
+    </picture>
         </div>
 
-        <figure class="figure figure--tall">
-          <img src="assets/img/solution.jpg" alt="" loading="lazy">
-        </figure>
-      </div>
+        <div class="invite__body">
+          <span class="invite__kind">Героям</span>
+          <h3 class="h2 invite__title">Расскажите свою историю</h3>
+          <p class="text">
+            Мы рассказываем о&nbsp;людях, которые своим делом формируют жизнь территории.
+            Публичность и&nbsp;опыт интервью не&nbsp;нужны, важно само дело и&nbsp;ваша
+            готовность о&nbsp;нём говорить.
+          </p>
+          <ul class="list">
+            <li>Видимость и признание вклада</li>
+            <li>Возможность поделиться видением мира и своей историей</li>
+            <li>Связь с другими героями проекта из разных регионов</li>
+            <li>Продвижение вашего дела и возможные коллаборации</li>
+            <li>Печатный зин с вашей историей и материалы съёмки</li>
+          </ul>
+          <a class="btn btn--primary btn--lg" href="become-hero.html">Рассказать свою историю</a>
+        </div>
+      </article>
+
+      <article class="invite invite--flip reveal">
+        <div class="ph ph--4x3 invite__media">
+          <picture>
+      <source type="image/webp" srcset="assets/img/photo/altay-2-600.webp 600w, assets/img/photo/altay-2-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 46vw">
+      <img src="assets/img/photo/altay-2-1200.jpg" alt="Дорога между сёлами во время экспедиции" loading="lazy" decoding="async">
+    </picture>
+        </div>
+
+        <div class="invite__body">
+          <span class="invite__kind">Молодым авторам</span>
+          <h3 class="h2 invite__title">Поехать в экспедицию</h3>
+          <p class="text">
+            Участники экспедиций обучатся методам интервьюирования, видеосъёмке и основам
+            документальной фотографии. Познакомятся с людьми из интересующей их области,
+            увидят пути развития в своём регионе.
+          </p>
+          <p class="invite__note">
+            В экспедицию по региону едут те, кто в этом регионе живёт. Перед поездкой участники
+            проходят обучение методике с наставником.
+          </p>
+          <a class="btn btn--paper btn--lg" href="expedition.html">Узнать об экспедициях</a>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- ─────────────────────────  ЦЕЛИ И ЗАДАЧИ  ───────────────────────── -->
-  <section class="section" id="goals">
+  <!-- ── Что остаётся после экспедиции ── -->
+  <section class="section section--deep">
     <div class="container">
       <div class="section__head">
-        <span class="section__label">Блок 04 — Цели</span>
-        <span class="section__num">04</span>
-      </div>
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Итог</span></span>
+    <span class="section__num">08 / 09</span>
+  </div>
 
-      <h2 class="section__title">Цель и ключевые задачи</h2>
+  <div class="section__intro">
+    <h2 class="h2">Что остаётся после экспедиции</h2>
+  </div>
 
       <div class="grid grid--5">
-        <article class="card"><h3 class="card__title">Институциональный</h3><p class="card__text">Задача.</p></article>
-        <article class="card"><h3 class="card__title">Технологический</h3><p class="card__text">Задача.</p></article>
-        <article class="card"><h3 class="card__title">Медийный</h3><p class="card__text">Задача.</p></article>
-        <article class="card"><h3 class="card__title">Продуктовый</h3><p class="card__text">Задача.</p></article>
-        <article class="card card--accent"><h3 class="card__title">Сообщество</h3><p class="card__text">Задача.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  РЕГИОНЫ  ───────────────────────── -->
-  <section class="section" id="regions">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 05 — География</span>
-        <span class="section__num">05</span>
-      </div>
-
-      <h2 class="section__title">6 пилотных регионов России</h2>
-
-      <div class="grid grid--2">
-        <ul class="regions" data-regions>
-          <li class="regions__item is-active" data-img="assets/img/region-1.jpg">Республика Бурятия</li>
-          <li class="regions__item" data-img="assets/img/region-2.jpg">Республика Саха (Якутия)</li>
-          <li class="regions__item" data-img="assets/img/region-3.jpg">Приморский край</li>
-          <li class="regions__item" data-img="assets/img/region-4.jpg">Забайкальский край</li>
-          <li class="regions__item" data-img="assets/img/region-5.jpg">Республика Алтай</li>
-          <li class="regions__item" data-img="assets/img/region-6.jpg">Новосибирская область</li>
-        </ul>
-
-        <figure class="figure figure--sticky">
-          <img src="assets/img/region-1.jpg" alt="" id="regionImage" loading="lazy">
-          <figcaption class="figure__caption">Подпись к региону</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  АУДИТОРИЯ  ───────────────────────── -->
-  <section class="section" id="audience">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 06 — Аудитория</span>
-        <span class="section__num">06</span>
-      </div>
-
-      <div class="grid grid--2">
-        <figure class="figure">
-          <img src="assets/img/audience.jpg" alt="" loading="lazy">
-        </figure>
-
-        <div class="col">
-          <h2 class="section__title">Для кого мы работаем</h2>
-          <div class="chips">
-            <button class="chip is-active">Жители регионов</button>
-            <button class="chip">Медиа</button>
-            <button class="chip">Институции</button>
-            <button class="chip">Бизнес</button>
-          </div>
-          <ul class="list">
-            <li>Пункт аудитории</li>
-            <li>Пункт аудитории</li>
-            <li>Пункт аудитории</li>
-            <li>Пункт аудитории</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  КОМАНДА  ───────────────────────── -->
-  <section class="section" id="team">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 07 — Команда</span>
-        <span class="section__num">07</span>
-      </div>
-
-      <h2 class="section__title">Кто реализует проект</h2>
-
-      <div class="grid grid--3">
-        <article class="person">
-          <img src="assets/img/person-1.jpg" alt="" class="person__photo" loading="lazy">
-          <h3 class="person__name">Имя Фамилия</h3>
-          <p class="person__role">Роль в проекте</p>
-          <ul class="list list--sm">
-            <li>Факт биографии</li>
-            <li>Факт биографии</li>
-          </ul>
+        <article class="card">
+          <h3 class="card__title">Истории</h3>
+          <p class="card__text">Документальные интервью с&nbsp;жителями региона.</p>
         </article>
-
-        <article class="person">
-          <img src="assets/img/person-2.jpg" alt="" class="person__photo" loading="lazy">
-          <h3 class="person__name">Имя Фамилия</h3>
-          <p class="person__role">Роль в проекте</p>
-          <ul class="list list--sm">
-            <li>Факт биографии</li>
-            <li>Факт биографии</li>
-          </ul>
+        <article class="card">
+          <h3 class="card__title">Фотографии</h3>
+          <p class="card__text">Документальная съёмка людей и&nbsp;среды.</p>
         </article>
-
-        <article class="person person--accent">
-          <h3 class="person__name">Партнёры и институции</h3>
-          <ul class="list list--sm">
-            <li>Партнёр</li>
-            <li>Партнёр</li>
-          </ul>
+        <article class="card">
+          <h3 class="card__title">Видео</h3>
+          <p class="card__text">Короткие документальные материалы.</p>
+        </article>
+        <article class="card">
+          <h3 class="card__title">Цифровой выпуск</h3>
+          <p class="card__text">Собранные и&nbsp;отредактированные истории региона.</p>
+        </article>
+        <article class="card card--accent">
+          <h3 class="card__title">Печатный зин</h3>
+          <p class="card__text">Материальное издание с&nbsp;историями героев.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ─────────────────────────  ДОРОЖНАЯ КАРТА  ───────────────────────── -->
-  <section class="section" id="roadmap">
+  <!-- ── Вопросы и Telegram ── -->
+  <section class="section">
     <div class="container">
       <div class="section__head">
-        <span class="section__label">Блок 08 — План</span>
-        <span class="section__num">08</span>
+    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Вопросы</span></span>
+    <span class="section__num">09 / 09</span>
+  </div>
+
+  <div class="section__intro">
+    <h2 class="h2">Что спрашивают чаще всего</h2>
+  </div>
+
+      <div class="faq">
+        <details class="faq__item">
+          <summary class="faq__q">Герой что-то платит или получает?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Участие бесплатное, гонорар за интервью мы не платим.
+            Герой получает видимость и признание вклада, связь с другими участниками проекта,
+            все фотографии съёмки и печатный зин со своей историей.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Почему обязательно нужна экспедиция?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Доверие невозможно собрать дистанционно. Мы не приглашаем
+            героя в студию, а приезжаем к нему в среду. Это метод включённого наблюдения, который
+            даёт контекст, невозможный при удалённой работе.</p></div>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__q">Кто может поехать в экспедицию?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Молодые авторы, которые живут в одном из семи регионов
+            маршрута. Журналистское образование не требуется: методика построена так, чтобы
+            качественное интервью мог провести любой подготовленный человек.</p></div>
+        </details>
       </div>
 
-      <h2 class="section__title">Дорожная карта проекта</h2>
-
-      <ol class="roadmap">
-        <li class="roadmap__step"><span class="roadmap__dot"></span><h3>Подготовка</h3><p>Описание этапа</p></li>
-        <li class="roadmap__step"><span class="roadmap__dot"></span><h3>Экспедиции</h3><p>Описание этапа</p></li>
-        <li class="roadmap__step"><span class="roadmap__dot"></span><h3>Монтаж</h3><p>Описание этапа</p></li>
-        <li class="roadmap__step"><span class="roadmap__dot"></span><h3>Публикация</h3><p>Описание этапа</p></li>
-        <li class="roadmap__step"><span class="roadmap__dot"></span><h3>Итоги</h3><p>Описание этапа</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  БЮДЖЕТ  ───────────────────────── -->
-  <section class="section" id="budget">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 09 — Бюджет</span>
-        <span class="section__num">09</span>
+      <div class="section__foot">
+        <a class="btn btn--ghost" href="faq.html">Все вопросы и ответы</a>
       </div>
 
-      <h2 class="section__title">Бюджет <span class="accent">988 000 ₽</span></h2>
-
-      <div class="grid grid--2">
-        <table class="budget">
-          <tbody>
-            <tr><th>Статья расходов</th><td class="budget__bar"><span style="--w:82%"></span></td><td class="budget__sum">000 000 ₽</td></tr>
-            <tr><th>Статья расходов</th><td class="budget__bar"><span style="--w:54%"></span></td><td class="budget__sum">000 000 ₽</td></tr>
-            <tr><th>Статья расходов</th><td class="budget__bar"><span style="--w:38%"></span></td><td class="budget__sum">000 000 ₽</td></tr>
-            <tr><th>Статья расходов</th><td class="budget__bar"><span style="--w:22%"></span></td><td class="budget__sum">000 000 ₽</td></tr>
-            <tr class="budget__total"><th>Итого</th><td></td><td class="budget__sum accent">988 000 ₽</td></tr>
-          </tbody>
-        </table>
-
-        <figure class="figure">
-          <img src="assets/img/budget.jpg" alt="" loading="lazy">
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  РЕЗУЛЬТАТЫ  ───────────────────────── -->
-  <section class="section" id="results">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 10 — Результаты</span>
-        <span class="section__num">10</span>
-      </div>
-
-      <h2 class="section__title">Что мы создадим</h2>
-
-      <div class="stats">
-        <div class="stat"><span class="stat__num" data-count="6">0</span><span class="stat__label">регионов</span></div>
-        <div class="stat"><span class="stat__num" data-count="30">0</span><span class="stat__label">историй</span></div>
-        <div class="stat"><span class="stat__num" data-count="9">0</span><span class="stat__label">фильмов</span></div>
-        <div class="stat"><span class="stat__num" data-count="63">0</span><span class="stat__label">публикаций</span></div>
-        <div class="stat"><span class="stat__num" data-count="18">0</span><span class="stat__label">партнёров</span></div>
-        <div class="stat"><span class="stat__num" data-count="12900">0</span><span class="stat__label">охват</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  ЭФФЕКТ  ───────────────────────── -->
-  <section class="section" id="impact">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 11 — Эффект</span>
-        <span class="section__num">11</span>
-      </div>
-
-      <h2 class="section__title">Какой след оставит проект</h2>
-
-      <div class="grid grid--3">
-        <article class="card"><h3 class="card__title">Для аудитории</h3><p class="card__text">Описание.</p></article>
-        <article class="card"><h3 class="card__title">Для сообщества</h3><p class="card__text">Описание.</p></article>
-        <article class="card card--accent"><h3 class="card__title">Для развития медиа</h3><p class="card__text">Описание.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  МАСШТАБИРОВАНИЕ  ───────────────────────── -->
-  <section class="section" id="scale">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 12 — Развитие</span>
-        <span class="section__num">12</span>
-      </div>
-
-      <h2 class="section__title">Масштабирование проекта</h2>
-
-      <div class="grid grid--3">
-        <article class="card"><h3 class="card__title">Этап 1</h3><p class="card__text">Описание.</p></article>
-        <article class="card"><h3 class="card__title">Этап 2</h3><p class="card__text">Описание.</p></article>
-        <article class="card"><h3 class="card__title">Этап 3</h3><p class="card__text">Описание.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────────────────────  TELEGRAM  ───────────────────────── -->
-  <section class="section" id="telegram">
-    <div class="container">
-      <div class="section__head">
-        <span class="section__label">Блок 13 — Канал</span>
-        <span class="section__num">13</span>
-      </div>
-
-      <h2 class="section__title">Telegram как основной канал</h2>
-
-      <div class="grid grid--2">
-        <table class="budget">
-          <tbody>
-            <tr><th>Показатель</th><td class="budget__bar"><span style="--w:90%"></span></td><td class="budget__sum">00%</td></tr>
-            <tr><th>Показатель</th><td class="budget__bar"><span style="--w:70%"></span></td><td class="budget__sum">00%</td></tr>
-            <tr><th>Показатель</th><td class="budget__bar"><span style="--w:45%"></span></td><td class="budget__sum">00%</td></tr>
-          </tbody>
-        </table>
-
-        <div class="card card--accent">
-          <ul class="list">
-            <li>Тезис о канале</li>
-            <li>Тезис о канале</li>
-            <li>Тезис о канале</li>
-          </ul>
-          <a href="https://t.me/" class="btn" target="_blank" rel="noopener">Перейти в канал</a>
-        </div>
-      </div>
+      <div class="tg reveal">
+  <div class="tg__text">
+    <p class="tg__title">Следить за экспедицией</p>
+    <p class="tg__note">Короткие заметки прямо с маршрута. Кого встретили, что снимаем сегодня, где застряли.</p>
+  </div>
+  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
+</div>
     </div>
   </section>
 
 </main>
 
-<!-- ─────────────────────────  КОНТАКТЫ / ФУТЕР  ───────────────────────── -->
-<footer class="footer" id="contacts">
+<footer class="footer">
   <div class="container">
-    <img src="assets/img/logo.png" alt="ДРУГ" class="footer__logo">
+    <div class="footer__top">
+      <div class="footer__col">
+        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
+          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+        </a>
+        <p class="footer__about">
+          Исследуем страну через призму восприятия её жителей.
+        </p>
+      </div>
 
-    <div class="footer__row">
-      <h2 class="section__title">Свяжитесь с нами</h2>
+      <div class="footer__col">
+        <span class="footer__head">Написать</span>
+        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
+        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+      </div>
 
-      <div class="footer__contacts">
-        <a href="tel:+79828783942" class="footer__link">+7 (982) 878-39-42</a>
-        <a href="mailto:hello@drug.ru" class="footer__link">hello@drug.ru</a>
-        <a href="https://t.me/" class="footer__link" target="_blank" rel="noopener">Telegram</a>
+      <div class="footer__col">
+        <span class="footer__head">Читать</span>
+        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
+        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
+        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
+        <a class="footer__link" href="archive.html">Медиаархив</a>
+      </div>
+
+      <div class="footer__col">
+        <span class="footer__head">Участвовать</span>
+        <a class="footer__link" href="become-hero.html">Стать героем</a>
+        <a class="footer__link" href="expedition.html">Поехать в экспедицию</a>
+        <a class="footer__link" href="zines.html">Заказать зин</a>
+        <a class="footer__link" href="partners.html">Сотрудничество</a>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span id="year">2026</span> Проект «ДРУГ»</span>
-      <a href="#hero" class="footer__up">Наверх ↑</a>
+      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
+        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
+      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
     </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
