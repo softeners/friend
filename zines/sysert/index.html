@@ -61,7 +61,7 @@ button:disabled{opacity:.3;cursor:default}
     <div class="meta"><b>Выпуск 01 · Сысерть</b></div>
   </header>
   <footer>
-    <div class="meta hint">Тяните лист или листайте стрелками · колёсико, щипок или двойной клик — приблизить и отдалить</div>
+    <div class="meta hint">Тяните лист или листайте стрелками · колёсико или щипок — масштаб, двойной клик — приблизить</div>
     <div class="ctl">
       <div class="zoomctl"><button id="zout" aria-label="Отдалить">−</button><button id="zin" aria-label="Приблизить">+</button><button id="mode" aria-label="Режим просмотра">страница</button></div>
       <button id="prev" aria-label="Предыдущий разворот">←</button>
@@ -404,13 +404,13 @@ addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLe
 canvas.addEventListener('wheel',ev=>{ev.preventDefault();
   // Щипок на трекпаде приходит как колесо с Ctrl.
   if(ev.ctrlKey||ev.metaKey){zoomBy(Math.exp(-ev.deltaY*.012),ev.clientX,ev.clientY);return}
-  // Колесо мыши (крупные шаги) приближает и отдаляет в любом масштабе:
-  // вверх — ближе, вниз — дальше, до исходного вида.
-  const px=ev.deltaMode===1?ev.deltaY*16:ev.deltaMode===2?ev.deltaY*innerHeight:ev.deltaY;
-  const mouse=ev.deltaMode!==0||(ev.wheelDeltaY&&Math.abs(ev.wheelDeltaY)%120===0)||(Math.abs(px)>=40&&!ev.deltaX);
-  if(mouse&&!ev.shiftKey){zoomBy(Math.exp(-Math.max(-240,Math.min(240,px))*.004),ev.clientX,ev.clientY);return}
-  // Плавная прокрутка двумя пальцами по трекпаду двигает приближенный лист.
-  if(view.zoom>1){const k=cam.d/1400; view.panX+=ev.deltaX*k; view.panY-=ev.deltaY*k; clampPan();}
+  // Вертикальная прокрутка — колесо мыши любого типа или два пальца на трекпаде —
+  // всегда масштаб: вверх ближе, вниз дальше, до исходного вида.
+  // Двигать приближенный лист — перетаскиванием или прокруткой вбок.
+  const k=ev.deltaMode===1?16:ev.deltaMode===2?innerHeight:1;
+  const dx=ev.deltaX*k, dy=ev.deltaY*k;
+  if(Math.abs(dy)>=Math.abs(dx)){zoomBy(Math.exp(-Math.max(-240,Math.min(240,dy))*.004),ev.clientX,ev.clientY);return}
+  if(view.zoom>1){const m=cam.d/1400; view.panX+=dx*m; clampPan();}
 },{passive:false});
 // Книжка может жить во фрейме на странице сайта: колесо и жесты над интерфейсом
 // (кнопки, подписи) не должны прокручивать или масштабировать страницу снаружи.
