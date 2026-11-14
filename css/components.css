@@ -106,8 +106,7 @@
   transition: background var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease),
               color var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
 }
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: none; }
+/* Кнопки при наведении меняют только цвет и остаются на месте */
 
 .btn--primary { background: var(--accent); color: var(--ink); }
 .btn--primary:hover { background: var(--accent-dark); }
@@ -145,22 +144,35 @@
 .paper--flat { transform: none; }
 .paper--wide { max-width: none; }
 
-/* Скрепка в левом верхнем углу. Нарисована проволокой в SVG: два витка,
-   как у настоящей канцелярской скрепки. Высота подобрана так, чтобы
-   нижний виток заканчивался выше текста. */
-.paper::before {
+/* Скрепка в левом верхнем углу. Нарисована проволокой в SVG, как настоящая
+   канцелярская скрепка, и надета на край листа: внешняя петля целиком лежит
+   поверх бумаги (::after), а внутренний виток уходит под лист (::before) —
+   его видно только выше верхнего края, ниже он спрятан за бумагой. */
+.paper::before,
+.paper::after {
   content: '';
   position: absolute;
-  top: -16px;
+  top: -20px;
   left: 20px;
   width: 17px;
   height: 46px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 46' fill='none' stroke='%23968D82' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M4.1 40.5V8.6a4.4 4.4 0 0 1 8.8 0v28.6'/%3E%3Cpath d='M12.9 37.2a4.4 4.4 0 0 1-8.8 0V12.4a2 2 0 0 1 4 0v26'/%3E%3C/svg%3E") no-repeat center / contain;
   transform: rotate(-7deg);
-  filter: drop-shadow(0 1px 1px rgba(42, 35, 32, .28));
+  transform-origin: 50% 20px;
   pointer-events: none;
 }
-.paper--noclip::before { display: none; }
+/* задняя часть: виток под листом, видна только над краем бумаги */
+.paper::before {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 46' fill='none' stroke='%23968D82' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M4.1 24V12.4a2 2 0 0 1 4 0v26'/%3E%3C/svg%3E") no-repeat center / contain;
+  clip-path: inset(0 0 calc(100% - 20px) 0);
+  opacity: .85;
+}
+/* передняя часть: внешняя петля поверх бумаги, с тенью на листе */
+.paper::after {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 46' fill='none' stroke='%23968D82' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M4.1 37.2V8.6a4.4 4.4 0 0 1 8.8 0v28.6a4.4 4.4 0 0 1-8.8 0'/%3E%3C/svg%3E") no-repeat center / contain;
+  filter: drop-shadow(0 1px 1px rgba(42, 35, 32, .28));
+}
+.paper--noclip::before,
+.paper--noclip::after { display: none; }
 .paper--noclip { padding-top: 1.4rem; }
 
 .paper__label {

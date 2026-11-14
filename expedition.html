@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/components.css?v=20261114h">
+  <link rel="stylesheet" href="css/pages.css?v=20261114h">
 
   <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
        не прячут блоки перед анимацией, и сайт читается даже без JS. -->
@@ -57,32 +57,31 @@
 
 <main id="main">
 
-  <section class="section pagehead">
-    <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Экспедиции</span></span>
-      <h1 class="h1 pagehead__title">Поехать в экспедицию</h1>
-      <p class="lead pagehead__lead">
-        Методика проекта построена так, чтобы качественное интервью мог провести человек
-        без журналистского образования. Мы обучаем ей молодых авторов, а затем едем
-        вместе с ними в регионы.
-      </p>
-      <div class="pagehead__actions">
-        <a class="btn btn--paper btn--lg" href="become-participant.html">Подать заявку</a>
-        <a class="btn btn--ghost btn--lg" href="#course">Программа курса</a>
+  <!-- ── Первый экран: фото в рамке, заголовок слева, описание справа ── -->
+  <section class="hero hero--home hero--page">
+      <div class="hero__frame">
+        <div class="hero__media">
+          <picture>
+            <source type="image/webp" srcset="assets/img/photo/notes-07-600.webp 600w, assets/img/photo/notes-07-1200.webp 1200w, assets/img/photo/notes-07-2000.webp 2000w" sizes="100vw">
+            <img src="assets/img/photo/notes-07-1200.jpg" alt="Палатки-шатры экспедиции в горной долине" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+
+        <div class="hero__content">
+          <span class="eyebrow hero__eyebrow">ДРУГ <span class="eyebrow__rest">Экспедиции</span></span>
+          <h1 class="hero__title">Поехать в&nbsp;экспедицию</h1>
+        </div>
+
+        <div class="hero__aside">
+          <p class="hero__lead">Методика проекта построена так, чтобы качественное интервью мог провести человек без журналистского образования. Мы&nbsp;обучаем ей&nbsp;молодых авторов, а&nbsp;затем едем вместе с&nbsp;ними в&nbsp;регионы.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="become-participant.html">Подать заявку</a>
+            <a class="hero__link" href="#course">Программа курса <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
       </div>
-    </div>
   </section>
 
-  <section class="section section--flush">
-    <div class="container">
-      <figure class="ph ph--16x9">
-        <picture>
-      <source type="image/webp" srcset="assets/img/photo/altay-38-600.webp 600w, assets/img/photo/altay-38-1200.webp 1200w, assets/img/photo/altay-38-2000.webp 2000w" sizes="100vw">
-      <img src="assets/img/photo/altay-38-1200.jpg" alt="Дорога вдоль реки в Республике Алтай" loading="lazy" decoding="async">
-    </picture>
-      </figure>
-    </div>
-  </section>
 
   <!-- ── Путь участника: настоящая последовательность, поэтому нумеруем ── -->
   <section class="section">

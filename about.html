@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/components.css?v=20261114h">
+  <link rel="stylesheet" href="css/pages.css?v=20261114h">
 
   <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
        не прячут блоки перед анимацией, и сайт читается даже без JS. -->
@@ -57,27 +57,27 @@
 
 <main id="main">
 
-  <section class="section pagehead">
-    <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">О проекте</span></span>
-      <h1 class="h1 pagehead__title">Медиа как друг</h1>
-      <p class="lead pagehead__lead">
-        Проект «Друг» знакомит людей с людьми. Он прививает путь путешественника, а не туриста,
-        и знакомит с отдалёнными уголками России через крафтовые материалы «из уст в уста».
-      </p>
-    </div>
+  <!-- ── Первый экран: фото в рамке, заголовок слева, описание справа ── -->
+  <section class="hero hero--home hero--page">
+      <div class="hero__frame">
+        <div class="hero__media">
+          <picture>
+            <source type="image/webp" srcset="assets/img/photo/mountain-range-600.webp 600w, assets/img/photo/mountain-range-1200.webp 1200w, assets/img/photo/mountain-range-2000.webp 2000w" sizes="100vw">
+            <img src="assets/img/photo/mountain-range-1200.jpg" alt="Горная гряда в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+
+        <div class="hero__content">
+          <span class="eyebrow hero__eyebrow">ДРУГ <span class="eyebrow__rest">О проекте</span></span>
+          <h1 class="hero__title">Медиа как&nbsp;друг</h1>
+        </div>
+
+        <div class="hero__aside">
+          <p class="hero__lead">Проект «Друг» знакомит людей с&nbsp;людьми. Он&nbsp;прививает путь путешественника, а&nbsp;не&nbsp;туриста, и&nbsp;знакомит с&nbsp;отдалёнными уголками России через крафтовые материалы «из&nbsp;уст в&nbsp;уста».</p>
+        </div>
+      </div>
   </section>
 
-  <section class="section section--flush">
-    <div class="container">
-      <figure class="ph ph--16x9">
-        <picture>
-      <source type="image/webp" srcset="assets/img/photo/mountain-range-600.webp 600w, assets/img/photo/mountain-range-1200.webp 1200w, assets/img/photo/mountain-range-2000.webp 2000w" sizes="100vw">
-      <img src="assets/img/photo/mountain-range-1200.jpg" alt="Горная гряда в Республике Алтай" loading="lazy" decoding="async">
-    </picture>
-      </figure>
-    </div>
-  </section>
 
   <section class="section">
     <div class="container">
@@ -191,24 +191,38 @@
     <p class="lead">Глубокие интервью и личные истории используют многие. Но эти практики остаются авторскими, не систематизированы и не могут быть переданы другим.</p>
   </div>
 
-      <div class="grid grid--sidebar">
-        <ul class="list list--loose">
-          <li>Мы не создаём ещё одно успешное шоу, а разрабатываем алгоритм: гайд, чек-листы
-              и банк вопросов. По нему качественное интервью может провести
-              человек без журналистского образования.</li>
-          <li>Фокус на методе, а не на личности интервьюера. В центре внимания герой и его история,
-              а не автор и его интерпретации услышанного.</li>
-          <li>Экспедиция — обязательное условие. Мы приезжаем к герою в его среду, а не приглашаем
-              в студию. Это метод включённого наблюдения.</li>
-          <li>Мы фиксируем не только сам материал, но и метод работы с героем. Метод становится
-              основой для обучения, поэтому проект тиражируем и не зависит от одной команды.</li>
-        </ul>
-
-        <div class="paper paper--right">
-          <span class="paper__label">Результат первого этапа</span>
-          <p>Методика в виде гайда, чек-листов и банка вопросов. Семь цифровых выпусков,
-             пилотный зин, медиаархив с открытой и внутренней частями и этот сайт-платформа.</p>
+      <div class="method">
+        <div class="method__item">
+          <span class="method__num">01</span>
+          <h3 class="method__title">Алгоритм, а&nbsp;не&nbsp;шоу</h3>
+          <p class="method__text">Мы не&nbsp;создаём ещё одно успешное шоу, а&nbsp;разрабатываем алгоритм: гайд, чек-листы
+            и&nbsp;банк вопросов. По&nbsp;нему качественное интервью может провести
+            человек без журналистского образования.</p>
         </div>
+        <div class="method__item">
+          <span class="method__num">02</span>
+          <h3 class="method__title">Метод, а&nbsp;не&nbsp;личность</h3>
+          <p class="method__text">В&nbsp;центре внимания герой и&nbsp;его история,
+            а&nbsp;не&nbsp;автор и&nbsp;его интерпретации услышанного.</p>
+        </div>
+        <div class="method__item">
+          <span class="method__num">03</span>
+          <h3 class="method__title">Экспедиция обязательна</h3>
+          <p class="method__text">Мы приезжаем к&nbsp;герою в&nbsp;его среду, а&nbsp;не&nbsp;приглашаем
+            в&nbsp;студию. Это метод включённого наблюдения.</p>
+        </div>
+        <div class="method__item">
+          <span class="method__num">04</span>
+          <h3 class="method__title">Метод можно передать</h3>
+          <p class="method__text">Мы фиксируем не&nbsp;только материал, но&nbsp;и&nbsp;метод работы с&nbsp;героем. Он&nbsp;становится
+            основой для обучения, поэтому проект тиражируем и&nbsp;не&nbsp;зависит от&nbsp;одной команды.</p>
+        </div>
+      </div>
+
+      <div class="paper method__result">
+        <span class="paper__label">Результат первого этапа</span>
+        <p>Методика в&nbsp;виде гайда, чек-листов и&nbsp;банка вопросов. Семь цифровых выпусков,
+           пилотный зин, медиаархив с&nbsp;открытой и&nbsp;внутренней частями и&nbsp;этот сайт-платформа.</p>
       </div>
     </div>
   </section>
