@@ -114,6 +114,163 @@
   .hero .paper { display: none; }
 }
 
+/* ── Первый экран главной (.hero--home) ──────────────────────
+   Логотип «ДРУГ» крупно, фото в рамке, карточка выпуска.
+   Всё под .hero--home: обычный .hero выше остаётся для путевых
+   заметок и статей. */
+.hero.hero--home {
+  /* сброс раскладки старого .hero (он остаётся для заметок и статей) */
+  display: block;
+  min-height: 0;
+  overflow: visible;
+  /* тонкое поле вокруг кадра */
+  --hero-m: clamp(.5rem, 1vw, .875rem);
+  padding: var(--header-h) var(--hero-m) var(--hero-m);
+}
+
+/* Кадр в рамке: ширина контейнера, высота — окно минус шапка */
+.hero--home .hero__frame {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gap);
+  align-items: end;
+  min-height: calc(100svh - var(--header-h) - var(--hero-m));
+  /* текст внутри стоит на той же линии, что логотип в шапке и секции ниже */
+  padding-block: clamp(1.5rem, 5vh, 3.5rem);
+  padding-inline: calc(max(var(--gutter), (100vw - var(--container)) / 2 + var(--gutter)) - var(--hero-m));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero--home .hero__media { position: absolute; inset: 0; z-index: -1; }
+.hero--home .hero__media picture { display: block; width: 100%; height: 100%; }
+.hero--home .hero__media img { width: 100%; height: 100%; object-fit: cover; }
+.hero--home .hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(22, 22, 22, .78) 0%, rgba(22, 22, 22, .45) 45%, rgba(22, 22, 22, 0) 75%),
+    linear-gradient(0deg, rgba(22, 22, 22, .7) 0%, rgba(22, 22, 22, 0) 50%);
+}
+
+.hero--home .hero__content {
+  grid-column: 1 / span 7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1rem, 2.4vh, 1.5rem);
+  animation: hero-rise-home .9s var(--ease) both;
+}
+@keyframes hero-rise-home {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Название — главный акцент: фирменный логотип, перекрашенный в цвет бумаги */
+.hero--home .hero__heading { display: flex; flex-direction: column; gap: clamp(1.25rem, 3vh, 2rem); margin: 0; }
+.hero--home .hero__mark {
+  /* в PNG вокруг букв есть поля — сдвигаем, чтобы буквы встали по левому краю текста */
+  --mark-w: clamp(14rem, min(36vw, 52vh), 30rem);
+  display: block;
+  width: var(--mark-w);
+  margin: calc(var(--mark-w) * -.097) 0 calc(var(--mark-w) * -.103) calc(var(--mark-w) * -.061);
+  aspect-ratio: 544 / 218;
+  background: var(--paper);
+  -webkit-mask: url("../assets/img/logo.png") left center / contain no-repeat;
+          mask: url("../assets/img/logo.png") left center / contain no-repeat;
+}
+.hero--home .hero__title {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, min(2.4vw, 3.8vh), 2.2rem);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.hero--home .hero__lead {
+  max-width: 44ch;
+  font-size: clamp(.95rem, min(1.2vw, 2vh), 1.1rem);
+  line-height: 1.55;
+  color: var(--text);
+  opacity: .82;
+}
+.hero--home .hero__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  flex-wrap: wrap;
+  margin-top: var(--s-1);
+}
+.hero--home .hero__link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5em;
+  padding-block: .35rem;
+  font-size: var(--fs-body);
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 237, 227, .35);
+  transition: border-color var(--dur-s) var(--ease);
+}
+.hero--home .hero__link span { transition: transform var(--dur-s) var(--ease), color var(--dur-s) var(--ease); }
+.hero--home .hero__link:hover { border-color: var(--accent); }
+.hero--home .hero__link:hover span { transform: translateX(3px); color: var(--accent); }
+
+/* Стеклянная карточка свежего выпуска */
+.hero--home .hero__card {
+  grid-column: 9 / -1;
+  justify-self: end;
+  width: 100%;
+  max-width: 24rem;
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  gap: var(--s-3);
+  align-items: center;
+  padding: .75rem 1.1rem .75rem .75rem;
+  border-radius: var(--radius);
+  background: rgba(30, 30, 30, .42);
+  border: 1px solid rgba(245, 237, 227, .16);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+          backdrop-filter: blur(16px) saturate(1.2);
+  color: var(--text);
+  text-decoration: none;
+  animation: hero-rise-home .9s var(--ease) .25s both;
+  transition: background var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease);
+}
+.hero--home .hero__card:hover { background: rgba(30, 30, 30, .6); border-color: var(--accent-line); }
+.hero--home .hero__card-img { display: block; aspect-ratio: 1; border-radius: var(--radius-sm); overflow: hidden; }
+.hero--home .hero__card-img img { width: 100%; height: 100%; object-fit: cover; }
+.hero--home .hero__card-body { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.hero--home .hero__card-label { font-size: var(--fs-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--accent); }
+.hero--home .hero__card-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; }
+.hero--home .hero__card-text { font-size: var(--fs-sm); color: var(--text-dim); }
+.hero--home .hero__card-arrow { font-size: 1.1rem; transition: transform var(--dur-s) var(--ease); }
+.hero--home .hero__card:hover .hero__card-arrow { transform: translateX(3px); color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--home .hero__content, .hero--home .hero__card { animation: none; }
+}
+@media (max-width: 1100px) {
+  .hero--home .hero__content { grid-column: 1 / span 9; }
+  .hero--home .hero__card { grid-column: 1 / -1; justify-self: start; margin-top: var(--s-5); }
+}
+@media (max-width: 760px) {
+  .hero--home .hero__frame { padding-block: 1.5rem; }
+  .hero--home .hero__content { grid-column: 1 / -1; }
+  .hero--home .hero__media::after {
+    background: linear-gradient(180deg, rgba(22, 22, 22, .35) 0%, rgba(22, 22, 22, .55) 45%, rgba(22, 22, 22, .85) 100%);
+  }
+}
+
+
+@media (max-width: 640px) {
+  .hero.hero--home { padding: var(--header-h) var(--hero-m) var(--hero-m); }
+  .hero--home .hero__frame { min-height: auto; padding-top: 5rem; }
+}
+
 /* Компактный первый экран внутренних страниц.
    Отступ сверху = высота фиксированной шапки плюс полноценная отбивка:
    заголовок не должен читаться как продолжение меню. */

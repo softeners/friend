@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/pages.css?v=20261114g">
 
   <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
        не прячут блоки перед анимацией, и сайт читается даже без JS. -->
@@ -58,35 +58,47 @@
 <main id="main">
 
   <!-- ── Первый экран ── -->
-  <section class="hero hero--cinematic">
-    <div class="hero__media">
-      <picture>
-      <source type="image/webp" srcset="assets/img/photo/sunset-ridge-600.webp 600w, assets/img/photo/sunset-ridge-1200.webp 1200w, assets/img/photo/sunset-ridge-2000.webp 2000w" sizes="100vw">
-      <img src="assets/img/photo/sunset-ridge-1200.jpg" alt="Закат над хребтом в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
-    </picture>
-    </div>
+  <section class="hero hero--home">
+      <div class="hero__frame">
+        <div class="hero__media">
+          <picture>
+            <source type="image/webp" srcset="assets/img/photo/altay-38-600.webp 600w, assets/img/photo/altay-38-1200.webp 1200w, assets/img/photo/altay-38-2000.webp 2000w" sizes="(max-width: 1360px) 100vw, 1360px">
+            <img src="assets/img/photo/altay-38-1200.jpg" alt="Дорога вдоль реки в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
 
-    <div class="container hero__inner">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">культурно-медийный проект</span></span>
+        <div class="hero__content">
+          <h1 class="hero__heading">
+            <span class="hero__mark" role="img" aria-label="ДРУГ"></span>
+            <span class="hero__title">Медиа о&nbsp;людях, которые делают российские регионы особенными</span>
+          </h1>
 
-      <h1 class="hero__title">Медиа о&nbsp;людях, которые делают<br>российские регионы особенными</h1>
+          <p class="hero__lead">
+            Ездим в&nbsp;экспедиции по&nbsp;России, записываем интервью с&nbsp;местными
+            жителями и&nbsp;выпускаем их истории онлайн и&nbsp;в&nbsp;печатном зине.
+          </p>
 
-      <p class="hero__lead">
-        Мы отправляемся в&nbsp;экспедиции по&nbsp;России, записываем документальные интервью
-        с&nbsp;местными жителями и&nbsp;превращаем их истории в&nbsp;цифровые выпуски,
-        фотографии и&nbsp;печатные издания.
-      </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary btn--lg" href="issues.html">Читать выпуски</a>
+            <a class="hero__link" href="become-hero.html">Рассказать свою историю <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
 
-      <p class="hero__accent">
-        Главная идея проекта — показать Россию через людей, а&nbsp;не через список
-        достопримечательностей.
-      </p>
-
-      <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="issues.html">Читать выпуски</a>
-        <a class="btn btn--outline btn--lg" href="become-hero.html">Рассказать историю</a>
+        <a class="hero__card" href="issues.html">
+          <span class="hero__card-img">
+            <picture>
+              <source type="image/webp" srcset="assets/img/photo/altay-40-600.webp">
+              <img src="assets/img/photo/altay-40-1200.jpg" alt="" loading="eager" decoding="async">
+            </picture>
+          </span>
+          <span class="hero__card-body">
+            <span class="hero__card-label">Выпуск 01 · июнь 2026</span>
+            <span class="hero__card-title">Республика Алтай</span>
+            <span class="hero__card-text">Две недели вдоль Чуйского тракта</span>
+          </span>
+          <span class="hero__card-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
-    </div>
   </section>
 
   <!-- ── Как работает «Друг» ── -->
