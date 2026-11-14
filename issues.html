@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css?v=20261114j">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/components.css?v=20261114k">
+  <link rel="stylesheet" href="css/pages.css?v=20261114k">
 
   <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
        не прячут блоки перед анимацией, и сайт читается даже без JS. -->
@@ -56,19 +56,26 @@
 
 <main id="main">
 
-  <section class="section pagehead">
-    <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Журнал</span></span>
-      <h1 class="h1 pagehead__title">Цифровые выпуски</h1>
-      <p class="lead pagehead__lead">
-        Семь выпусков, по одному на регион. Такое количество выбрано не случайно: оно позволяет
-        доказать, что методика воспроизводима в разных культурных контекстах.
-      </p>
-      <p class="lead pagehead__lead">
-        История требует композиции, поэтому каждый выпуск собран как номер журнала,
-        который читают от начала до конца.
-      </p>
-    </div>
+  <!-- ── Первый экран: фото в рамке, заголовок слева, описание справа (как на «О проекте») ── -->
+  <section class="hero hero--home hero--page">
+      <div class="hero__frame">
+        <div class="hero__media">
+          <picture>
+            <source type="image/webp" srcset="assets/img/photo/sunset-ridge-600.webp 600w, assets/img/photo/sunset-ridge-1200.webp 1200w, assets/img/photo/sunset-ridge-2000.webp 2000w" sizes="100vw">
+            <img src="assets/img/photo/sunset-ridge-1200.jpg" alt="Закат над хребтом в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </div>
+
+        <div class="hero__content">
+          <span class="eyebrow hero__eyebrow">ДРУГ <span class="eyebrow__rest">Журнал</span></span>
+          <h1 class="hero__title">Цифровые выпуски</h1>
+        </div>
+
+        <div class="hero__aside">
+          <p class="hero__lead">Семь выпусков, по&nbsp;одному на&nbsp;регион. Такое количество выбрано не&nbsp;случайно: оно позволяет доказать, что методика воспроизводима в&nbsp;разных культурных контекстах.</p>
+          <p class="hero__lead">История требует композиции, поэтому каждый выпуск собран как номер журнала, который читают от&nbsp;начала до&nbsp;конца.</p>
+        </div>
+      </div>
   </section>
 
   <section class="section section--flush">

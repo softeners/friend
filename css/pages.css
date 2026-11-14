@@ -295,6 +295,10 @@
   animation: hero-rise-home .9s var(--ease) .2s both;
 }
 .hero--page .hero__aside .hero__lead { max-width: 36ch; }
+.hero--page .hero__aside .hero__lead + .hero__lead { margin-top: calc(var(--s-1) * -1); }
+/* секция «вплотную» под первым экраном (раньше стояла под текстовой шапкой)
+   получает обычный отступ, чтобы не прилипать к рамке с фото */
+.hero--page + .section--flush { padding-top: var(--s-7); }
 @media (prefers-reduced-motion: reduce) { .hero--page .hero__aside { animation: none; } }
 @media (max-width: 1100px) {
   .hero--page .hero__content { grid-column: 1 / -1; }
