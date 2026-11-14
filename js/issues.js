@@ -49,7 +49,7 @@ function zineCard(z) {
       <div class="zine-card__foot">
         ${z.available
           ? `<span class="zine-card__price">${z.price.toLocaleString('ru-RU')} ₽</span>
-             <a class="btn btn--primary" href="${ROOT}zines.html?zine=${z.slug}#order">Заказать</a>`
+             <a class="btn btn--primary" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener" aria-label="Заказать «${esc(z.title)}» у менеджера в Telegram">Заказать</a>`
           : `<span class="tag tag--planned">выйдет при софинансировании</span>
              <a class="btn btn--ghost" href="${ROOT}partners.html">Условия партнёрства</a>`}
       </div>
