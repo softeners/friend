@@ -304,9 +304,22 @@
   .hero--page .hero__aside { grid-column: 1 / -1; }
 }
 
-/* ── Записка «Важно» под карточками «Героям» ────────────────── */
-.support__note { margin: var(--s-6) 0 0 auto; max-width: 46ch; }
-@media (max-width: 860px) { .support__note { margin-left: 0; } }
+/* ── «Героям»: заголовок слева, записка «Важно» справа ──────────
+   Записка стоит в шапке секции на уровне описания, а не висит в углу
+   под карточками: шапка уравновешена, сетка карточек ниже — цельная. */
+.support__top {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--gap-lg);
+  align-items: end;
+  margin-bottom: var(--s-6);
+}
+.support__top .section__intro { margin-bottom: 0; }
+.support__note { justify-self: end; max-width: 40ch; }
+@media (max-width: 860px) {
+  .support__top { grid-template-columns: 1fr; }
+  .support__note { justify-self: start; }
+}
 
 /* ── «В чём новизна»: четыре принципа метода в ряд ─────────────
    Отличается от «Зачем всё это» (текст + записка сбоку): номера и
@@ -591,7 +604,9 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--gap-lg);
-  align-items: center;
+  /* текст тянется на высоту фото: подпись — по его верхнему краю,
+     кнопка — по нижнему, одинаково в обеих карточках */
+  align-items: stretch;
 }
 .invite + .invite { margin-top: var(--s-8); }
 .invite--flip .invite__media { order: 2; }
@@ -616,7 +631,7 @@
   border-left: 2px solid var(--accent);
   padding-left: 1rem;
 }
-.invite__body .btn { margin-top: var(--s-2); }
+.invite__body .btn { margin-top: auto; }
 
 /* ── Путь участника: настоящая последовательность шагов ────── */
 .steps {
@@ -958,22 +973,15 @@
 .eco { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); position: relative; }
 .eco__step { position: relative; }
 .eco__step:not(:last-child)::after {
-  /* стрелка в кружке ровно посередине промежутка между карточками */
+  /* стрелка ровно посередине промежутка между карточками */
   content: '→';
   position: absolute;
   z-index: 2;
   top: 50%;
   right: calc(var(--gap) / -2);
   transform: translate(50%, -50%);
-  width: 2rem;
-  height: 2rem;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--bg-deep);
-  border: 1px solid var(--accent-line);
   color: var(--accent);
-  font-size: .95rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 .eco__now {
@@ -1151,7 +1159,7 @@
   /* карточки в столбик: стрелка вниз посередине промежутка */
   .eco__step:not(:last-child)::after {
     content: '↓';
-    display: grid;
+    display: block;
     top: auto;
     right: auto;
     left: 50%;
