@@ -59,7 +59,7 @@ def head(title, desc, root='', og_img=OG, og_type='website'):
 '''
 
 
-NAV = [('archive.html', 'Истории'), ('participate.html', 'Участвовать'), ('about.html', 'О проекте')]
+NAV = [('archive.html', 'Истории'), ('zines/sysert/', 'Журнал'), ('participate.html', 'Участвовать'), ('about.html', 'О проекте')]
 
 
 def header(root='', active=''):
@@ -89,13 +89,15 @@ def header(root='', active=''):
 
 
 def partners_strip(root=''):
+    P = f'{root}assets/img/partners/'
     return f'''<div class="partners" data-partners>
-        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
-        <span class="partners__item">Сысертский завод-музей</span>
-        <span class="partners__item">«Кот Шредингера»</span>
-        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener"><img src="{P}fond-potanina.png" alt="Благотворительный фонд Владимира Потанина" width="344" height="96" loading="lazy"></a>
+        <span class="partners__item partners__item--tall"><img src="{P}sysert-museum.png" alt="Сысертский завод-музей" width="240" height="240" loading="lazy"></span>
+        <span class="partners__item"><img src="{P}kot-shredingera.png" alt="«Кот Шредингера», научно-популярный журнал" width="365" height="176" loading="lazy"></span>
+        <span class="partners__item partners__item--wide"><img src="{P}goskomitet-rb.png" alt="Государственный комитет Республики Башкортостан по молодежной политике. ГБУ Республиканский молодежный психологический центр" width="662" height="43" loading="lazy"></span>
         <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>'''
+
 
 
 def footer(root=''):
@@ -115,6 +117,7 @@ def footer(root=''):
       <div class="footer__col">
         <span class="footer__head">Разделы</span>
         {L('archive.html', 'Истории')}
+        {L('zines/sysert/', 'Журнал')}
         {L('participate.html', 'Участвовать')}
         {L('about.html', 'О проекте')}
       </div>
@@ -813,7 +816,7 @@ def about():
       {section_head('Нас поддерживают')}
       <div class="section__intro">
         <h2 class="h2">Нас поддерживают</h2>
-        <p class="lead">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина. Ниже логотипы партнеров.</p>
+        <p class="lead">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина. </p>
       </div>
       {partners_strip()}
     </div>
@@ -1017,7 +1020,7 @@ def journal():
 '''
     return page('Журнал «Друг», выпуск 01: Сысерть в историях ее жителей',
                 'Листайте журнал онлайн. Фарфоровый и электротехнический заводы Сысерти в рассказах людей, '
-                'которые там работали. Город, каким его помнят местные.', body, root=R, og_type='article')
+                'которые там работали. Город, каким его помнят местные.', body, root=R, active='zines/sysert/', og_type='article')
 
 
 def redirect(to, title):
