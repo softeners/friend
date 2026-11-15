@@ -1,4 +1,7 @@
+<!doctype html>
+<html lang="ru">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Друг · Сысерть</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,6 +121,17 @@ scene.add(sun);
 const ground=new THREE.Mesh(new THREE.PlaneGeometry(4000,4000),new THREE.ShadowMaterial({opacity:.22}));
 ground.position.z=-3; ground.receiveShadow=true; scene.add(ground);
 const maxAniso=renderer.capabilities.getMaxAnisotropy();
+// Телефон: память на холсты и текстуры у Safari на iPhone в разы меньше, чем на компьютере.
+// Страница 2400px = 16 МБ холста и столько же в видеопамяти; 40 таких страниц не влезают,
+// книжка падала на «Раскладываем страницы…». На телефоне берём 1280px — на его экране
+// разворот всё равно меньше, — а холст каждой страницы освобождаем сразу после загрузки в GPU.
+const MOBILE=matchMedia('(pointer: coarse)').matches||Math.min(screen.width,screen.height)<820;
+const TEX_W=Math.min(renderer.capabilities.maxTextureSize, MOBILE?1280:2400);
+function toGPU(t){
+  if(!renderer.initTexture) return;          // старый three.js: холст нужен до первого кадра
+  renderer.initTexture(t);                     // текстура (с mipmap) уже в видеопамяти
+  const c=t.image; if(c&&c.width>1){c.width=1;c.height=1;}  // холст в обычной памяти больше не нужен
+}
 
 // ---------- helpers
 function rng(seed){return()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
@@ -241,11 +255,12 @@ const book=new THREE.Group();scene.add(book);
 const n=LEAVES.length;
 for(const [i,L] of LEAVES.entries()){
   const fImg=await getImg(L.front);
-  const cw=fImg.naturalWidth, ch=Math.round(cw*L.h/L.w);
+  const cw=Math.min(fImg.naturalWidth,TEX_W), ch=Math.round(cw*L.h/L.w);
   const bSrc=L.back.startsWith('@')?endpaper(cw,ch,L.back):await getImg(L.back);
   const seed=101+i*131;
-  L.texF=makeTex(fImg,cw,ch,L,false,seed);
-  L.texB=makeTex(bSrc,cw,ch,L,!L.rigid,seed);
+  L.texF=makeTex(fImg,cw,ch,L,false,seed); toGPU(L.texF);
+  L.texB=makeTex(bSrc,cw,ch,L,!L.rigid,seed); toGPU(L.texB);
+  IMG.delete(L.front); IMG.delete(L.back);   // исходные картинки больше не держим
   if(L.rigid){
     const T=BOARD, g=new THREE.BoxGeometry(L.w,L.h,T); g.translate(L.w/2,0,i===0?T/2:-T/2);
     const side=new THREE.MeshLambertMaterial({color:0x6E2A1A});
