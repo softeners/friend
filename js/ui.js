@@ -201,8 +201,36 @@ export function initYear() {
   });
 }
 
+/** Плашка cookies: показываем, пока человек не нажал «Хорошо». */
+export function initCookies() {
+  const bar = document.querySelector('[data-cookies]');
+  if (!bar) return;
+  let seen = false;
+  try { seen = localStorage.getItem('drug.cookies') === 'ok'; } catch {}
+  if (seen) return;
+  bar.hidden = false;
+  bar.querySelector('[data-cookies-ok]')?.addEventListener('click', () => {
+    try { localStorage.setItem('drug.cookies', 'ok'); } catch {}
+    bar.hidden = true;
+  });
+}
+
+/** Кнопка «Скопировать ссылку». */
+export function initCopyLink() {
+  document.querySelectorAll('[data-copy-link]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const label = btn.textContent;
+      try { await navigator.clipboard.writeText(location.href.split('#')[0]); btn.textContent = 'Ссылка скопирована'; }
+      catch { btn.textContent = location.href; }
+      setTimeout(() => { btn.textContent = label; }, 2500);
+    });
+  });
+}
+
 export function initCommon() {
   initHeader();
   initReveal();
   initYear();
+  initCookies();
+  initCopyLink();
 }

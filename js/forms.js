@@ -181,11 +181,41 @@ function initGuardian(form) {
   sync();
 }
 
+/* ── Форма героя: «о себе» или «советую другого» ─────────────
+   Блок, который сейчас не выбран, прячем и выключаем: такие поля
+   не проверяются и не уходят в заявке.                          */
+function initModeSwitch(form) {
+  const radios = form.querySelectorAll('[data-mode-switch]');
+  if (!radios.length) return;
+  const sync = () => {
+    const mode = form.querySelector('[data-mode-switch]:checked')?.value || 'self';
+    form.querySelectorAll('[data-mode]').forEach(block => {
+      const on = block.dataset.mode === mode;
+      block.hidden = !on;
+      block.querySelectorAll('input, textarea, select').forEach(el => {
+        el.disabled = !on;
+        if (!on) { el.removeAttribute('aria-invalid'); showError(el, ''); }
+      });
+    });
+  };
+  if (new URLSearchParams(location.search).get('mode') === 'other') {
+    const other = form.querySelector('[data-mode-switch][value="other"]');
+    if (other) other.checked = true;
+  }
+  radios.forEach(r => r.addEventListener('change', sync));
+  sync();
+}
+
 /** Заявка героя → js/store.js (демо: localStorage, позже — Directus). */
 async function saveHeroRequest(form, getFiles) {
-  const data = Object.fromEntries([...new FormData(form).entries()]
+  const raw = Object.fromEntries([...new FormData(form).entries()]
     .filter(([k, v]) => k !== 'photos' && k !== 'consent' && !(v instanceof File))
     .map(([k, v]) => [k, String(v).trim()]));
+  // В админке у заявки поля name, place, work, why, phone — приводим к ним
+  const data = raw.mode === 'other'
+    ? { name: raw.o_name, phone: raw.o_contact, place: raw.o_hero, work: raw.o_why,
+        why: `Советует другого человека. Герой знает: ${raw.o_knows || 'не указано'}` }
+    : { name: raw.name, place: raw.place, work: raw.work, phone: raw.contact, why: 'Рассказывает о себе' };
   const photos = (await Promise.all((getFiles ? getFiles() : []).map(f => compressImage(f)))).filter(Boolean);
   await addRequest({ ...data, photos, createdAt: new Date().toISOString() });
 }
@@ -217,6 +247,7 @@ export function initForms() {
     initRegionSelect(form);
     initCounters(form);
     initGuardian(form);
+    initModeSwitch(form);
 
     const btn = form.querySelector('[data-submit]');
     const status = form.querySelector('[data-status]');
@@ -268,7 +299,7 @@ export function initForms() {
         status.textContent = err.code === 'quota'
           ? 'Фотографии слишком тяжёлые для демо-версии. Уберите одно-два фото или пришлите ссылку на облако.'
           : 'Заявка не ушла, похоже, пропала связь. Попробуйте ещё раз через минуту. '
-          + 'Если не получится, напишите нам на почту sycheva.alina.2000@bk.ru';
+          + 'Если не получится, напишите нам на почту tvoi.friend.media@yandex.ru';
         console.error(err);
       }
     });

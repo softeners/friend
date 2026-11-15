@@ -20,7 +20,7 @@
    либо путь от корня сайта, например 'zines/sysert/pages/cover.webp'.
    ═══════════════════════════════════════════════════════════ */
 
-const KEY = 'drug.demo.v1';
+const KEY = 'drug.demo.v2';
 
 /* ── Демо-данные ───────────────────────────────────────────── */
 function daysAgo(n, h = 12) {
@@ -85,8 +85,8 @@ function demoData() {
         cover: 'zines/sysert/pages/cover.webp',
         lead: 'Фарфоровый и железоделательный: как два завода собрали город вокруг себя '
           + 'и что от них осталось. Прогулка по Сысерти с местными.',
-        region: 'sverdlovsk',
-        type: 'territory',
+        region: 'sysert',
+        type: 'text',
         formats: ['photo'],
         date: '2026-05-15',
         blocks: [

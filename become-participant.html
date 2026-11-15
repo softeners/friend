@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Заявка в экспедицию — ДРУГ</title>
-  <meta name="description" content="Анкета участника экспедиции проекта «Друг» для молодых авторов из семи регионов маршрута.">
+  <title>Станьте соавтором «Друга»: запишите историю жителя своего города</title>
+  <meta name="description" content="Истории обычных людей тоже наследие города. Запишите человека, который живет рядом с вами, а мы поможем с вопросами, съемкой и редактурой. Материал выйдет с вашим именем.">
   <meta name="theme-color" content="#2C2C2C">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Заявка в экспедицию — ДРУГ">
-  <meta property="og:description" content="Анкета участника экспедиции проекта «Друг» для молодых авторов из семи регионов маршрута.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:site_name" content="«Друг»">
+  <meta property="og:title" content="Станьте соавтором «Друга»: запишите историю жителя своего города">
+  <meta property="og:description" content="Истории обычных людей тоже наследие города. Запишите человека, который живет рядом с вами, а мы поможем с вопросами, съемкой и редактурой. Материал выйдет с вашим именем.">
+  <meta property="og:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,11 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
-
-  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
-       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <link rel="stylesheet" href="css/components.css?v=20261115v2">
+  <link rel="stylesheet" href="css/pages.css?v=20261115v2">
+  <link rel="stylesheet" href="css/v2.css?v=20261115v2">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,21 +35,18 @@
 
 <header class="header">
   <div class="container header__inner">
-    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
-      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    <a href="index.html" class="logo" aria-label="«Друг» — на главную">
+      <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="archive.html" class="nav__link">Истории</a>
+        <a href="participate.html" class="nav__link" aria-current="page">Участвовать</a>
         <a href="about.html" class="nav__link">О проекте</a>
-        <a href="issues.html" class="nav__link">Выпуски</a>
-        <a href="archive.html" class="nav__link">Архив</a>
-        <a href="zines.html" class="nav__link">Зины</a>
-        <a href="partners.html" class="nav__link">Сотрудничество</a>
-        <a href="faq.html" class="nav__link">Вопросы</a>
-        <a href="contacts.html" class="nav__link">Контакты</a>
+        <a href="become-hero.html" class="nav__link nav__link--cta">Рассказать о человеке</a>
     </nav>
 
-    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать о человеке</a>
 
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -58,12 +58,10 @@
 
   <section class="section pagehead">
     <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Заявка в экспедицию</span></span>
-      <h1 class="h1 pagehead__title">Расскажите о себе</h1>
-      <p class="lead pagehead__lead">
-        Мы смотрим не на готовые работы, а на то, как вы думаете и как разговариваете с людьми.
-        Три развёрнутых вопроса в конце анкеты важнее всего остального.
-      </p>
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Соавторам</span></span>
+      <h1 class="h1 pagehead__title">Запишите человека из своего города</h1>
+      <p class="lead pagehead__lead">Вы встречаетесь с героем у себя в городе. Мы даем вопросы, памятку по съемке и редактируем материал вместе с вами.</p>
+      
     </div>
   </section>
 
@@ -71,200 +69,140 @@
     <div class="container">
       <div class="grid grid--sidebar">
         <div>
-          <form class="form" data-form="participant" data-subject="Заявка в экспедицию с сайта «ДРУГ»" novalidate>
-
+          <form class="form" data-form="participant" data-subject="Заявка соавтора с сайта «Друг»" novalidate>
             <div class="form__section form__section--first">
-              <p class="form__legend">Кто вы</p>
               <div class="form__grid">
-                <div class="field">
-      <label class="field__label" for="name">Фамилия, имя и отчество <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="name" name="name" data-label="это поле" required placeholder="Полностью" aria-describedby="name-err">
+<div class="field">
+      <label class="field__label" for="name">Фамилия и имя <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="name" name="name" data-label="это поле" required aria-describedby="name-err">
       <p class="field__error" id="name-err" role="alert"></p>
     </div>
-                <div class="form__row">
-                  <div class="field">
-      <label class="field__label" for="email">Почта <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="email" id="email" name="email" data-label="это поле" required placeholder="you@example.ru" aria-describedby="email-err">
-      <p class="field__error" id="email-err" role="alert"></p>
-    </div>
-                  <div class="field">
-      <label class="field__label" for="social">Ссылка на соцсети <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="url" id="social" name="social" data-label="это поле" required placeholder="vk.com/… или t.me/…" aria-describedby="social-note social-err">
-      <p class="field__note" id="social-note">Подойдёт любая страница, по которой можно составить о вас представление.</p>
-      <p class="field__error" id="social-err" role="alert"></p>
-    </div>
-                </div>
-                <div class="field">
-      <label class="field__label" for="age">Сколько вам лет <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="number" id="age" name="age" data-label="это поле" required placeholder="18" aria-describedby="age-note age-err" min="14" max="35" data-age>
-      <p class="field__note" id="age-note">Если вам ещё нет восемнадцати, ниже появится блок для согласия законного представителя.</p>
+<div class="form__row">
+<div class="field">
+      <label class="field__label" for="age">Возраст <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="number" id="age" name="age" data-label="это поле" required aria-describedby="age-err" min="12" max="99" data-age>
       <p class="field__error" id="age-err" role="alert"></p>
     </div>
-              </div>
-            </div>
-
-            <div class="form__section">
-              <p class="form__legend">Где вы учитесь</p>
-              <div class="form__grid">
-                <div class="field">
-      <label class="field__label" for="status">Статус участника <span class="field__req" aria-hidden="true">*</span></label>
-      <select class="select" id="status" name="status" data-label="это поле" required aria-describedby="status-err">
-        <option value="Школьник или школьница">Школьник или школьница</option>
-        <option value="Обучаюсь в профессиональном учреждении">Обучаюсь в профессиональном учреждении</option>
-        <option value="Обучаюсь в высшем учебном заведении">Обучаюсь в высшем учебном заведении</option>
-        <option value="Аспирантура">Аспирантура</option>
-        <option value="Завершил обучение в этом году">Завершил обучение в этом году</option>
-      </select>
-      <p class="field__error" id="status-err" role="alert"></p>
+<div class="field">
+      <label class="field__label" for="city">Город <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="city" name="city" data-label="это поле" required aria-describedby="city-err">
+      <p class="field__error" id="city-err" role="alert"></p>
     </div>
-                <div class="field">
-      <label class="field__label" for="school">Учебное заведение <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="school" name="school" data-label="это поле" required placeholder="Полное название" aria-describedby="school-note school-err">
-      <p class="field__note" id="school-note">Школа, колледж, техникум или вуз.</p>
-      <p class="field__error" id="school-err" role="alert"></p>
+</div>
+<div class="field">
+      <label class="field__label" for="who">Кто вы <span class="field__req" aria-hidden="true">*</span></label>
+      <select class="select" id="who" name="who" data-label="это поле" required aria-describedby="who-err"><option value="" disabled selected>Выберите</option><option>студент бакалавриата</option><option>студент магистратуры</option><option>журналист</option><option>фотограф или видеограф</option><option>житель или активист</option><option>другое</option></select>
+      <p class="field__error" id="who-err" role="alert"></p>
     </div>
-                <div class="field">
-      <label class="field__label" for="speciality">Наименование специальности <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="speciality" name="speciality" data-label="это поле" required placeholder="Например, прикладная информатика" aria-describedby="speciality-err">
-      <p class="field__error" id="speciality-err" role="alert"></p>
-    </div>
-              </div>
-            </div>
-
-            <div class="form__section">
-              <p class="form__legend">Регион проживания</p>
-              <p class="form__hint">
-                В экспедицию по региону едут те, кто в этом регионе живёт. Так работает наш метод:
-                своих героев участники находят через личные связи.
-              </p>
-              <div class="form__grid">
-                <div class="field">
-                  <label class="field__label" for="region">Регион проживания <span class="field__req" aria-hidden="true">*</span></label>
-                  <select class="select" id="region" name="region" required data-label="регион"
-                          data-region-select aria-describedby="region-note region-err"></select>
-                  <p class="field__note" id="region-note">
-                    Если вы живёте в другом регионе, выберите «Другой регион» и всё равно отправьте
-                    заявку. География проекта будет расширяться.
-                  </p>
-                  <p class="field__error" id="region-err" role="alert"></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="form__section">
-              <p class="form__legend">Три вопроса</p>
-              <p class="form__hint">
-                Отвечайте своими словами. Нам важно понять, как вы думаете, поэтому текст,
-                написанный нейросетью, здесь не поможет.
-              </p>
-              <div class="form__grid">
-                <div class="field">
-      <label class="field__label" for="why">Почему вы хотите участвовать в экспедиции <span class="field__req" aria-hidden="true">*</span></label>
-      <textarea class="textarea" id="why" name="why" rows="8" data-label="это поле" required minlength="100" maxlength="3000" aria-describedby="why-err"></textarea>
-      <p class="field__count" data-count-for="why" aria-hidden="true">0 / 3000</p>
-      <p class="field__error" id="why-err" role="alert"></p>
-    </div>
-                <div class="field">
-      <label class="field__label" for="experience">Был ли у вас опыт видеосъёмок, фотосъёмок, сбора интервью <span class="field__req" aria-hidden="true">*</span></label>
-      <textarea class="textarea" id="experience" name="experience" rows="5" data-label="это поле" required minlength="20" maxlength="1000" aria-describedby="experience-note experience-err"></textarea>
-      <p class="field__note" id="experience-note">Опыт не обязателен. Если его нет, так и напишите.</p>
-      <p class="field__count" data-count-for="experience" aria-hidden="true">0 / 1000</p>
-      <p class="field__error" id="experience-err" role="alert"></p>
-    </div>
-                <div class="field">
-      <label class="field__label" for="heroes">Каких героев своего региона вы видите в этом выпуске <span class="field__req" aria-hidden="true">*</span></label>
-      <textarea class="textarea" id="heroes" name="heroes" rows="5" data-label="это поле" required minlength="40" maxlength="1000" aria-describedby="heroes-note heroes-err"></textarea>
-      <p class="field__note" id="heroes-note">Можно назвать конкретных людей или описать тип истории, который вам интересен.</p>
-      <p class="field__count" data-count-for="heroes" aria-hidden="true">0 / 1000</p>
-      <p class="field__error" id="heroes-err" role="alert"></p>
+<div class="field">
+      <label class="field__label" for="study">Где учитесь или работаете <span class="field__opt">(необязательно)</span></label>
+      <input class="input" type="text" id="study" name="study" data-label="это поле" aria-describedby="study-err">
+      <p class="field__error" id="study-err" role="alert"></p>
     </div>
               </div>
             </div>
 
             <div class="form__section">
               <div class="guardian">
-                <p class="form__legend">Согласие законного представителя</p>
-                <p class="form__hint">
-                  Вам ещё нет восемнадцати лет, поэтому заявку должен подтвердить родитель
-                  или опекун. Это значит, что взрослый знает о заявке, согласен на обработку
-                  ваших персональных данных и на участие в поездке. Перед экспедицией
-                  мы свяжемся с ним отдельно.
-                </p>
+                <p class="form__legend">Вам еще нет 18?</p>
+                <p class="form__hint">Тогда нужно согласие родителя или опекуна. Укажите его имя и как с ним связаться. Мы поговорим с ним до начала работы.</p>
                 <div class="form__grid">
-                  <div class="field">
-      <label class="field__label" for="guardian_name">ФИО родителя или опекуна <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="guardian_name" name="guardian_name" data-label="это поле" required placeholder="Полностью" aria-describedby="guardian_name-err">
+<div class="field">
+      <label class="field__label" for="guardian_name">Имя родителя или опекуна <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="guardian_name" name="guardian_name" data-label="это поле" required aria-describedby="guardian_name-err">
       <p class="field__error" id="guardian_name-err" role="alert"></p>
     </div>
-                  <div class="field">
-      <label class="field__label" for="guardian_contact">Его телефон или почта <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="guardian_contact" name="guardian_contact" data-label="это поле" required placeholder="+7 900 000-00-00" aria-describedby="guardian_contact-err">
+<div class="field">
+      <label class="field__label" for="guardian_contact">Как с ним связаться <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="guardian_contact" name="guardian_contact" data-label="это поле" required aria-describedby="guardian_contact-err">
       <p class="field__error" id="guardian_contact-err" role="alert"></p>
     </div>
-                  <div class="field">
-                    <label class="check">
-                      <input type="checkbox" name="guardian_consent" id="guardian_consent" required
-                             data-error-required="Без согласия законного представителя заявку от несовершеннолетнего принять нельзя"
-                             aria-describedby="guardian_consent-err">
-                      <span>Родитель или опекун знает о заявке и даёт согласие на обработку
-                            персональных данных несовершеннолетнего и на его участие в проекте.</span>
-                    </label>
-                    <p class="field__error" id="guardian_consent-err" role="alert"></p>
-                  </div>
                 </div>
               </div>
             </div>
 
             <div class="form__section">
-              <div class="field">
-                <label class="check">
-                  <input type="checkbox" name="consent" id="consent" required
-                         data-error-required="Без этого согласия мы не сможем принять заявку"
-                         aria-describedby="consent-err">
-                  <span>Согласен на обработку персональных данных. Мы используем их только для связи по вашей заявке, никому не передаём и удаляем по первой просьбе. Подробности в <a href="privacy.html" target="_blank" rel="noopener">политике обработки персональных данных</a>.</span>
-                </label>
-                <p class="field__error" id="consent-err" role="alert"></p>
+              <div class="form__grid">
+<div class="field">
+      <label class="field__label" for="why">Кого хотите записать и почему <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="why" name="why" rows="7" data-label="это поле" required maxlength="1500" aria-describedby="why-err"></textarea>
+      <p class="field__count" data-count-for="why" aria-hidden="true">0 / 1500</p>
+      <p class="field__error" id="why-err" role="alert"></p>
+    </div>
+<div class="field">
+      <label class="field__label" for="links">Ссылка на работы или соцсети <span class="field__opt">(необязательно)</span></label>
+      <input class="input" type="text" id="links" name="links" data-label="это поле" aria-describedby="links-err">
+      <p class="field__error" id="links-err" role="alert"></p>
+    </div>
+<div class="form__row">
+<div class="field">
+      <label class="field__label" for="email">Почта <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="email" id="email" name="email" data-label="это поле" required placeholder="you@example.ru" aria-describedby="email-err">
+      <p class="field__error" id="email-err" role="alert"></p>
+    </div>
+<div class="field">
+      <label class="field__label" for="phone">Telegram или телефон <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="tel" id="phone" name="phone" data-label="это поле" required placeholder="@nickname или +7 900 000-00-00" aria-describedby="phone-err">
+      <p class="field__error" id="phone-err" role="alert"></p>
+    </div>
+</div>
               </div>
             </div>
 
+            <div class="form__section">
+              <div class="field">
+        <label class="check">
+          <input type="checkbox" name="consent" id="consent" required data-error-required="Без этого согласия мы не сможем принять заявку" aria-describedby="consent-err">
+          <span>Я соглашаюсь на обработку моих персональных данных. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a></span>
+        </label>
+        <p class="field__error" id="consent-err" role="alert"></p>
+      </div>
+              <div class="field">
+        <label class="check">
+          <input type="checkbox" name="terms" id="terms" required data-error-required="Без согласия с условиями мы не сможем принять заявку" aria-describedby="terms-err">
+          <span>Я прочитал условия для соавторов и принимаю их</span>
+        </label>
+        <p class="field__error" id="terms-err" role="alert"></p>
+      </div>
+            </div>
+
             <div class="form__foot">
-              <button class="btn btn--paper btn--lg" type="submit" data-submit>Отправить заявку</button>
+              <button class="btn btn--primary btn--lg" type="submit" data-submit>Отправить заявку</button>
               <p class="form__status" data-status role="status" aria-live="polite"></p>
             </div>
           </form>
 
           <div class="sent" data-sent="participant">
-    <div class="paper paper--wide">
-      <span class="paper__label">Заявка принята</span>
-      <p class="paper__title">Заявка принята</p>
-      <p>Мы читаем анкеты в течение двух недель и отвечаем каждому, даже если в этот набор пригласить не получится.</p>
-      <p>Следующий шаг — короткий разговор в Telegram или по видеосвязи. Готовиться к нему не нужно.</p>
-      <p>Затем начинается курс с наставником и финальная работа, после защиты которой вы получаете доступ к экспедиции.</p>
-      <p>Если вам ещё нет восемнадцати, до поездки мы свяжемся с вашим родителем или опекуном.</p>
-    </div>
-  </div>
+            <div class="paper paper--wide">
+              <span class="paper__label">Заявка у нас</span>
+              <p class="paper__title">Заявка у нас!</p>
+              <p>Ответим в течение недели и предложим время для созвона.</p>
+            </div>
+          </div>
         </div>
 
         <aside class="aside">
-          <div class="paper paper--right">
-            <span class="paper__label">Что мы оцениваем</span>
-            <p>Не харизму и не портфолио. Нам важно, умеете ли вы слушать человека
-               и интересно ли вам то, чем он занимается.</p>
-          </div>
-
           <div class="card">
-            <h2 class="card__title">Только семь регионов</h2>
-            <p class="card__text">
-              Бурятия, Карелия, Приморье, Дагестан, Северная Осетия, Республика Алтай
-              и Кемеровская область. В экспедицию едут те, кто здесь живёт.
-            </p>
+            <h2 class="card__title">Кого мы ищем</h2>
+            <p class="card__text">Студентов бакалавриата и магистратуры, журналистов, фотографов, видеографов, активистов и жителей, которым интересен свой город. Журналистское образование не нужно.</p>
           </div>
-
           <div class="card">
-            <h2 class="card__title">Организацию берёт на себя проект</h2>
-            <p class="card__text">
-              От участника нужны время и готовность работать в поле вместе с командой.
-            </p>
+            <h2 class="card__title">Как это устроено</h2>
+            <ol class="numlist">
+              <li>Вы присылаете заявку и пишете, кого хотите записать.</li>
+              <li>Мы созваниваемся, обсуждаем героя, даем вопросы и памятку.</li>
+              <li>Вы записываете разговор и делаете фото.</li>
+              <li>Вместе редактируем, герой подписывает согласие.</li>
+              <li>Материал выходит на сайте с вашим именем.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h2 class="card__title">Что вы получите</h2>
+            <p class="card__text">Публикацию с вашим именем и страницу автора со всеми работами. Кейс для портфолио. Лучшие материалы попадут в печатный журнал. Место в «Друг.Клубе», где знакомятся авторы и герои. Самых активных авторов позовем в команду.</p>
+          </div>
+          <div class="paper paper--right" id="terms-info">
+            <span class="paper__label">Важно знать заранее</span>
+            <p>Это добровольное соавторство. Мы не платим гонорар и не оплачиваем дорогу и жилье. Вы работаете в своем городе и в удобное вам время. Материал остается вашим, а нам вы разрешаете публиковать его на сайте, в журнале и в соцсетях с вашим именем. Подробности в условиях для соавторов.</p>
           </div>
         </aside>
       </div>
@@ -276,46 +214,50 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__col">
-        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
-          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+      <div class="footer__col footer__col--wide">
+        <a href="index.html" class="logo logo--lg" aria-label="«Друг» — на главную">
+          <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
         </a>
-        <p class="footer__about">
-          Исследуем страну через призму восприятия её жителей.
-        </p>
+        <p class="footer__about">«Друг». Медиа о людях из небольших городов России</p>
+        <p class="footer__support">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина</p>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Написать</span>
-        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <span class="footer__head">Разделы</span>
+        <a class="footer__link" href="archive.html">Истории</a>
+        <a class="footer__link" href="participate.html">Участвовать</a>
+        <a class="footer__link" href="about.html">О проекте</a>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Читать</span>
-        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
-        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
-        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
-        <a class="footer__link" href="archive.html">Медиаархив</a>
+        <span class="footer__head">Еще</span>
+        <a class="footer__link" href="partners.html">Партнерам</a>
+        <a class="footer__link" href="faq.html">Вопросы</a>
+        <a class="footer__link" href="contacts.html">Контакты</a>
       </div>
+    </div>
 
-      <div class="footer__col">
-        <span class="footer__head">Участвовать</span>
-        <a class="footer__link" href="become-hero.html">Стать героем</a>
-        <a class="footer__link" href="become-participant.html">Поехать в экспедицию</a>
-        <a class="footer__link" href="zines.html">Заказать зин</a>
-        <a class="footer__link" href="partners.html">Сотрудничество</a>
+    <div class="footer__partners">
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
-        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span><a class="footer__link" href="privacy.html">Политика обработки данных</a>. <a class="footer__link" href="privacy.html#consent">Согласие на обработку данных</a>. © 2026 «Друг»</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="js/main.js"></script>
+<div class="cookies" data-cookies hidden>
+  <p class="cookies__text">Мы считаем посещения через Яндекс Метрику, чтобы понимать, какие истории вы читаете. Подробности в <a href="privacy.html">политике</a>.</p>
+  <button type="button" class="btn btn--paper cookies__ok" data-cookies-ok>Хорошо</button>
+</div>
+
+<script type="module" src="js/main.js?v=20261115v2"></script>
 </body>
 </html>

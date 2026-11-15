@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Сотрудничество — ДРУГ</title>
-  <meta name="description" content="Партнёрство с проектом «Друг» для институций и фондов и отдельно для бизнеса в регионах: совместные события, доступ к архиву, спецвыпуски, лицензирование съёмки.">
+  <title>Партнерам: выпуск «Друга» о вашем городе, музее или предприятии</title>
+  <meta name="description" content="Расскажем о вашей территории через людей, которые там живут и работают: интервью, фото, видео и печатный журнал. Работаем с музеями, вузами, фондами и предприятиями.">
   <meta name="theme-color" content="#2C2C2C">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Сотрудничество — ДРУГ">
-  <meta property="og:description" content="Партнёрство с проектом «Друг» для институций и фондов и отдельно для бизнеса в регионах: совместные события, доступ к архиву, спецвыпуски, лицензирование съёмки.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:site_name" content="«Друг»">
+  <meta property="og:title" content="Партнерам: выпуск «Друга» о вашем городе, музее или предприятии">
+  <meta property="og:description" content="Расскажем о вашей территории через людей, которые там живут и работают: интервью, фото, видео и печатный журнал. Работаем с музеями, вузами, фондами и предприятиями.">
+  <meta property="og:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,11 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css?v=20261114k">
-  <link rel="stylesheet" href="css/pages.css?v=20261114k">
-
-  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
-       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <link rel="stylesheet" href="css/components.css?v=20261115v2">
+  <link rel="stylesheet" href="css/pages.css?v=20261115v2">
+  <link rel="stylesheet" href="css/v2.css?v=20261115v2">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,21 +35,18 @@
 
 <header class="header">
   <div class="container header__inner">
-    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
-      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    <a href="index.html" class="logo" aria-label="«Друг» — на главную">
+      <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="archive.html" class="nav__link">Истории</a>
+        <a href="participate.html" class="nav__link">Участвовать</a>
         <a href="about.html" class="nav__link">О проекте</a>
-        <a href="issues.html" class="nav__link">Выпуски</a>
-        <a href="archive.html" class="nav__link">Архив</a>
-        <a href="zines.html" class="nav__link">Зины</a>
-        <a href="partners.html" class="nav__link" aria-current="page">Сотрудничество</a>
-        <a href="faq.html" class="nav__link">Вопросы</a>
-        <a href="contacts.html" class="nav__link">Контакты</a>
+        <a href="become-hero.html" class="nav__link nav__link--cta">Рассказать о человеке</a>
     </nav>
 
-    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать о человеке</a>
 
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -56,64 +56,33 @@
 
 <main id="main">
 
-  <!-- ── Первый экран: фото в рамке, заголовок слева, описание справа (как на «О проекте») ── -->
-  <section class="hero hero--home hero--page">
-      <div class="hero__frame">
-        <div class="hero__media">
-          <picture>
-            <source type="image/webp" srcset="assets/img/photo/child-portrait-600.webp 600w, assets/img/photo/child-portrait-1200.webp 1200w, assets/img/photo/child-portrait-2000.webp 2000w" sizes="100vw">
-            <img src="assets/img/photo/child-portrait-1200.jpg" alt="Мальчик на фоне гор в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
-          </picture>
-        </div>
-
-        <div class="hero__content">
-          <span class="eyebrow hero__eyebrow">ДРУГ <span class="eyebrow__rest">Сотрудничество</span></span>
-          <h1 class="hero__title">С&nbsp;кем мы работаем</h1>
-        </div>
-
-        <div class="hero__aside">
-          <p class="hero__lead">Институциям и&nbsp;бизнесу мы&nbsp;предлагаем разное, поэтому разделили страницу на&nbsp;две части. Выберите подходящий случай, там&nbsp;же есть кнопка написать нам с&nbsp;готовой темой письма.</p>
-        </div>
-      </div>
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Партнерам</span></span>
+      <h1 class="h1 pagehead__title">Сделаем выпуск вместе</h1>
+      <p class="lead pagehead__lead">Мы работаем с музеями, университетами, фондами и предприятиями. Выпуск про Сысерть мы делали вместе с заводом «Фарфор Сысерти» и музеем на электротехническом заводе и АНО «ПОЛЕТ».</p>
+      
+    </div>
   </section>
 
   <section class="section section--flush">
     <div class="container">
-      <div class="grid grid--2">
-        <article class="card">
-          <div class="offer">
-            <span class="offer__kind">Институции, фонды, музеи, библиотеки</span>
-            <h2 class="h3">Культурным организациям</h2>
-            <p class="card__text">
-              Проект мягко скрепляет образ регионов и общероссийскую идентичность через живое
-              культурное наследие. Совместная работа может выглядеть так:
-            </p>
-            <ul class="list list--sm">
-              <li>Публичные события: показы, разборы выпусков, встречи с героями</li>
-              <li>Доступ к медиаархиву для образовательных программ</li>
-              <li>Партнёрство по конкретному региону и помощь в поиске героев</li>
-              <li>Совместная подача на гранты и программы поддержки</li>
-            </ul>
-            <a class="btn btn--primary" href="mailto:sycheva.alina.2000@bk.ru?subject=Сотрудничество%3A%20институция%20или%20фонд">Написать о партнёрстве</a>
+      <div class="grid grid--sidebar">
+        <div>
+          <h2 class="h2">Что можем сделать</h2>
+          <div class="grid grid--2">
+            <article class="card"><h3 class="card__title">Выпуск о вашем городе или поселке</h3></article>
+            <article class="card"><h3 class="card__title">Истории людей вашего музея или предприятия</h3></article>
+            <article class="card"><h3 class="card__title">Совместный проект со студентами или волонтерами</h3><p class="card__text">Они записывают героев, мы помогаем и редактируем.</p></article>
+            <article class="card"><h3 class="card__title">Выставку или презентацию выпуска у вас</h3></article>
           </div>
-        </article>
-
-        <article class="card card--accent">
-          <div class="offer">
-            <span class="offer__kind">Туроператоры и локальный бизнес</span>
-            <h2 class="h3">Бизнесу в регионах</h2>
-            <p class="card__text">
-              Мы работаем с теми, кто связан с территорией. Возможные форматы:
-            </p>
-            <ul class="list list--sm">
-              <li>Спецвыпуски о регионе или направлении по редакционному стандарту проекта</li>
-              <li>Лицензирование фотографий и видео из архива для промоматериалов</li>
-              <li>Брендированное партнёрство с упоминанием в выпуске, канале и на сайте</li>
-              <li>Софинансирование регионального зина</li>
-            </ul>
-            <a class="btn btn--paper" href="mailto:sycheva.alina.2000@bk.ru?subject=Сотрудничество%3A%20бизнес">Обсудить условия</a>
+        </div>
+        <aside class="aside">
+          <div class="paper paper--right">
+            <span class="paper__label">Как начать</span>
+            <p>Напишите на <a href="mailto:tvoi.friend.media@yandex.ru">tvoi.friend.media@yandex.ru</a>, что за место и чего хочется. Ответим в течение недели.</p>
           </div>
-        </article>
+        </aside>
       </div>
     </div>
   </section>
@@ -121,29 +90,15 @@
   <section class="section section--deep">
     <div class="container">
       <div class="section__head">
-    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Правила</span></span>
-    <span class="section__num">01 / 01</span>
-  </div>
-
-  <div class="section__intro">
-    <h2 class="h2">О чём мы договариваемся сразу</h2>
-  </div>
-
-      <div class="grid grid--sidebar">
-        <ul class="list list--loose">
-          <li>Партнёрство не влияет на содержание историй. Редакционные решения остаются за редакцией.</li>
-          <li>Спецвыпуск маркируется как партнёрский, чтобы читатель видел, кто его поддержал.</li>
-          <li>Лицензия на фотографии и видео оформляется письменно, со сроком, перечнем площадок
-              и территорией использования.</li>
-          <li>Материалы с героями используются только с их согласия, независимо от договорённостей
-              с партнёром.</li>
-        </ul>
-
-        <div class="paper paper--right">
-          <span class="paper__label">Как ускорить ответ</span>
-          <p>Напишите сразу, какой регион вам интересен и в каком формате вы видите сотрудничество.
-             Мы отвечаем в течение недели и предлагаем короткий созвон.</p>
-        </div>
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">С нами</span></span>
+        
+      </div>
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
   </section>
@@ -153,46 +108,50 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__col">
-        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
-          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+      <div class="footer__col footer__col--wide">
+        <a href="index.html" class="logo logo--lg" aria-label="«Друг» — на главную">
+          <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
         </a>
-        <p class="footer__about">
-          Исследуем страну через призму восприятия её жителей.
-        </p>
+        <p class="footer__about">«Друг». Медиа о людях из небольших городов России</p>
+        <p class="footer__support">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина</p>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Написать</span>
-        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <span class="footer__head">Разделы</span>
+        <a class="footer__link" href="archive.html">Истории</a>
+        <a class="footer__link" href="participate.html">Участвовать</a>
+        <a class="footer__link" href="about.html">О проекте</a>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Читать</span>
-        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
-        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
-        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
-        <a class="footer__link" href="archive.html">Медиаархив</a>
+        <span class="footer__head">Еще</span>
+        <a class="footer__link" href="partners.html">Партнерам</a>
+        <a class="footer__link" href="faq.html">Вопросы</a>
+        <a class="footer__link" href="contacts.html">Контакты</a>
       </div>
+    </div>
 
-      <div class="footer__col">
-        <span class="footer__head">Участвовать</span>
-        <a class="footer__link" href="become-hero.html">Стать героем</a>
-        <a class="footer__link" href="become-participant.html">Поехать в экспедицию</a>
-        <a class="footer__link" href="zines.html">Заказать зин</a>
-        <a class="footer__link" href="partners.html">Сотрудничество</a>
+    <div class="footer__partners">
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
-        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span><a class="footer__link" href="privacy.html">Политика обработки данных</a>. <a class="footer__link" href="privacy.html#consent">Согласие на обработку данных</a>. © 2026 «Друг»</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="js/main.js"></script>
+<div class="cookies" data-cookies hidden>
+  <p class="cookies__text">Мы считаем посещения через Яндекс Метрику, чтобы понимать, какие истории вы читаете. Подробности в <a href="privacy.html">политике</a>.</p>
+  <button type="button" class="btn btn--paper cookies__ok" data-cookies-ok>Хорошо</button>
+</div>
+
+<script type="module" src="js/main.js?v=20261115v2"></script>
 </body>
 </html>

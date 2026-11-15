@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>О проекте — ДРУГ</title>
-  <meta name="description" content="Идея, философия и миссия проекта «Друг». Почему восприятие места идёт через человека, зачем нужны экспедиции и что даёт печатный артефакт.">
+  <title>О проекте «Друг»: изучаем регионы России через истории людей</title>
+  <meta name="description" content="Мы записываем жителей небольших городов и собираем из их историй журналы и маршруты. Так сохраняется культурное наследие, которое создается прямо сейчас.">
   <meta name="theme-color" content="#2C2C2C">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="О проекте — ДРУГ">
-  <meta property="og:description" content="Идея, философия и миссия проекта «Друг». Почему восприятие места идёт через человека, зачем нужны экспедиции и что даёт печатный артефакт.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:site_name" content="«Друг»">
+  <meta property="og:title" content="О проекте «Друг»: изучаем регионы России через истории людей">
+  <meta property="og:description" content="Мы записываем жителей небольших городов и собираем из их историй журналы и маршруты. Так сохраняется культурное наследие, которое создается прямо сейчас.">
+  <meta property="og:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,11 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css?v=20261114h">
-  <link rel="stylesheet" href="css/pages.css?v=20261114i">
-
-  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
-       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <link rel="stylesheet" href="css/components.css?v=20261115v2">
+  <link rel="stylesheet" href="css/pages.css?v=20261115v2">
+  <link rel="stylesheet" href="css/v2.css?v=20261115v2">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,21 +35,18 @@
 
 <header class="header">
   <div class="container header__inner">
-    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
-      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    <a href="index.html" class="logo" aria-label="«Друг» — на главную">
+      <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="archive.html" class="nav__link">Истории</a>
+        <a href="participate.html" class="nav__link">Участвовать</a>
         <a href="about.html" class="nav__link" aria-current="page">О проекте</a>
-        <a href="issues.html" class="nav__link">Выпуски</a>
-        <a href="archive.html" class="nav__link">Архив</a>
-        <a href="zines.html" class="nav__link">Зины</a>
-        <a href="partners.html" class="nav__link">Сотрудничество</a>
-        <a href="faq.html" class="nav__link">Вопросы</a>
-        <a href="contacts.html" class="nav__link">Контакты</a>
+        <a href="become-hero.html" class="nav__link nav__link--cta">Рассказать о человеке</a>
     </nav>
 
-    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать о человеке</a>
 
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -56,60 +56,55 @@
 
 <main id="main">
 
-  <!-- ── Первый экран: фото в рамке, заголовок слева, описание справа ── -->
-  <section class="hero hero--home hero--page">
-      <div class="hero__frame">
-        <div class="hero__media">
-          <picture>
-            <source type="image/webp" srcset="assets/img/photo/mountain-range-600.webp 600w, assets/img/photo/mountain-range-1200.webp 1200w, assets/img/photo/mountain-range-2000.webp 2000w" sizes="100vw">
-            <img src="assets/img/photo/mountain-range-1200.jpg" alt="Горная гряда в Республике Алтай" loading="eager" fetchpriority="high" decoding="async">
-          </picture>
-        </div>
-
-        <div class="hero__content">
-          <span class="eyebrow hero__eyebrow">ДРУГ <span class="eyebrow__rest">О проекте</span></span>
-          <h1 class="hero__title">Медиа как&nbsp;друг</h1>
-        </div>
-
-        <div class="hero__aside">
-          <p class="hero__lead">Проект «Друг» знакомит людей с&nbsp;людьми. Он&nbsp;прививает путь путешественника, а&nbsp;не&nbsp;туриста, и&nbsp;знакомит с&nbsp;отдалёнными уголками России через крафтовые материалы «из&nbsp;уст в&nbsp;уста».</p>
-        </div>
-      </div>
+  <section class="section pagehead">
+    <div class="container">
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">О проекте</span></span>
+      <h1 class="h1 pagehead__title">Медиа, которое ведет себя как друг</h1>
+      <p class="lead pagehead__lead">Друг знакомит тебя со своими людьми, водит по любимым местам и рассказывает, как здесь все устроено. Так мы и рассказываем о городах.</p>
+      
+    </div>
   </section>
 
-
-  <section class="section">
+  <section class="section section--flush">
     <div class="container">
-      <div class="section__head">
-    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Миссия</span></span>
-    <span class="section__num">01 / 04</span>
-  </div>
-
-  <div class="section__intro">
-    <h2 class="h2">Зачем всё это</h2>
-    <p class="lead">Проект собирает сеть связей между людьми, даёт инструмент знакомства с регионом через подлинное общение и формирует новый взгляд на путешествия.</p>
-  </div>
-
       <div class="grid grid--sidebar">
         <div class="prose">
-          <p class="lead">
-            Проект создан для людей, которые каждый день делают выбор в пользу своего дома
-            и находят вдохновение на созидание и развитие своего дела и региона.
-          </p>
-          <p class="text">
-            Мы создаём культурное медиа нового типа, которое показывает Россию через живые
-            человеческие истории и формирует глубокую эмоциональную связь человека и территории.
-          </p>
+          <h2 class="h2">Зачем мы это делаем</h2>
+          <p class="lead">О небольших городах обычно пишут коротко: достопримечательности, население, сколько ехать до областного центра. В Сысерти мы услышали другое. Живописец спустя годы узнает свои сервизы в чужих домах. Печник каждый Новый год играл Деда Мороза для заводских детей. Обмотчицы носили работу домой и гнули детали всей семьей. Если такие истории не записать, они уйдут вместе с людьми.</p>
         </div>
+        <div class="ph ph--3x4"><picture>
+            <source type="image/webp" srcset="assets/img/photo/sysert-f3267-600.webp 600w, assets/img/photo/sysert-f3267-1200.webp 1200w" sizes="(max-width: 860px) 92vw, 38vw">
+            <img src="assets/img/photo/sysert-f3267-1200.jpg" alt="Живописец за работой на фарфоровом заводе" loading="lazy" decoding="async">
+          </picture></div>
+      </div>
+    </div>
+  </section>
 
-        <div class="paper paper--right paper--mid">
-          <span class="paper__label">Наши ценности</span>
-          <ul class="list">
-            <li>Доверие важнее охвата.</li>
-            <li>Человек первичен, а место поддерживает человека.</li>
-            <li>Физическое имеет значение: уход в цифру уводит фокус от материального мира
-                и от контакта человека с человеком.</li>
-          </ul>
+  <section class="section section--deep">
+    <div class="container">
+      <div class="section__head">
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Как мы работаем</span></span>
+        
+      </div>
+      <div class="section__intro"><h2 class="h2">Как мы работаем</h2></div>
+      <ol class="steps steps--big">
+        <li>Ищем героев. Нам пишут сами люди, их внуки, соседи и краеведы.</li><li>Приезжаем туда, где человек живет и работает.</li><li>Слушаем и почти не перебиваем.</li><li>Собираем выпуск на сайте и печатный журнал. Герой видит текст до публикации.</li><li>Знакомим героев и авторов из разных городов между собой.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2">
+        <div class="prose">
+          <h2 class="h2">Во что мы верим</h2>
+          <p class="text">Мы оставляем прямую речь: интонация и любимые словечки тоже часть истории. Герой сам решает, что о нем публиковать, и может передумать. Журнал печатаем на бумаге, чтобы его можно было подарить и увезти с собой.</p>
+        </div>
+        <div class="prose">
+          <h2 class="h2">Что уже сделано</h2>
+          <p class="text">Мы записали героев Сысерти и выпустили про нее <a href="zines/sysert/">журнал</a>. Собрали методику, по которой интервью может провести человек без журналистского образования.</p>
+          <h2 class="h2">Что дальше</h2>
+          <p class="text">Выпуски про Шерегеш и Алтай, на сайте и на бумаге. «Друг.Клуб», где герои и авторы знакомятся друг с другом. Открытый архив всех записей.</p>
         </div>
       </div>
     </div>
@@ -118,62 +113,36 @@
   <section class="section section--deep">
     <div class="container">
       <div class="section__head">
-    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Философия</span></span>
-    <span class="section__num">02 / 04</span>
-  </div>
-
-  <div class="section__intro">
-    <h2 class="h2">Почему именно так</h2>
-  </div>
-
-      <div class="grid grid--3">
-        <article class="card">
-          <h3 class="card__title">Восприятие места через человека</h3>
-          <p class="card__text">
-            Смысл места появляется, когда конкретный человек рассказывает о своей малой родине
-            и любимых местах, объясняет, почему остался или переехал, и как на него повлияла среда.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3 class="card__title">Интервью от первого лица</h3>
-          <p class="card__text">
-            Доверие и полное погружение рождаются через личную речь с интонацией, детали
-            рассказчика и его обстановки. Пересказ и редакционные колонки теряют это.
-          </p>
-        </article>
-
-        <article class="card card--accent">
-          <h3 class="card__title">Экспедиции</h3>
-          <p class="card__text">
-            Доверие невозможно собрать дистанционно. В атмосферу, пантомимику рассказчика,
-            его традиции, кухню и быт нельзя погрузиться удалённо.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3 class="card__title">Журнал, цифровой и печатный</h3>
-          <p class="card__text">
-            История требует композиции. Лента даёт только фрагменты, а печатный артефакт
-            становится материальным доказательством важности истории.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3 class="card__title">Документальная фотография</h3>
-          <p class="card__text">
-            Постановка возвращает в туристическую оптику. Живые кадры позволяют заглянуть
-            внутрь сцены и увидеть человека таким, какой он есть.
-          </p>
-        </article>
-
-        <article class="card">
-          <h3 class="card__title">Материалы делает молодёжь</h3>
-          <p class="card__text">
-            В экспедицию по региону едут те, кто в нём живёт. Работая над выпуском, молодые
-            авторы находят в своём регионе новые связи и возможности.
-          </p>
-        </article>
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Команда</span></span>
+        
+      </div>
+      <div class="section__intro"><h2 class="h2">Команда</h2></div>
+      <div class="team">
+        <div class="person">
+          <div class="person__photo" aria-hidden="true">АС</div>
+          <p class="person__name">Алина Сычева</p>
+          <p class="person__role">автор проекта</p>
+        </div>
+        <div class="person">
+          <div class="person__photo" aria-hidden="true">ГШ</div>
+          <p class="person__name">Георгий Шарипов</p>
+          <p class="person__role">технический директор</p>
+        </div>
+        <div class="person">
+          <div class="person__photo" aria-hidden="true">ВШ</div>
+          <p class="person__name">Виолетта Шкуропатская</p>
+          <p class="person__role">контент-маркетолог</p>
+        </div>
+        <div class="person">
+          <div class="person__photo" aria-hidden="true">РР</div>
+          <p class="person__name">Роман Ракчеев</p>
+          <p class="person__role">дизайнер</p>
+        </div>
+        <div class="person">
+          <div class="person__photo" aria-hidden="true">ДЩ</div>
+          <p class="person__name">Дарья Щуцкая</p>
+          <p class="person__role">дизайнер</p>
+        </div>
       </div>
     </div>
   </section>
@@ -181,93 +150,20 @@
   <section class="section">
     <div class="container">
       <div class="section__head">
-    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Методика</span></span>
-    <span class="section__num">03 / 04</span>
-  </div>
-
-  <div class="section__intro">
-    <h2 class="h2">В чём новизна</h2>
-    <p class="lead">Глубокие интервью и личные истории используют многие. Но эти практики остаются авторскими, не систематизированы и не могут быть переданы другим.</p>
-  </div>
-
-      <div class="method">
-        <div class="method__item">
-          <span class="method__num">01</span>
-          <h3 class="method__title">Алгоритм, а&nbsp;не&nbsp;шоу</h3>
-          <p class="method__text">Мы не&nbsp;создаём ещё одно успешное шоу, а&nbsp;разрабатываем алгоритм: гайд, чек-листы
-            и&nbsp;банк вопросов. По&nbsp;нему качественное интервью может провести
-            человек без журналистского образования.</p>
-        </div>
-        <div class="method__item">
-          <span class="method__num">02</span>
-          <h3 class="method__title">Метод, а&nbsp;не&nbsp;личность</h3>
-          <p class="method__text">В&nbsp;центре внимания герой и&nbsp;его история,
-            а&nbsp;не&nbsp;автор и&nbsp;его интерпретации услышанного.</p>
-        </div>
-        <div class="method__item">
-          <span class="method__num">03</span>
-          <h3 class="method__title">Экспедиция обязательна</h3>
-          <p class="method__text">Мы приезжаем к&nbsp;герою в&nbsp;его среду, а&nbsp;не&nbsp;приглашаем
-            в&nbsp;студию. Это метод включённого наблюдения.</p>
-        </div>
-        <div class="method__item">
-          <span class="method__num">04</span>
-          <h3 class="method__title">Метод можно передать</h3>
-          <p class="method__text">Мы фиксируем не&nbsp;только материал, но&nbsp;и&nbsp;метод работы с&nbsp;героем. Он&nbsp;становится
-            основой для обучения, поэтому проект тиражируем и&nbsp;не&nbsp;зависит от&nbsp;одной команды.</p>
-        </div>
+        <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Нас поддерживают</span></span>
+        
       </div>
-
-      <div class="paper method__result">
-        <span class="paper__label">Результат первого этапа</span>
-        <p>Методика в&nbsp;виде гайда, чек-листов и&nbsp;банка вопросов. Семь цифровых выпусков,
-           пилотный зин, медиаархив с&nbsp;открытой и&nbsp;внутренней частями и&nbsp;этот сайт-платформа.</p>
+      <div class="section__intro">
+        <h2 class="h2">Нас поддерживают</h2>
+        <p class="lead">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина. Ниже логотипы партнеров.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="section section--deep">
-    <div class="container">
-      <div class="section__head">
-    <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Экосистема</span></span>
-    <span class="section__num">04 / 04</span>
-  </div>
-
-  <div class="section__intro">
-    <h2 class="h2">Четыре части проекта</h2>
-    <p class="lead">Сейчас работает первая часть. Остальные вырастают из неё по мере того, как накапливается материал и появляется аудитория.</p>
-  </div>
-
-      <div class="eco">
-        <article class="card card--accent eco__step">
-          <span class="eco__now">этап 1</span>
-          <h3 class="card__title">Друг.Медиа</h3>
-          <p class="card__text">Экспедиции, выпуски, зин и записанная методика работы с героем.</p>
-        </article>
-        <article class="card eco__step">
-          <span class="eco__now">этап 2</span>
-          <h3 class="card__title">Друг.Академия</h3>
-          <p class="card__text">Обучение методике. Курс из шести модулей и практика с наставником.</p>
-        </article>
-        <article class="card eco__step">
-          <span class="eco__now">этап 3</span>
-          <h3 class="card__title">Друг.Клуб</h3>
-          <p class="card__text">Сообщество: лекции, разборы выпусков, показы и встречи с героями.</p>
-        </article>
-        <article class="card eco__step">
-          <span class="eco__now">долгосрочно</span>
-          <h3 class="card__title">Друг.Архив</h3>
-          <p class="card__text">Культурный архив живых историй российских территорий.</p>
-        </article>
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
-
-      <div class="tg reveal">
-  <div class="tg__text">
-    <p class="tg__title">Следить за экспедицией</p>
-    <p class="tg__note">Короткие заметки прямо с маршрута. Кого встретили, что снимаем сегодня, где застряли.</p>
-  </div>
-  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
-</div>
     </div>
   </section>
 
@@ -276,46 +172,50 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__col">
-        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
-          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+      <div class="footer__col footer__col--wide">
+        <a href="index.html" class="logo logo--lg" aria-label="«Друг» — на главную">
+          <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
         </a>
-        <p class="footer__about">
-          Исследуем страну через призму восприятия её жителей.
-        </p>
+        <p class="footer__about">«Друг». Медиа о людях из небольших городов России</p>
+        <p class="footer__support">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина</p>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Написать</span>
-        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <span class="footer__head">Разделы</span>
+        <a class="footer__link" href="archive.html">Истории</a>
+        <a class="footer__link" href="participate.html">Участвовать</a>
+        <a class="footer__link" href="about.html">О проекте</a>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Читать</span>
-        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
-        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
-        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
-        <a class="footer__link" href="archive.html">Медиаархив</a>
+        <span class="footer__head">Еще</span>
+        <a class="footer__link" href="partners.html">Партнерам</a>
+        <a class="footer__link" href="faq.html">Вопросы</a>
+        <a class="footer__link" href="contacts.html">Контакты</a>
       </div>
+    </div>
 
-      <div class="footer__col">
-        <span class="footer__head">Участвовать</span>
-        <a class="footer__link" href="become-hero.html">Стать героем</a>
-        <a class="footer__link" href="become-participant.html">Поехать в экспедицию</a>
-        <a class="footer__link" href="zines.html">Заказать зин</a>
-        <a class="footer__link" href="partners.html">Сотрудничество</a>
+    <div class="footer__partners">
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
-        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span><a class="footer__link" href="privacy.html">Политика обработки данных</a>. <a class="footer__link" href="privacy.html#consent">Согласие на обработку данных</a>. © 2026 «Друг»</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="js/main.js"></script>
+<div class="cookies" data-cookies hidden>
+  <p class="cookies__text">Мы считаем посещения через Яндекс Метрику, чтобы понимать, какие истории вы читаете. Подробности в <a href="privacy.html">политике</a>.</p>
+  <button type="button" class="btn btn--paper cookies__ok" data-cookies-ok>Хорошо</button>
+</div>
+
+<script type="module" src="js/main.js?v=20261115v2"></script>
 </body>
 </html>

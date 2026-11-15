@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Рассказать свою историю — ДРУГ</title>
-  <meta name="description" content="Форма заявки для героев проекта «Друг». Расскажите, чем занимаетесь и что делаете для места, где живёте.">
+  <title>Расскажите историю своей жизни проекту «Друг»</title>
+  <meta name="description" content="«Друг» изучает регионы России через людей. Расскажите о себе или о человеке из вашего города, чью историю стоит сохранить. Известным быть не нужно.">
   <meta name="theme-color" content="#2C2C2C">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Рассказать свою историю — ДРУГ">
-  <meta property="og:description" content="Форма заявки для героев проекта «Друг». Расскажите, чем занимаетесь и что делаете для места, где живёте.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:site_name" content="«Друг»">
+  <meta property="og:title" content="Расскажите историю своей жизни проекту «Друг»">
+  <meta property="og:description" content="«Друг» изучает регионы России через людей. Расскажите о себе или о человеке из вашего города, чью историю стоит сохранить. Известным быть не нужно.">
+  <meta property="og:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,11 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
-
-  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
-       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <link rel="stylesheet" href="css/components.css?v=20261115v2">
+  <link rel="stylesheet" href="css/pages.css?v=20261115v2">
+  <link rel="stylesheet" href="css/v2.css?v=20261115v2">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,21 +35,18 @@
 
 <header class="header">
   <div class="container header__inner">
-    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
-      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    <a href="index.html" class="logo" aria-label="«Друг» — на главную">
+      <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="archive.html" class="nav__link">Истории</a>
+        <a href="participate.html" class="nav__link" aria-current="page">Участвовать</a>
         <a href="about.html" class="nav__link">О проекте</a>
-        <a href="issues.html" class="nav__link">Выпуски</a>
-        <a href="archive.html" class="nav__link">Архив</a>
-        <a href="zines.html" class="nav__link">Зины</a>
-        <a href="partners.html" class="nav__link">Сотрудничество</a>
-        <a href="faq.html" class="nav__link">Вопросы</a>
-        <a href="contacts.html" class="nav__link">Контакты</a>
+        <a href="become-hero.html" class="nav__link nav__link--cta">Рассказать о человеке</a>
     </nav>
 
-    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать о человеке</a>
 
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -58,12 +58,10 @@
 
   <section class="section pagehead">
     <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Стать героем</span></span>
-      <h1 class="h1 pagehead__title">Расскажите свою историю</h1>
-      <p class="lead pagehead__lead">
-        Публичность не нужна, соцсети не обязательны, опыт интервью не важен.
-        Важно то, что вы делаете для места, где живёте. Заполнение занимает около десяти минут.
-      </p>
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Героям</span></span>
+      <h1 class="h1 pagehead__title">Знаете человека, которого стоит записать?</h1>
+      <p class="lead pagehead__lead">Это можете быть вы сами, ваша бабушка или мастер с соседней улицы. Соцсети и опыт интервью не нужны.</p>
+      
     </div>
   </section>
 
@@ -71,150 +69,120 @@
     <div class="container">
       <div class="grid grid--sidebar">
         <div>
-          <form class="form" data-form="hero" data-subject="Заявка героя с сайта «ДРУГ»" novalidate>
-
+          <form class="form" data-form="hero" data-subject="Заявка героя с сайта «Друг»" novalidate>
             <div class="form__section form__section--first">
-              <p class="form__legend">Кто вы и откуда</p>
+              <div class="switch" role="radiogroup" aria-label="О ком заявка">
+                <label class="switch__opt"><input type="radio" name="mode" value="self" data-mode-switch checked><span>Я рассказываю о себе</span></label>
+                <label class="switch__opt"><input type="radio" name="mode" value="other" data-mode-switch><span>Я советую другого человека</span></label>
+              </div>
+            </div>
+
+            <div class="form__section" data-mode="self">
               <div class="form__grid">
-                <div class="form__row">
-                  <div class="field">
+<div class="field">
       <label class="field__label" for="name">Как вас зовут <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="name" name="name" data-label="это поле" required placeholder="Имя и фамилия" aria-describedby="name-err">
+      <input class="input" type="text" id="name" name="name" data-label="это поле" required aria-describedby="name-err">
       <p class="field__error" id="name-err" role="alert"></p>
     </div>
-                  <div class="field">
-      <label class="field__label" for="place">Регион, город или село <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="text" id="place" name="place" data-label="это поле" required placeholder="Республика Алтай, село Онгудай" aria-describedby="place-err">
+<div class="field">
+      <label class="field__label" for="place">Где вы живете <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="place" name="place" data-label="это поле" required placeholder="Город или поселок" aria-describedby="place-err">
       <p class="field__error" id="place-err" role="alert"></p>
     </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form__section">
-              <p class="form__legend">О вашем деле</p>
-              <p class="form__hint">
-                Пишите обычными словами, как рассказали бы знакомому. Литературную форму
-                мы придадим сами на этапе редактуры.
-              </p>
-              <div class="form__grid">
-                <div class="field">
-      <label class="field__label" for="work">Чем вы занимаетесь и что делаете для своего места <span class="field__req" aria-hidden="true">*</span></label>
-      <textarea class="textarea" id="work" name="work" rows="6" data-label="это поле" required minlength="60" placeholder="Например, держу мастерскую, где учу подростков работать с деревом" aria-describedby="work-err"></textarea>
+<div class="field">
+      <label class="field__label" for="work">Чем вы занимаетесь (пары предложений хватит) <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="work" name="work" rows="4" data-label="это поле" required maxlength="1500" aria-describedby="work-err"></textarea>
+      <p class="field__count" data-count-for="work" aria-hidden="true">0 / 1500</p>
       <p class="field__error" id="work-err" role="alert"></p>
     </div>
-                <div class="field">
-      <label class="field__label" for="why">Почему считаете, что эту историю стоит рассказать <span class="field__req" aria-hidden="true">*</span></label>
-      <textarea class="textarea" id="why" name="why" rows="5" data-label="это поле" required minlength="40" aria-describedby="why-note why-err"></textarea>
-      <p class="field__note" id="why-note">Нам важна личная причина, а не перечень достижений.</p>
-      <p class="field__error" id="why-err" role="alert"></p>
-    </div>
-                <div class="field">
-      <label class="field__label" for="links">Ссылки на соцсети, сайт, портфолио <span class="field__opt">по желанию</span></label>
-      <input class="input" type="text" id="links" name="links" data-label="это поле" placeholder="Через запятую" aria-describedby="links-err">
-      <p class="field__error" id="links-err" role="alert"></p>
+<div class="field">
+      <label class="field__label" for="contact">Как с вами связаться: телефон, почта или ник в Telegram <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="contact" name="contact" data-label="это поле" required aria-describedby="contact-err">
+      <p class="field__error" id="contact-err" role="alert"></p>
     </div>
               </div>
             </div>
 
-            <div class="form__section">
-              <p class="form__legend">Фотографии</p>
-              <p class="form__hint">
-                От одной до трёх: вы за работой, ваше место, результат. Подойдут снимки с телефона,
-                профессиональную съёмку мы проведём сами во время экспедиции.
-              </p>
-
-              <div class="field">
-                <div class="upload" data-upload>
-                  <input type="file" id="photos" name="photos" accept="image/jpeg,image/png,image/webp,image/heic" multiple>
-                  <label class="upload__cta" for="photos">Выбрать файлы</label>
-                  <span class="upload__note">или перетащите сюда. До трёх файлов, каждый до 10 МБ</span>
-                  <div class="upload__list"></div>
-                </div>
-                <p class="field__error" role="alert"></p>
-              </div>
-
-              <div class="form__grid form__grid--after">
-                <div class="field">
-      <label class="field__label" for="photo_link">Или ссылка на облако с фотографиями <span class="field__opt">по желанию</span></label>
-      <input class="input" type="text" id="photo_link" name="photo_link" data-label="это поле" placeholder="Яндекс.Диск, Google Диск, альбом ВКонтакте" aria-describedby="photo_link-note photo_link-err">
-      <p class="field__note" id="photo_link-note">Подойдёт, если файлы слишком тяжёлые для загрузки.</p>
-      <p class="field__error" id="photo_link-err" role="alert"></p>
-    </div>
-              </div>
-            </div>
-
-            <div class="form__section">
-              <p class="form__legend">Как с вами связаться</p>
+            <div class="form__section" data-mode="other" hidden>
               <div class="form__grid">
-                <div class="form__row">
-                  <div class="field">
-      <label class="field__label" for="email">Почта <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="email" id="email" name="email" data-label="это поле" required placeholder="you@example.ru" aria-describedby="email-err">
-      <p class="field__error" id="email-err" role="alert"></p>
+<div class="field">
+      <label class="field__label" for="o_name">Как вас зовут <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="o_name" name="o_name" data-label="это поле" required aria-describedby="o_name-err">
+      <p class="field__error" id="o_name-err" role="alert"></p>
     </div>
-                  <div class="field">
-      <label class="field__label" for="phone">Телефон или Telegram <span class="field__req" aria-hidden="true">*</span></label>
-      <input class="input" type="tel" id="phone" name="phone" data-label="это поле" required placeholder="+7 900 000-00-00 или @nickname" aria-describedby="phone-err">
-      <p class="field__error" id="phone-err" role="alert"></p>
+<div class="field">
+      <label class="field__label" for="o_contact">Как с вами связаться <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="o_contact" name="o_contact" data-label="это поле" required aria-describedby="o_contact-err">
+      <p class="field__error" id="o_contact-err" role="alert"></p>
     </div>
-                </div>
+<div class="field">
+      <label class="field__label" for="o_hero">Кого советуете и где он живет <span class="field__req" aria-hidden="true">*</span></label>
+      <input class="input" type="text" id="o_hero" name="o_hero" data-label="это поле" required aria-describedby="o_hero-err">
+      <p class="field__error" id="o_hero-err" role="alert"></p>
+    </div>
+<div class="field">
+      <label class="field__label" for="o_why">Чем он интересен <span class="field__req" aria-hidden="true">*</span></label>
+      <textarea class="textarea" id="o_why" name="o_why" rows="4" data-label="это поле" required maxlength="1500" aria-describedby="o_why-err"></textarea>
+      <p class="field__count" data-count-for="o_why" aria-hidden="true">0 / 1500</p>
+      <p class="field__error" id="o_why-err" role="alert"></p>
+    </div>
+<div class="field">
+      <label class="field__label" for="o_knows">Он знает, что вы его советуете? <span class="field__req" aria-hidden="true">*</span></label>
+      <select class="select" id="o_knows" name="o_knows" data-label="это поле" required aria-describedby="o_knows-err"><option value="" disabled selected>Выберите</option><option>Да</option><option>Нет</option><option>Скажу позже</option></select>
+      <p class="field__error" id="o_knows-err" role="alert"></p>
+    </div>
+<p class="form__hint">Контакты героя пока не присылайте. Сначала спросите его самого.</p>
               </div>
             </div>
 
             <div class="form__section">
               <div class="field">
-                <label class="check">
-                  <input type="checkbox" name="consent" id="consent" required
-                         data-error-required="Без этого согласия мы не сможем принять заявку"
-                         aria-describedby="consent-err">
-                  <span>Согласен на обработку персональных данных. Мы используем их только для связи по вашей заявке, никому не передаём и удаляем по первой просьбе. Подробности в <a href="privacy.html" target="_blank" rel="noopener">политике обработки персональных данных</a>.</span>
-                </label>
-                <p class="field__error" id="consent-err" role="alert"></p>
-              </div>
+        <label class="check">
+          <input type="checkbox" name="consent" id="consent" required data-error-required="Без этого согласия мы не сможем принять заявку" aria-describedby="consent-err">
+          <span>Я соглашаюсь на обработку моих персональных данных. <a href="privacy.html" target="_blank" rel="noopener">Политика обработки данных</a></span>
+        </label>
+        <p class="field__error" id="consent-err" role="alert"></p>
+      </div>
             </div>
 
             <div class="form__foot">
-              <button class="btn btn--primary btn--lg" type="submit" data-submit>Отправить заявку</button>
+              <button class="btn btn--primary btn--lg" type="submit" data-submit>Отправить</button>
               <p class="form__status" data-status role="status" aria-live="polite"></p>
             </div>
+            <p class="form__hint">Перед съемкой мы попросим героя подписать согласие на публикацию. Его текст можно прочитать заранее.</p>
           </form>
 
           <div class="sent" data-sent="hero">
-    <div class="paper paper--wide">
-      <span class="paper__label">Заявка принята</span>
-      <p class="paper__title">Мы получили вашу историю</p>
-      <p>Редакция разбирает заявки раз в неделю и отвечает в течение десяти рабочих дней на почту или в Telegram.</p>
-      <p>Если история войдёт в ближайший маршрут, мы согласуем дату и приедем к вам. Съёмка занимает один день, интервью около трёх часов.</p>
-      <p>Если по географии в этот раз не совпадёт, заявка останется в базе. Мы возвращаемся в регионы.</p>
-      <p>Если что-то изменилось или хотите дополнить заявку, напишите на <a href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>.</p>
-    </div>
-  </div>
+            <div class="paper paper--wide">
+              <span class="paper__label">Заявка у нас</span>
+              <p class="paper__title">Спасибо!</p>
+              <p>Мы получили заявку и ответим в течение недели. Если ответа нет, напишите нам в <a href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram</a> или <a href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">ВКонтакте</a>, письма иногда теряются.</p>
+            </div>
+          </div>
         </div>
 
         <aside class="aside">
-          <div class="paper paper--right">
-            <span class="paper__label">Как проходит съёмка</span>
-            <p>Мы не приглашаем героя в студию, а приезжаем к нему в его среду. Готовиться
-               и заучивать ответы не нужно: мы задаём вопросы, вы рассказываете.</p>
-          </div>
-
           <div class="card">
-            <h2 class="card__title">Участие бесплатное</h2>
-            <p class="card__text">
-              Герой ничего не платит и не получает гонорар. После публикации мы передаём все
-              фотографии в высоком разрешении и присылаем печатный зин с вашей историей.
-            </p>
+            <h2 class="card__title">Что будет дальше</h2>
+            <ol class="numlist">
+              <li>Вы заполняете форму, это пять минут.</li>
+              <li>Мы отвечаем в течение недели и договариваемся о звонке.</li>
+              <li>Приезжаем сами или находим соавтора в вашем городе.</li>
+              <li>Перед публикацией показываем вам текст и фотографии.</li>
+            </ol>
           </div>
-
           <div class="card">
-            <h2 class="card__title">Что это даёт</h2>
-            <ul class="list list--sm">
-              <li>Видимость и признание вклада в жизнь своего места</li>
-              <li>Связь с другими героями проекта</li>
-              <li>Продвижение вашего дела и услуг</li>
-              <li>Возможные коллаборации: мастер-классы, совместные события</li>
+            <h2 class="card__title">Что получает герой</h2>
+            <ul class="list">
+              <li>Все фотографии со съемки и запись интервью.</li>
+              <li>Печатный журнал со своей историей.</li>
+              <li>Право прочитать текст до публикации и попросить правки.</li>
+              <li>Право в любой момент попросить убрать материал с сайта.</li>
             </ul>
+          </div>
+          <div class="paper paper--right">
+            <span class="paper__label">Про деньги</span>
+            <p>Участие бесплатное. Гонорар за интервью мы не платим.</p>
           </div>
         </aside>
       </div>
@@ -226,46 +194,50 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__col">
-        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
-          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+      <div class="footer__col footer__col--wide">
+        <a href="index.html" class="logo logo--lg" aria-label="«Друг» — на главную">
+          <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
         </a>
-        <p class="footer__about">
-          Исследуем страну через призму восприятия её жителей.
-        </p>
+        <p class="footer__about">«Друг». Медиа о людях из небольших городов России</p>
+        <p class="footer__support">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина</p>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Написать</span>
-        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <span class="footer__head">Разделы</span>
+        <a class="footer__link" href="archive.html">Истории</a>
+        <a class="footer__link" href="participate.html">Участвовать</a>
+        <a class="footer__link" href="about.html">О проекте</a>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Читать</span>
-        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
-        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
-        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
-        <a class="footer__link" href="archive.html">Медиаархив</a>
+        <span class="footer__head">Еще</span>
+        <a class="footer__link" href="partners.html">Партнерам</a>
+        <a class="footer__link" href="faq.html">Вопросы</a>
+        <a class="footer__link" href="contacts.html">Контакты</a>
       </div>
+    </div>
 
-      <div class="footer__col">
-        <span class="footer__head">Участвовать</span>
-        <a class="footer__link" href="become-hero.html">Стать героем</a>
-        <a class="footer__link" href="become-participant.html">Поехать в экспедицию</a>
-        <a class="footer__link" href="zines.html">Заказать зин</a>
-        <a class="footer__link" href="partners.html">Сотрудничество</a>
+    <div class="footer__partners">
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
-        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span><a class="footer__link" href="privacy.html">Политика обработки данных</a>. <a class="footer__link" href="privacy.html#consent">Согласие на обработку данных</a>. © 2026 «Друг»</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="js/main.js?v=20261114d"></script>
+<div class="cookies" data-cookies hidden>
+  <p class="cookies__text">Мы считаем посещения через Яндекс Метрику, чтобы понимать, какие истории вы читаете. Подробности в <a href="privacy.html">политике</a>.</p>
+  <button type="button" class="btn btn--paper cookies__ok" data-cookies-ok>Хорошо</button>
+</div>
+
+<script type="module" src="js/main.js?v=20261115v2"></script>
 </body>
 </html>

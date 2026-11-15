@@ -1,4 +1,23 @@
-# Сайт-платформа проекта «ДРУГ»
+# Сайт-платформа проекта «Друг»
+
+## Сборка по аудиту 15.11.2026
+
+Все страницы с текстами собирает один скрипт:
+
+```bash
+python3 _build/v2.py
+```
+
+- шапка, подвал, плашка cookies и тексты страниц — в `_build/v2.py`;
+- герои выпуска, места маршрута, истории — в `js/data.js`
+  (после правки героев: `node -e "import('./js/data.js').then(m=>require('fs').writeFileSync('_build/heroes.json',JSON.stringify(m.heroes,null,1)))"`);
+- журнал: страница `zines/sysert/index.html` (собирается скриптом), сама книжка — `zines/sysert/book.html`;
+- политика и страница статьи берут содержимое из `_build/privacy_src.html` и `_build/article_src.html`;
+- новые блоки оформления — `css/v2.css`.
+
+Старые адреса `zines.html`, `news.html`, `issues.html` перенаправляют на журнал и «Истории».
+
+---
 
 Статический сайт: HTML, CSS и JavaScript без сборки и зависимостей.
 Открывается на любом хостинге, куда можно положить файлы (GitHub Pages, Netlify,

@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Вопрос-ответ — ДРУГ</title>
-  <meta name="description" content="Как стать героем проекта «Друг», что получает герой, как попасть в экспедицию, как заказать зин и на каких условиях доступен архив.">
+  <title>Вопросы о проекте «Друг»: как стать героем или соавтором</title>
+  <meta name="description" content="Кого мы записываем, что получает герой, можно ли передумать и как заказать журнал. Ответы на частые вопросы о проекте «Друг».">
   <meta name="theme-color" content="#2C2C2C">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Вопрос-ответ — ДРУГ">
-  <meta property="og:description" content="Как стать героем проекта «Друг», что получает герой, как попасть в экспедицию, как заказать зин и на каких условиях доступен архив.">
-  <meta property="og:image" content="assets/img/photo/sunset-ridge-1200.jpg">
+  <meta property="og:site_name" content="«Друг»">
+  <meta property="og:title" content="Вопросы о проекте «Друг»: как стать героем или соавтором">
+  <meta property="og:description" content="Кого мы записываем, что получает герой, можно ли передумать и как заказать журнал. Ответы на частые вопросы о проекте «Друг».">
+  <meta property="og:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://tvoifriend.ru/assets/img/og-sysert.jpg">
 
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preload" href="assets/fonts/rubik-800-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
@@ -19,11 +24,9 @@
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
-
-  <!-- Помечаем страницу как «скрипты работают». Без этого класса стили
-       не прячут блоки перед анимацией, и сайт читается даже без JS. -->
+  <link rel="stylesheet" href="css/components.css?v=20261115v2">
+  <link rel="stylesheet" href="css/pages.css?v=20261115v2">
+  <link rel="stylesheet" href="css/v2.css?v=20261115v2">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -32,21 +35,18 @@
 
 <header class="header">
   <div class="container header__inner">
-    <a href="index.html" class="logo" aria-label="ДРУГ — на главную">
-      <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+    <a href="index.html" class="logo" aria-label="«Друг» — на главную">
+      <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
     </a>
 
     <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="archive.html" class="nav__link">Истории</a>
+        <a href="participate.html" class="nav__link">Участвовать</a>
         <a href="about.html" class="nav__link">О проекте</a>
-        <a href="issues.html" class="nav__link">Выпуски</a>
-        <a href="archive.html" class="nav__link">Архив</a>
-        <a href="zines.html" class="nav__link">Зины</a>
-        <a href="partners.html" class="nav__link">Сотрудничество</a>
-        <a href="faq.html" class="nav__link" aria-current="page">Вопросы</a>
-        <a href="contacts.html" class="nav__link">Контакты</a>
+        <a href="become-hero.html" class="nav__link nav__link--cta">Рассказать о человеке</a>
     </nav>
 
-    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать историю</a>
+    <a href="become-hero.html" class="btn btn--primary header__cta">Рассказать о человеке</a>
 
     <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">
       <span></span><span></span><span></span>
@@ -58,13 +58,10 @@
 
   <section class="section pagehead">
     <div class="container">
-      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Вопрос-ответ</span></span>
+      <span class="eyebrow">ДРУГ <span class="eyebrow__rest">Вопросы</span></span>
       <h1 class="h1 pagehead__title">Что обычно спрашивают</h1>
-      <p class="lead pagehead__lead">
-        Мы собрали вопросы, которые лучше закрыть заранее. Если вашего здесь нет,
-        напишите на <a href="mailto:sycheva.alina.2000@bk.ru" class="accent">sycheva.alina.2000@bk.ru</a>. Мы ответим
-        и дополним эту страницу.
-      </p>
+      
+      
     </div>
   </section>
 
@@ -72,66 +69,57 @@
     <div class="container">
       <div class="faq">
         <details class="faq__item">
-          <summary class="faq__q">Что такое проект «Друг»?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">«Друг» — культурно-медийный проект, который знакомит со страной через доверие к человеку. Мы сохраняем живые истории, сказания и легенды российских регионов и превращаем их в общее культурное наследие. Россия показана не через список объектов, а через человека: мастера, учителя, художника, хранителя, предпринимателя.</p></div>
+          <summary class="faq__q">Что такое «Друг»?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Медиа о людях из небольших российских городов. Мы приезжаем, записываем их рассказы и собираем из них выпуск о городе. Мы изучаем как судьбы людей переплетаются с территорией и раскрываем регион именно через эти истории.</p></div>
         </details>
         <details class="faq__item">
           <summary class="faq__q">Как стать героем, если я не публичный человек?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Публичность не требуется. Мы приезжаем к людям, которые своим делом меняют жизнь небольшой территории, и просим рассказать о ней. Заполните форму «Стать героем» и опишите своими словами, чем занимаетесь. Соцсети и опыт интервью не нужны.</p></div>
+          <div class="faq__a"><p class="text">Публичность не нужна. Заполните <a href="become-hero.html">короткую форму</a> и расскажите своими словами, чем занимаетесь.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Герой что-то платит или получает?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Участие бесплатное, гонорар за интервью мы не платим. Герой получает видимость и признание вклада, связь с другими участниками проекта, продвижение своего дела, возможные коллаборации, все фотографии съёмки и печатный зин со своей историей.</p></div>
+          <summary class="faq__q">Это платно? Герой что-то получает?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Участие бесплатное, гонорар мы не платим. Герой получает все фото со съемки, запись интервью.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Почему обязательно нужна экспедиция?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Доверие невозможно собрать дистанционно. В атмосферу, пантомимику рассказчика, его традиции, кухню и быт нельзя погрузиться удалённо. Поэтому мы не приглашаем героя в студию, а приезжаем к нему в его среду. Это метод включённого наблюдения.</p></div>
+          <summary class="faq__q">Можно посмотреть текст до публикации?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Да. Мы всегда показываем герою текст и фото перед выходом и правим неточности.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Почему интервью, а не статья о регионе?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Доверие и полное погружение рождаются через личную речь с её интонацией, через детали самого рассказчика и его обстановки. Пересказ и редакционные колонки это теряют. Поэтому мы работаем с прямой речью от первого лица.</p></div>
+          <summary class="faq__q">А если я передумаю?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Напишите нам, и мы уберем материал с сайта. Уже напечатанные журналы забрать не получится, об этом мы предупреждаем заранее.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Кто может поехать в экспедицию?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Молодые авторы, которые живут в одном из семи регионов маршрута. Журналистское образование не требуется: методика проекта построена как алгоритм, по которому качественное интервью может провести человек без специальной подготовки.</p></div>
+          <summary class="faq__q">Почему вы приезжаете, а не созваниваетесь?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">По видеосвязи человек говорит иначе. Нам важно видеть, где он живет, где работал и как создает свои вещи, чем и где вдохновляется, как выглядит его рабочий процесс и детали жизни.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Как проходит обучение перед поездкой?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Курс состоит из шести модулей: исследование территории, подготовка экспедиции, доверительное интервью, документирование, редактура и архивирование, публичное представление. Затем участник выполняет финальную работу, а после её защиты получает доступ к экспедиции в команде проекта. Наставники — опытные авторы «Друг.Медиа».</p></div>
+          <summary class="faq__q">Где вы сейчас работаете?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Выпуск про Сысерть готов. Дальше Шерегеш и Алтай. Следующие места выбираем вместе с читателями.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Мне ещё нет 18 лет. Могу подать заявку?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Можете. В форме появится блок для согласия законного представителя, родителя или опекуна. Без него заявку от несовершеннолетнего рассматривать нельзя: это требование закона о персональных данных. Перед поездкой мы отдельно свяжемся со взрослым.</p></div>
+          <summary class="faq__q">Кто может стать соавтором?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Студенты бакалавриата и магистратуры, журналисты, фотографы, видеографы, активисты и жители, которым интересен свой город. Вопросы и памятку мы дадим.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Почему выпусков именно семь?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">По одному на регион. Такое количество позволяет доказать, что методика воспроизводима в разных культурных контекстах, а не работает только на одной знакомой территории.</p></div>
+          <summary class="faq__q">Вы оплачиваете соавторам дорогу?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Нет. Соавторы записывают героев в своем городе. Взамен публикация с именем и кейс в портфолио, лучшие работы выходят в печатном журнале. А лучшие команды из регионов будут приглашены на стажироку и могут попасть в постоянную команду медиа, создавая заказные выпуски.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Зачем печатный зин, если есть сайт?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Цифровые материалы масштабируемы, но полный уход в цифру уводит фокус от материального мира и от контакта человека с человеком. Печатный артефакт работает на героя, потому что результат оказывается у него в руках, и на аудиторию, потому что зин можно подарить или взять с собой в путешествие. Основное издание первого этапа — пилотный зин, который собирает материалы всех семи регионов.</p></div>
+          <summary class="faq__q">Как купить печатный журнал?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Напишите нам в <a href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram</a> или <a href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">ВКонтакте</a>. Журнал про Сысерть можно сначала <a href="zines/sysert/">полистать на сайте</a>.</p></div>
         </details>
         <details class="faq__item">
-          <summary class="faq__q">Как заказать зин и сколько идёт доставка?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Выберите издание в разделе «Печатные издания» и заполните форму заказа. После отправки мы покажем реквизиты для оплаты. Отправляем Почтой России и СДЭК: по Сибири доставка обычно занимает от трёх до семи дней, в европейскую часть до двух недель. Трек-номер присылаем на почту.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary class="faq__q">Можно ли пользоваться материалами архива?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Медиаархив состоит из двух частей. Открытая включает видео-интервью, статьи, фотографии и подкасты, она доступна на сайте. Внутренняя методологическая база с банком вопросов и чек-листами доступна авторам проекта. Для публикаций и учебных программ напишите нам, мы отвечаем в течение недели.</p></div>
-        </details>
-        <details class="faq__item">
-          <summary class="faq__q">Что такое «Друг.Академия», «Клуб» и «Архив»?<span class="faq__sign" aria-hidden="true"></span></summary>
-          <div class="faq__a"><p class="text">Это следующие этапы проекта. Сейчас работает «Друг.Медиа»: экспедиции, выпуски и записанная методика. «Академия» строится на обучении этой методике, «Клуб» объединяет сообщество вокруг выпусков, а «Архив» остаётся долгосрочным культурным архивом живых историй.</p></div>
+          <summary class="faq__q">Можно использовать ваши материалы?<span class="faq__sign" aria-hidden="true"></span></summary>
+          <div class="faq__a"><p class="text">Для учебы и исследований можно, напишите нам, подскажем, как сослаться. Для публикации в других медиа или для использования материалов в коммерческих целях нужно наше разрешение и согласие героя.</p></div>
         </details>
       </div>
-
       <div class="tg reveal">
-  <div class="tg__text">
-    <p class="tg__title">Следить за экспедицией</p>
-    <p class="tg__note">Короткие заметки прямо с маршрута. Кого встретили, что снимаем сегодня, где застряли.</p>
-  </div>
-  <a class="btn btn--ghost" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Подписаться в Telegram</a>
-</div>
+        <div class="tg__text">
+          <p class="tg__title">Не нашли ответа?</p>
+          <p class="tg__note">Напишите нам. Ответим и добавим вопрос сюда</p>
+        </div>
+        <a class="btn btn--ghost" href="mailto:tvoi.friend.media@yandex.ru">Написать на почту</a>
+      </div>
     </div>
   </section>
 
@@ -140,46 +128,50 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <div class="footer__col">
-        <a href="index.html" class="logo logo--lg" aria-label="ДРУГ — на главную">
-          <img src="assets/img/logo.png" alt="ДРУГ" width="544" height="218">
+      <div class="footer__col footer__col--wide">
+        <a href="index.html" class="logo logo--lg" aria-label="«Друг» — на главную">
+          <img src="assets/img/logo.png" alt="Друг" width="544" height="218">
         </a>
-        <p class="footer__about">
-          Исследуем страну через призму восприятия её жителей.
-        </p>
+        <p class="footer__about">«Друг». Медиа о людях из небольших городов России</p>
+        <p class="footer__support">Проект реализуется при поддержке Благотворительного фонда Владимира Потанина</p>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Написать</span>
-        <a class="footer__contact footer__link" href="mailto:sycheva.alina.2000@bk.ru">sycheva.alina.2000@bk.ru</a>
-        <a class="footer__contact footer__link" href="tel:+79618795542">+7 961 879-55-42</a>
+        <span class="footer__head">Разделы</span>
+        <a class="footer__link" href="archive.html">Истории</a>
+        <a class="footer__link" href="participate.html">Участвовать</a>
+        <a class="footer__link" href="about.html">О проекте</a>
       </div>
 
       <div class="footer__col">
-        <span class="footer__head">Читать</span>
-        <a class="footer__link" href="https://t.me/tvoi_friend_media" target="_blank" rel="noopener">Telegram-канал</a>
-        <a class="footer__link" href="https://vk.ru/tvoi_friend_media" target="_blank" rel="noopener">Сообщество ВКонтакте</a>
-        <a class="footer__link" href="issues.html">Цифровые выпуски</a>
-        <a class="footer__link" href="archive.html">Медиаархив</a>
+        <span class="footer__head">Еще</span>
+        <a class="footer__link" href="partners.html">Партнерам</a>
+        <a class="footer__link" href="faq.html">Вопросы</a>
+        <a class="footer__link" href="contacts.html">Контакты</a>
       </div>
+    </div>
 
-      <div class="footer__col">
-        <span class="footer__head">Участвовать</span>
-        <a class="footer__link" href="become-hero.html">Стать героем</a>
-        <a class="footer__link" href="become-participant.html">Поехать в экспедицию</a>
-        <a class="footer__link" href="zines.html">Заказать зин</a>
-        <a class="footer__link" href="partners.html">Сотрудничество</a>
+    <div class="footer__partners">
+      <div class="partners" data-partners>
+        <a class="partners__item" href="https://www.fondpotanin.ru/" target="_blank" rel="noopener">Благотворительный фонд Владимира Потанина</a>
+        <span class="partners__item">Сысертский завод-музей</span>
+        <span class="partners__item">«Кот Шредингера»</span>
+        <span class="partners__item">Госкомитет Республики Башкортостан по молодежной политике и Республиканский молодежный психологический центр</span>
+        <span class="partners__item partners__item--caps">АНО «ПОЛЕТ»</span>
       </div>
     </div>
 
     <div class="footer__bottom">
-      <span>© <span data-year>2026</span> Проект «ДРУГ». Автор
-        <a class="footer__link" href="https://t.me/Alina_Teplo" target="_blank" rel="noopener">Сычева Алина Артемовна</a></span>
-      <a class="footer__link" href="faq.html">Вопрос-ответ</a>
+      <span><a class="footer__link" href="privacy.html">Политика обработки данных</a>. <a class="footer__link" href="privacy.html#consent">Согласие на обработку данных</a>. © 2026 «Друг»</span>
     </div>
   </div>
 </footer>
 
-<script type="module" src="js/main.js"></script>
+<div class="cookies" data-cookies hidden>
+  <p class="cookies__text">Мы считаем посещения через Яндекс Метрику, чтобы понимать, какие истории вы читаете. Подробности в <a href="privacy.html">политике</a>.</p>
+  <button type="button" class="btn btn--paper cookies__ok" data-cookies-ok>Хорошо</button>
+</div>
+
+<script type="module" src="js/main.js?v=20261115v2"></script>
 </body>
 </html>
