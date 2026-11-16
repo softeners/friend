@@ -229,3 +229,22 @@ a.partners__item:hover { border-color: var(--accent); }
 .hero-doc__quotes .quote-block { background: var(--surface); color: var(--text); border-left: 3px solid var(--accent); padding: var(--s-5); }
 .hero-doc__quotes .quote { max-width: 62ch; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.45; font-weight: 500; }
 .hero-doc__quotes .quote__author { color: var(--text-mute); }
+
+/* ── Эпиграф под партнерами ─────────────────────────────── */
+.epigraph {
+  margin: var(--s-8) 0 0;
+  max-width: 52rem;
+  padding-left: var(--s-5);
+  border-left: 2px solid var(--accent);
+}
+.epigraph blockquote {
+  margin: 0 0 var(--s-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-quote);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.epigraph figcaption { font-size: var(--fs-sm); color: var(--text-dim); letter-spacing: .02em; }
+.epigraph + .tg { margin-top: var(--s-7); }

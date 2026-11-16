@@ -347,6 +347,11 @@ def index():
       <div class="section__intro"><h2 class="h2">С нами</h2></div>
       {partners_strip()}
 
+      <figure class="epigraph reveal">
+        <blockquote>«Нам хочется считать, что наша жизнь&nbsp;— большой-большой роман, а&nbsp;на самом деле она сборник рассказов. Один рассказ лучше, другой&nbsp;— хуже. У&nbsp;каждого своя кульминация и&nbsp;финал».</blockquote>
+        <figcaption>Кар Карыч</figcaption>
+      </figure>
+
       <div class="tg reveal">
         <div class="tg__text">
           <p class="tg__title">Пишем с дороги</p>
